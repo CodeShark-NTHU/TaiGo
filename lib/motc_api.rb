@@ -4,7 +4,7 @@ require 'http'
 require_relative 'city_stop.rb'
 require_relative 'bus_stop.rb'
 
-module PublicTrans
+module PublicTransporation
   # Library for MOTC Web API
   class MotcAPI
     module Errors

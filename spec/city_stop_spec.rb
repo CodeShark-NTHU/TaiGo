@@ -12,21 +12,21 @@ describe 'Tests City Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide correct city information' do
-      city = PublicTrans::MotcAPI.new(cache: RESPONSE).stop(CITY_NAME)
+      city = PublicTransporation::MotcAPI.new(cache: RESPONSE).stop(CITY_NAME)
       _(city.size).must_equal CORRECT['size']
       _(city.authority_id).must_equal CORRECT['AuthorityID']
     end
 
     it 'SAD: should provide correct message' do
       proc do
-        PublicTrans::MotcAPI.new(cache: RESPONSE).stop('Tokyo')
-      end.must_raise PublicTrans::MotcAPI::Errors::NotFound
+        PublicTransporation::MotcAPI.new(cache: RESPONSE).stop('Tokyo')
+      end.must_raise PublicTransporation::MotcAPI::Errors::NotFound
     end
   end
 
   describe 'Bus Stop information' do
     before do
-      @city = PublicTrans::MotcAPI.new(cache: RESPONSE).stop(CITY_NAME)
+      @city = PublicTransporation::MotcAPI.new(cache: RESPONSE).stop(CITY_NAME)
     end
 
     it 'HAPPY: should provided bus stop list' do

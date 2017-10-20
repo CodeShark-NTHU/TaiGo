@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-module PublicTrans
+module PublicTransporation
   # Provides access to bus stop data
   class BusStop
     def initialize(data)

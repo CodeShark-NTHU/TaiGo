@@ -2,7 +2,7 @@
 
 require_relative 'bus_stop.rb'
 
-module PublicTrans
+module PublicTransporation
   # Model for City
   class CityStop
     def initialize(city_data, data_source)
