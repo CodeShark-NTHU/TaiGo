@@ -23,7 +23,7 @@ module PublicTransporation
       bus_stop_url = 'Stop/City/' + city_name
       city_st_req_url = most_api_path(bus_stop_url)
       city_st_data = call_most_url(city_st_req_url).parse
-      CityStop.new(city_st_data, self)
+      CityStops.new(city_st_data, self)
     end
 
     def stop_list(data)

@@ -4,7 +4,7 @@ require_relative 'bus_stop.rb'
 
 module PublicTransporation
   # Model for City
-  class CityStop
+  class CityStops
     def initialize(city_data, data_source)
       @city = city_data
       @data_source = data_source
