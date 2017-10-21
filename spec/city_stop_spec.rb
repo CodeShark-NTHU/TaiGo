@@ -20,7 +20,7 @@ describe 'Tests City Stop library' do
     it 'SAD: should provide correct message' do
       proc do
         PublicTransporation::MotcAPI.new(cache: RESPONSE).stop('Tokyo')
-      end.must_raise PublicTransporation::MotcAPI::Errors::NotFound
+      end.must_raise PublicTransporation::Errors::ServerError
     end
   end
 
