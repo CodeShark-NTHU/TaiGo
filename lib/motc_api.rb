@@ -1,7 +1,6 @@
 # frozen_string_literal: false
 
 require 'http'
-require_relative 'city_stops.rb'
 require_relative 'bus_stop.rb'
 
 module PublicTransporation
@@ -14,9 +13,8 @@ module PublicTransporation
 
   # Library for MOTC Web API
   class MotcAPI
-
     # Encapsulates API response success and errors
-    class Response  
+    class Response
       HTTP_ERROR = {
         500 => Errors::ServerError,
         404 => Errors::NotFound
@@ -34,33 +32,35 @@ module PublicTransporation
         successful? ? @response : raise(HTTP_ERROR[@response.code])
       end
     end
-    
+    # Encapsulates API Requests
+    class Request
+      def initialize(path, cache = {})
+        @path = path
+        @cache = cache
+      end
+
+      def url
+        'http://ptx.transportdata.tw/MOTC/v2/Bus/' + @path
+      end
+
+      def execute
+        response = @cache.fetch(url) { HTTP.get(url) }
+        Response.new(response).response_or_error
+      end
+    end
+
     def initialize(cache: {})
       @cache = cache
     end
 
-    def stop(city_name)
-      city_st_req_url = MotcAPI.path(['Stop','City',city_name].join("/"))
-      city_st_data = call_most_url(city_st_req_url).parse
-      CityStops.new(city_st_data, self)
+    def city_bus_stops(city_name)
+      request = Request.new(%W[Stop City #{city_name}].join('/'), @cache)
+      response = request.execute.parse
+      MotcAPI.stop_list(response)
     end
 
-    def stop_list(data)
+    def self.stop_list(data)
       data.map { |stop| BusStop.new(stop) }
     end
-
-    def self.path(path)
-      'http://ptx.transportdata.tw/MOTC/v2/Bus/' + path
-    end
-
-    private
-
-    def call_most_url(url)
-      response = @cache.fetch(url) do
-        HTTP.get(url)
-      end
-      Response.new(response).response_or_error
-    end
-
   end
 end
