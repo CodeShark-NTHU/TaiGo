@@ -3,23 +3,37 @@
 require_relative 'spec_helper.rb'
 
 describe 'Tests Bus Stop library' do
+  VCR.configure do |c|
+    c.cassette_library_dir = CASSETTES_FOLDER
+    c.hook_into :webmock
+  end
+
+  before do
+    VCR.insert_cassette CASSETTE_FILE,
+                        record: :new_episodes,
+                        match_requests_on: %i[method uri headers]
+  end
+
+  after do
+    VCR.eject_cassette
+  end
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      city = PublicTransportation::MotcAPI.new(cache: RESPONSE).city_bus_stops(CITY_NAME)
+      city = PublicTransportation::MotcAPI.new().city_bus_stops(CITY_NAME)
       _(city.size).must_equal CORRECT['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        PublicTransportation::MotcAPI.new(cache: RESPONSE).city_bus_stops('Tokyo')
+        PublicTransportation::MotcAPI.new().city_bus_stops('Tokyo')
       end.must_raise PublicTransportation::Errors::ServerError
     end
   end
 
   describe 'Bus Stop information' do
     before do
-      @stops = PublicTransportation::MotcAPI.new(cache: RESPONSE).city_bus_stops(CITY_NAME)
+      @stops = PublicTransportation::MotcAPI.new().city_bus_stops(CITY_NAME)
     end
 
     it 'HAPPY: should provided bus stop list' do
