@@ -36,13 +36,38 @@ describe 'Tests Bus Stop library' do
       @stops = PublicTransportation::MotcAPI.new().city_bus_stops(CITY_NAME)
     end
 
-    it 'HAPPY: should provided bus stop list' do
+    it 'HAPPY: should provided correct bus stop list' do
       # stops = @city.bus_stops
       _(@stops.count).must_equal CORRECT['stops'].count
 
       uid = @stops.map(&:uid)
       correct_uid = CORRECT['stops'].map { |c| c['StopUID'] }
       _(uid).must_equal correct_uid
+
+      authority_id = @stops.map(&:authority_id)
+      correct_authority_id = CORRECT['stops'].map { |c| c['AuthorityID'] }
+      _(authority_id).must_equal correct_authority_id
+
+      stop_name_ch = @stops.map(&:stop_name_ch)
+      correct_stop_name_ch = CORRECT['stops'].map { |c| c['StopName']['Zh_tw'] }
+      _(stop_name_ch).must_equal correct_stop_name_ch
+
+      stop_name_en = @stops.map(&:stop_name_en)
+      correct_stop_name_en = CORRECT['stops'].map { |c| c['StopName']['En'] }
+      _(stop_name_en).must_equal correct_stop_name_en
+
+      stop_longitude = @stops.map(&:stop_longitude)
+      correct_stop_longitude = CORRECT['stops'].map { |c| c['StopPosition']['PositionLon'] }
+      _(stop_longitude).must_equal correct_stop_longitude
+
+      stop_latitude = @stops.map(&:stop_latitude)
+      correct_stop_latitude = CORRECT['stops'].map { |c| c['StopPosition']['PositionLat'] }
+      _(stop_latitude).must_equal correct_stop_latitude
+
+      stop_address = @stops.map(&:stop_address)
+      correct_stop_address = CORRECT['stops'].map { |c| c['StopAddress'] }
+      _(stop_address).must_equal correct_stop_address
+      
     end
   end
 end
