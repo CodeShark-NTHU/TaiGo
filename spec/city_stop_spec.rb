@@ -20,20 +20,20 @@ describe 'Tests Bus Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      city = PublicTransportation::MotcAPI.new().city_bus_stops(CITY_NAME)
+      city = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
       _(city.size).must_equal CORRECT['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        PublicTransportation::MotcAPI.new().city_bus_stops('Tokyo')
+        PublicTransportation::MotcAPI.new.city_bus_stops('Tokyo')
       end.must_raise PublicTransportation::Errors::ServerError
     end
   end
 
   describe 'Bus Stop information' do
     before do
-      @stops = PublicTransportation::MotcAPI.new().city_bus_stops(CITY_NAME)
+      @stops = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
     end
 
     it 'HAPPY: should provided correct bus stop list' do
@@ -67,7 +67,6 @@ describe 'Tests Bus Stop library' do
       stop_address = @stops.map(&:stop_address)
       correct_stop_address = CORRECT['stops'].map { |c| c['StopAddress'] }
       _(stop_address).must_equal correct_stop_address
-      
     end
   end
 end
