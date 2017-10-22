@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start
 
@@ -10,9 +12,12 @@ require 'webmock'
 
 require_relative '../lib/motc_api.rb'
 
-CITY_NAME = 'Hsinchu'.freeze
+CITY_NAME = 'Hsinchu'
+CITY_NAME.freeze
 CORRECT = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
 RESPONSE = YAML.load(File.read('spec/fixtures/bs_response.yml'))
 
-CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
-CASSETTE_FILE = 'motc_api'.freeze
+CASSETTES_FOLDER = 'spec/fixtures/cassettes'
+CASSETTES_FOLDER.freeze
+CASSETTE_FILE = 'motc_api'
+CASSETTE_FILE.freeze
