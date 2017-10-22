@@ -20,8 +20,8 @@ describe 'Tests Bus Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      city = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
-      _(city.size).must_equal CORRECT['size']
+      city_stops = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
+      _(city_stops.size).must_equal CORRECT['size']
     end
 
     it 'SAD: it should throw a server error message' do
