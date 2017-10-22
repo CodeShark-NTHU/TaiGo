@@ -3,7 +3,7 @@
 require 'http'
 require_relative 'bus_stop.rb'
 
-module PublicTransporation
+module PublicTransportation
   module Errors
     # Not allowed to access resource
     ServerError = Class.new(StandardError)
