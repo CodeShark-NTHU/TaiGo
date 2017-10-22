@@ -2,12 +2,12 @@
 AllCops:
   TargetRubyVersion: 2.4
 
-Metric/BlockLength:
+Metrics/BlockLength:
   Enabled: true
   Exclude:
     - spec/**/*
 
-Metric/LineLength:
+Metrics/LineLength:
   Enabled: true
   Exclude:
     - spec/**/*
