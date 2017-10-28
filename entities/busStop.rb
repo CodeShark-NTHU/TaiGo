@@ -10,7 +10,7 @@ module TaiGo
       attribute :stop_name_en, Types::Strict::String.optional
       attribute :stop_latitude, Types::Strict::Float
       attribute :stop_longitude, Types::Strict::Float
-      attribute :stop_address, Types::Strict::String
+      attribute :stop_address, Types::Strict::String.optional
     end
   end
 end
