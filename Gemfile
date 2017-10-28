@@ -11,6 +11,10 @@ gem 'simplecov'
 gem 'vcr'
 gem 'webmock'
 
+# Data gems
+gem 'dry-struct'
+gem 'dry-types'
+
 # Quality testing gems
 gem 'flog'
 gem 'reek'
