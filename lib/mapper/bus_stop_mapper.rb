@@ -1,4 +1,6 @@
 # frozen_string_literal: false
+require_relative '../motc_api.rb'
+require_relative '../entities/BusStop.rb'
 
 module TaiGo
   # Provides access to contributor data
@@ -9,9 +11,15 @@ module TaiGo
         @gateway = gateway
       end
 
+      def load(city_name)
+        @city_bus_stops_data = @gateway.city_bus_stops_data(city_name)
+        #load_several(@city_bus_stops_data)
+      end
+
+
       def load_several(city_bus_stops_data)
         city_bus_stops_data.map do |bus_stop_data|
-          BusStopMapper.build_entity(bus_stop_data)
+        BusStopMapper.build_entity(bus_stop_data)
         end
       end
 
@@ -70,3 +78,24 @@ module TaiGo
     end
   end
 end
+
+class Tester
+  include TaiGo
+  include MOTC
+  include Entity
+
+  xdate = Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+  sign_date = 'x-date: ' + xdate
+  app_id = '1ee236af2773428283e83f904f1aa4e9'
+  app_key = 'YJAFBEsbo4yD4P6hnEoQ1xFe9O8'
+  hash = OpenSSL::HMAC.digest('sha1', app_key, sign_date)
+  signature = Base64.encode64(hash).chomp
+  auth_code = 'hmac username="' + app_id + ', algorithm="hmac-sha1", headers="x-date", signature="' + signature + '"'
+  api = Api.new(auth_code,xdate)
+  
+  busstopmapper = BusStopMapper.new(api)
+  busstopmapper.load("Hsinchu")
+  
+end
+
+t = Tester.new
