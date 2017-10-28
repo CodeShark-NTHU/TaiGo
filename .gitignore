@@ -2,3 +2,6 @@
 
 # Ignore SimpleCov report
 coverage/
+
+# Ignore Secret Key 
+config/
