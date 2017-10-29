@@ -20,53 +20,66 @@ describe 'Tests Bus Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      city_stops = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
-      _(city_stops.size).must_equal CORRECT['size']
+      api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      bstop = bstop_mapper.load(CITY_NAME)
+      _(bstop.size).must_equal CORRECT['size']
+    end
+
+    it 'HAPPY: should provide the correct number of bus route' do
+      api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+      broute = broute_mapper.load(CITY_NAME)
+      _(broute.size).must_equal CORRECT_ROUTE['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        PublicTransportation::MotcAPI.new.city_bus_stops('Tokyo')
-      end.must_raise PublicTransportation::Errors::ServerError
+        api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+        bstop_mapper.load('Tokyo')
+      end.must_raise TaiGo::MOTC::Api::Errors::ServerError
+    end
+
+    it 'SAD: it should throw a server error message' do
+      proc do
+        api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+        broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+        broute_mapper.load('Tokyo')
+      end.must_raise TaiGo::MOTC::Api::Errors::ServerError
     end
   end
 
   describe 'Bus Stop information' do
     before do
-      @stops = PublicTransportation::MotcAPI.new.city_bus_stops(CITY_NAME)
+      api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      @stops = bstop_mapper.load(CITY_NAME)
     end
 
-    it 'HAPPY: should provided correct bus stop list' do
-      # stops = @city.bus_stops
+    it 'HAPPY: should identify bus Stop ' do
       _(@stops.count).must_equal CORRECT['stops'].count
 
       uid = @stops.map(&:uid)
       correct_uid = CORRECT['stops'].map { |c| c['StopUID'] }
       _(uid).must_equal correct_uid
-
-      authority_id = @stops.map(&:authority_id)
-      correct_authority_id = CORRECT['stops'].map { |c| c['AuthorityID'] }
-      _(authority_id).must_equal correct_authority_id
-
-      stop_name_ch = @stops.map(&:stop_name_ch)
-      correct_stop_name_ch = CORRECT['stops'].map { |c| c['StopName']['Zh_tw'] }
-      _(stop_name_ch).must_equal correct_stop_name_ch
-
-      stop_name_en = @stops.map(&:stop_name_en)
-      correct_stop_name_en = CORRECT['stops'].map { |c| c['StopName']['En'] }
-      _(stop_name_en).must_equal correct_stop_name_en
-
-      stop_longitude = @stops.map(&:stop_longitude)
-      correct_stop_longitude = CORRECT['stops'].map { |c| c['StopPosition']['PositionLon'] }
-      _(stop_longitude).must_equal correct_stop_longitude
-
-      stop_latitude = @stops.map(&:stop_latitude)
-      correct_stop_latitude = CORRECT['stops'].map { |c| c['StopPosition']['PositionLat'] }
-      _(stop_latitude).must_equal correct_stop_latitude
-
-      stop_address = @stops.map(&:stop_address)
-      correct_stop_address = CORRECT['stops'].map { |c| c['StopAddress'] }
-      _(stop_address).must_equal correct_stop_address
     end
   end
+
+  describe 'Bus Route information' do
+    before do
+      api = TaiGo::MOTC::Api.new(AUTH_CODE, SIGN_DATE)
+      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+      @route = broute_mapper.load(CITY_NAME)
+    end
+
+    it 'HAPPY: should identify bus Stop ' do
+      _(@route.count).must_equal CORRECT_ROUTE['routes'].count
+
+      uid = @route.map(&:route_uid)
+      correct_uid = CORRECT_ROUTE['routes'].map { |c| c['RouteUID'] }
+      _(uid).must_equal correct_uid
+    end
+  end
+
 end

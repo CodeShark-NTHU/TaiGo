@@ -24,27 +24,25 @@ def call_motc_url(auth, date, url)
   HTTP.headers('x-date' => date, 'Authorization' => auth).get(url)
 end
 
-br_response = {}
-br_results = {}
+bs_response = {}
+bs_results = {}
 
 ## GOOD REPO (HAPPY)
 good_request = motc_api_path('Hsinchu')
-br_response[good_request] = call_motc_url(auth_code, xdate, good_request)
-stops = br_response[good_request].parse
+bs_response[good_request] = call_motc_url(auth_code, xdate, good_request)
+stops = bs_response[good_request].parse
 
 # should be 956 bus stop in Hsinchu
-br_results['size'] = stops.count
+bs_results['size'] = stops.count
 # should be 12 (Hsinchu authority code)
-br_results['AuthorityID'] = stops[0]['AuthorityID']
+bs_results['AuthorityID'] = stops[0]['AuthorityID']
 # should provide all information about 956 bus stop
-br_results['stops'] = stops
+bs_results['stops'] = stops
 
 ## BAD REPO (SAD)
 bad_request = motc_api_path('Tokyo')
-br_response[bad_request] = call_motc_url(auth_code, xdate, bad_request)
-br_response[bad_request].parse
+bs_response[bad_request] = call_motc_url(auth_code, xdate, bad_request)
+bs_response[bad_request].parse
 
-File.write('spec/fixtures/br_response.yml', br_response.to_yaml)
-File.write('spec/fixtures/br_results.yml', br_results.to_yaml)
-
-puts br_results
+File.write('spec/fixtures/bs_response.yml', bs_response.to_yaml)
+File.write('spec/fixtures/bs_results.yml', bs_results.to_yaml)

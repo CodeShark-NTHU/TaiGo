@@ -1,5 +1,9 @@
 # frozen_string_literal: false
 
+require_relative '../motc_api.rb'
+require_relative '../../entities/init.rb'
+require_relative '../../entities/bus_stop.rb'
+
 module TaiGo
   # Provides access to contributor data
   module MOTC
@@ -14,17 +18,15 @@ module TaiGo
         load_several(@city_bus_stops_data)
       end
 
-
       def load_several(city_bus_stops_data)
         city_bus_stops_data.map do |bus_stop_data|
-        BusStopMapper.build_entity(bus_stop_data)
+          BusStopMapper.build_entity(bus_stop_data)
         end
       end
 
       def self.build_entity(bus_stop_data)
         DataMapper.new(bus_stop_data).build_entity
       end
-
 
       # Extracts entity specific elements from data structure
       class DataMapper
@@ -33,7 +35,7 @@ module TaiGo
         end
 
         def build_entity
-          TaiGo::Entity::BusStop.new(
+          Entity::BusStop.new(
             uid: uid,
             authority_id: authority_id,
             stop_name_ch: stop_name_ch,
@@ -77,4 +79,3 @@ module TaiGo
     end
   end
 end
-
