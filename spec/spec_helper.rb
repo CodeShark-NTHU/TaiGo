@@ -12,8 +12,10 @@ require 'minitest/rg'
 require 'vcr'
 require 'webmock'
 
-# require_relative '../lib/motc_api.rb'
 require_relative '../lib/mapper/bus_stop_mapper.rb'
+require_relative '../lib/mapper/bus_route_mapper.rb'
+
+# require_relative 'test_load_all'
 
 CITY_NAME = 'Hsinchu'
 CITY_NAME.freeze
@@ -27,6 +29,9 @@ AUTH_CODE = 'hmac username="' + CONFIG['APP_ID'].to_s + ', algorithm="hmac-sha1"
             , headers="x-date", signature="' + SIGNATURE + '"'
 CORRECT = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
 RESPONSE = YAML.load(File.read('spec/fixtures/bs_response.yml'))
+
+CORRECT_ROUTE = YAML.safe_load(File.read('spec/fixtures/br_results.yml'))
+RESPONSE_ROUTE = YAML.load(File.read('spec/fixtures/br_response.yml'))
 
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'
 CASSETTES_FOLDER.freeze
