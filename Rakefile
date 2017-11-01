@@ -12,9 +12,9 @@ Rake::TestTask.new(:spec) do |t|
   t.warning = false
 end
 
-# task :console do
-#   sh 'pry -r ./spec/test_load_all'
-# end
+task :console do
+  sh 'pry -r ./spec/test_load_all'
+end
 
 desc 'delete cassette fixtures'
 task :rmvcr do
