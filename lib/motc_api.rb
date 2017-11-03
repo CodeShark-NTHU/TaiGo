@@ -60,17 +60,14 @@ module TaiGo
       end
 
       def call_motc_url(url)
-        sign_date = xdate
+        xdate = Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        sign_date = 'x-date: ' + xdate
         signature = hash(@app_key, sign_date)
+        signature.delete!("\n")
         auth_code = recode(@app_id, signature)
-        response = HTTP.headers('x-date' => sign_date,
+        response = HTTP.headers('x-date' => xdate,
                                 'Authorization' => auth_code).get(url)
-        print auth_code
         Response.new(response).response_or_error
-      end
-
-      def xdate
-        'x-date: ' + Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
       end
 
       def hash(key, sign_date)
