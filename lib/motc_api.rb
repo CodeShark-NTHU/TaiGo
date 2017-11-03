@@ -60,14 +60,22 @@ module TaiGo
       end
 
       def call_motc_url(url)
-        xdate = Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
-        sign_date = 'x-date: ' + xdate
-        signature = hash(@app_key, sign_date)
-        signature.delete!("\n")
+        date = time_now_gmt
+        signature = create_signature(@app_key, date)
         auth_code = recode(@app_id, signature)
-        response = HTTP.headers('x-date' => xdate,
+        response = HTTP.headers('x-date' => date,
                                 'Authorization' => auth_code).get(url)
         Response.new(response).response_or_error
+      end
+
+      def time_now_gmt
+        Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+      end
+
+      def create_signature(key, date)
+        sign_date = 'x-date: ' + date
+        sign = Base64.encode64(OpenSSL::HMAC.digest('sha1', key, sign_date))
+        sign.delete!("\n")
       end
 
       def hash(key, sign_date)
@@ -75,7 +83,8 @@ module TaiGo
       end
 
       def recode(app_id, signature)
-        'hmac username="' + app_id + '", algorithm="hmac-sha1", headers="x-date", signature="' + signature + '"'
+        'hmac username="' + app_id + '", algorithm="hmac-sha1", ' \
+        'headers="x-date", signature="' + signature + '"'
       end
     end
   end
