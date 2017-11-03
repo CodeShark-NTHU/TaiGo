@@ -37,7 +37,7 @@ module TaiGo
               routing.halt(404, error: 'City not found')
             end
             routing.is do
-              { 'message' => "TaiGo API v0.1 up in #{app.environment}" }
+              { bus_stops: stops.map(&:to_h) }
             end
           end
 
@@ -51,7 +51,7 @@ module TaiGo
               routing.halt(404, error: 'Routes not found')
             end
             routing.is do
-              { 'message' => "TaiGo API v0.1 up in #{app.environment}" }
+              { bus_route: routes.map(&:to_h) }
             end
           end
         end

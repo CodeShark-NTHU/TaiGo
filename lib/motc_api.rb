@@ -36,11 +36,6 @@ module TaiGo
         end
       end
 
-      # def initialize(auth_code, xdate)
-      #   @auth_code = auth_code
-      #   @xdate = xdate
-      # end
-
       def initialize(app_id, app_key)
         @app_id = app_id
         @app_key = app_key
@@ -70,6 +65,7 @@ module TaiGo
         auth_code = recode(@app_id, signature)
         response = HTTP.headers('x-date' => sign_date,
                                 'Authorization' => auth_code).get(url)
+        print auth_code
         Response.new(response).response_or_error
       end
 
