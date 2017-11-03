@@ -16,9 +16,6 @@ require 'http'
 require 'base64'
 require 'openssl'
 
-# require_relative '../lib/mapper/bus_stop_mapper.rb'
-# require_relative '../lib/mapper/bus_route_mapper.rb'
-
 require_relative 'test_load_all'
 
 CITY_NAME = 'Hsinchu'.freeze

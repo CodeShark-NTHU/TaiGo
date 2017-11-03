@@ -1,9 +1,5 @@
 # frozen_string_literal: false
 
-# require_relative '../motc_api.rb'
-# require_relative '../../entities/init.rb'
-# require_relative '../../entities/bus_route.rb'
-
 module TaiGo
   # Provides access to contributor data
   module MOTC

@@ -10,11 +10,14 @@ config = YAML.safe_load(File.read('config/secrets.yml'))
 xdate = Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
 sign_date = 'x-date: ' + xdate
 
-hash = OpenSSL::HMAC.digest('sha1', config['development']['motc_key'], sign_date)
+hash = OpenSSL::HMAC.digest('sha1', 
+                            config['development']['motc_key'], sign_date)
 signature = Base64.encode64(hash)
 signature.delete!("\n")
 
-auth_code = 'hmac username="'+ config['development']['motc_id'] +'", algorithm="hmac-sha1", headers="x-date", signature="' + signature + '"'
+auth_code = 'hmac username="' + config['development']['motc_id'].to_s +
+            ', algorithm="hmac-sha1", headers="x-date", signature="' +
+            signature + '"'
 
 def motc_api_path(path)
   'http://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/' + path

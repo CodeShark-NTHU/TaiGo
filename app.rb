@@ -29,7 +29,8 @@ module TaiGo
         routing.on 'v0.1' do
           # /api/v0.1/stops/:city_name
           routing.on 'stops', String do |city_name|
-            motc_api = TaiGo::MOTC::Api.new(config['motc_id'], config['motc_key'])
+            motc_api = TaiGo::MOTC::Api.new(config['motc_id'],
+                                            config['motc_key'])
             stops_mapper = TaiGo::MOTC::BusStopMapper.new(motc_api)
             begin
               stops = stops_mapper.load(city_name)
@@ -43,7 +44,8 @@ module TaiGo
 
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
-            motc_api = TaiGo::MOTC::Api.new(config['motc_id'], config['motc_key'])
+            motc_api = TaiGo::MOTC::Api.new(config['motc_id'],
+                                            config['motc_key'])
             routes_mapper = TaiGo::MOTC::BusRouteMapper.new(motc_api)
             begin
               routes = routes_mapper.load(city_name)
