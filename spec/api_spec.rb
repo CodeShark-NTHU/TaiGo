@@ -26,7 +26,7 @@ describe 'Tests MOTC API library' do
 
     it 'SAD: should raise exception on incorrect city' do
       get "#{API_VER}/routes/tokyo"
-      _(last_response.status).must_equal 500
+      _(last_response.status).must_equal 404
       body = JSON.parse last_response.body
       _(body.keys).must_include 'error'
     end
