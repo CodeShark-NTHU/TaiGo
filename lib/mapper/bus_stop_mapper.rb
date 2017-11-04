@@ -1,9 +1,5 @@
 # frozen_string_literal: false
 
-require_relative '../motc_api.rb'
-require_relative '../../entities/init.rb'
-require_relative '../../entities/bus_stop.rb'
-
 module TaiGo
   # Provides access to contributor data
   module MOTC
@@ -30,52 +26,63 @@ module TaiGo
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(bus_stop_data)
-          @bus_stop_data = bus_stop_data
+        def initialize(data)
+          @data = data
         end
 
         def build_entity
           Entity::BusStop.new(
             uid: uid,
             authority_id: authority_id,
-            stop_name_ch: stop_name_ch,
-            stop_name_en: stop_name_en,
-            stop_latitude: stop_latitude,
-            stop_longitude: stop_longitude,
-            stop_address: stop_address
+            name: name,
+            coordinates: coordinates,
+            address: address
           )
         end
 
         private
 
         def uid
-          @bus_stop_data['StopUID']
+          @data['StopUID']
         end
 
         def authority_id
-          @bus_stop_data['AuthorityID']
+          @data['AuthorityID']
         end
 
-        def stop_name_ch
-          @bus_stop_data['StopName']['Zh_tw']
+        def name
+          Name.new(@data['StopName']['En'],@data['StopName']['Zh_tw'])
         end
 
-        def stop_name_en
-          @bus_stop_data['StopName']['En']
+        def coordinates
+          Coordinates.new(@data['StopPosition']['PositionLat'],@data['StopPosition']['PositionLon'])
         end
 
-        def stop_latitude
-          @bus_stop_data['StopPosition']['PositionLat']
+        def address
+          @data['stop_address']
         end
 
-        def stop_longitude
-          @bus_stop_data['StopPosition']['PositionLon']
+        class Name 
+          attr_reader :english, :chinese
+  
+          def initialize(en,ch)
+            @english = en
+            @chinese = ch
+          end
+        end
+  
+        class Coordinates
+          attr_reader :latitude, :longitude
+  
+          def initialize(lat, long)
+            @latitude = lat
+            @longitude = long
+          end
         end
 
-        def stop_address
-          @bus_stop_data['stop_address']
-        end
       end
+
+
     end
   end
 end

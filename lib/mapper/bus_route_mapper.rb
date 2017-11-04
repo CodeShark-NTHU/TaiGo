@@ -1,9 +1,5 @@
 # frozen_string_literal: false
 
-require_relative '../motc_api.rb'
-require_relative '../../entities/init.rb'
-require_relative '../../entities/bus_route.rb'
-
 module TaiGo
   # Provides access to contributor data
   module MOTC
@@ -37,13 +33,10 @@ module TaiGo
         def build_entity
           Entity::BusRoute.new(
             route_uid: route_uid,
-            route_name_zh: route_name_zh,
-            route_name_en: route_name_en,
             authority_id: authority_id,
-            depart_stop_name_zh: depart_stop_name_zh,
-            depart_stop_name_en: depart_stop_name_en,
-            dest_stop_name_zh: dest_stop_name_zh,
-            dest_stop_name_en: dest_stop_name_en
+            route_name: route_name,
+            depart_name: depart_name,
+            destination_name: destination_name
           )
         end
 
@@ -53,33 +46,32 @@ module TaiGo
           @bus_route_data['RouteUID']
         end
 
-        def route_name_zh
-          @bus_route_data['RouteName']['Zh_tw']
-        end
-
-        def route_name_en
-          @bus_route_data['RouteName']['En']
-        end
-
         def authority_id
           @bus_route_data['AuthorityID']
         end
 
-        def depart_stop_name_zh
-          @bus_route_data['DepartureStopNameZh']
+        def route_name 
+          Name.new(@bus_route_data['RouteName']['En'],  @bus_route_data['RouteName']['Zh_tw'])
+        end
+        
+        def depart_name 
+          Name.new(@bus_route_data['DepartureStopNameEn'],@bus_route_data['DepartureStopNameZh'])
         end
 
-        def depart_stop_name_en
-          @bus_route_data['DepartureStopNameEn']
+        def destination_name 
+          Name.new(@bus_route_data['DestinationStopNameEn'], @bus_route_data['DestinationStopNameZh'] )
         end
 
-        def dest_stop_name_zh
-          @bus_route_data['DestinationStopNameZh']
+        class Name 
+          attr_reader :english, :chinese
+  
+          def initialize(en,ch)
+            @english = en
+            @chinese = ch
+          end
         end
 
-        def dest_stop_name_en
-          @bus_route_data['DestinationStopNameEn']
-        end
+
       end
     end
   end
