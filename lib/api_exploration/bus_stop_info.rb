@@ -16,7 +16,7 @@ signature = Base64.encode64(hash)
 signature.delete!("\n")
 
 auth_code = 'hmac username="' + config['development']['motc_id'].to_s +
-            ', algorithm="hmac-sha1", headers="x-date", signature="' +
+            '", algorithm="hmac-sha1", headers="x-date", signature="' +
             signature + '"'
 
 def motc_api_path(path)
