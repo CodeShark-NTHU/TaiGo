@@ -5,3 +5,6 @@ coverage/
 
 # Ignore Secret Key 
 config/
+
+# Ignore Cassetes
+spec/fixtures/cassetes/
