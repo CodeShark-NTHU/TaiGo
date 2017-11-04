@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
 module TaiGo
-  # Provides access to contributor data
+  # Provides access to Route Stops data
   module MOTC
-    # Data Mapper for Github contributors
+    # Data Mapper for Github Route Stops
     class RouteStopsMapper
       def initialize(gateway)
         @gateway = gateway
@@ -26,50 +26,62 @@ module TaiGo
         end
 
         def build_entity
-          Entity::RouteStop.new(
-            stop_uid: stop_uid,
-            stop_id: stop_id,
-            stop_name_ch: stop_name_ch,
-            stop_name_en: stop_name_en,
-            stop_boarding: stop_name_en,
-            stop_sequence: stop_name_en,
-            stop_latitude: stop_latitude,
-            stop_longitude: stop_longitude
+          Entity::BusStop.new(
+            uid: uid,
+            name: name,
+            coordinates: coordinates,
+            address: address,
+            sequence: sequence,
+            boarding: boarding
           )
         end
 
         private
 
-        def stop_uid
-          @rstop_data['StopUID']
+        def uid
+          @data['StopUID']
         end
 
-        def stop_id
-          @rstop_data['StopID']
+        def name
+          Name.new(@data['StopName']['En'],
+                   @data['StopName']['Zh_tw'])
         end
 
-        def stop_name_ch
-          @rstop_data['StopName']['Zh_tw']
+        def coordinates
+          Coordinates.new(@data['StopPosition']['PositionLat'],
+                          @data['StopPosition']['PositionLon'])
         end
 
-        def stop_name_en
-          @rstop_data['StopName']['En']
+        def address
+          @data['stop_address']
         end
 
-        def stop_boarding
-          @rstop_data['StopBoarding']
+        def sequence
+          @data['StopSequence']
         end
 
-        def stop_sequence
-          @rstop_data['StopSequence']
+        def boarding
+          @data['StopBoarding']
         end
 
-        def stop_latitude
-          @rstop_data['StopPosition']['PositionLat']
+        # Extract class Name
+        class Name
+          attr_reader :english, :chinese
+
+          def initialize(en, ch)
+            @english = en
+            @chinese = ch
+          end
         end
 
-        def stop_longitude
-          @rstop_data['StopPosition']['PositionLon']
+        # Extract class Coordinates
+        class Coordinates
+          attr_reader :latitude, :longitude
+
+          def initialize(lat, long)
+            @latitude = lat
+            @longitude = long
+          end
         end
       end
     end
