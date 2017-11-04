@@ -1,11 +1,13 @@
+# frozen_string_literal: false
+
 require 'dry-struct'
 
 module TaiGo
   module Entity
     # Domain entity object for git BusStop
     class BusStop < Dry::Struct
-      attribute :uid, Types::Strict::String
-      attribute :authority_id, Types::Strict::String
+      attribute :uid, Types::Int.optional
+      attribute :authority_id, Types::Int.optional
       attribute :stop_name_ch, Types::Strict::String
       attribute :stop_name_en, Types::Strict::String.optional
       attribute :stop_latitude, Types::Strict::Float

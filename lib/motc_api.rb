@@ -1,6 +1,8 @@
 # frozen_string_literal: false
 
 require 'http'
+require 'base64'
+require 'openssl'
 
 module TaiGo
   # MINISTRY OF TRANSPORTATION AND COMMUNICATIONS
@@ -34,9 +36,9 @@ module TaiGo
         end
       end
 
-      def initialize(auth_code, xdate)
-        @auth_code = auth_code
-        @xdate = xdate
+      def initialize(app_id, app_key)
+        @app_id = app_id
+        @app_key = app_key
       end
 
       def city_bus_stops_data(city_name)
@@ -58,9 +60,31 @@ module TaiGo
       end
 
       def call_motc_url(url)
-        response = HTTP.headers('x-date' => @xdate,
-                                'Authorization' => @auth_code).get(url)
+        date = time_now_gmt
+        signature = create_signature(@app_key, date)
+        auth_code = recode(@app_id, signature)
+        response = HTTP.headers('x-date' => date,
+                                'Authorization' => auth_code).get(url)
         Response.new(response).response_or_error
+      end
+
+      def time_now_gmt
+        Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+      end
+
+      def create_signature(key, date)
+        sign_date = 'x-date: ' + date
+        sign = Base64.encode64(OpenSSL::HMAC.digest('sha1', key, sign_date))
+        sign.delete!("\n")
+      end
+
+      def hash(key, sign_date)
+        Base64.encode64(OpenSSL::HMAC.digest('sha1', key, sign_date))
+      end
+
+      def recode(app_id, signature)
+        'hmac username="' + app_id + '", algorithm="hmac-sha1", ' \
+        'headers="x-date", signature="' + signature + '"'
       end
     end
   end
