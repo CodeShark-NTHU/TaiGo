@@ -1,6 +1,8 @@
 # frozen_string_literal: false
 
 require 'http'
+require 'base64'
+require 'openssl'
 
 module TaiGo
   # MINISTRY OF TRANSPORTATION AND COMMUNICATIONS
@@ -34,33 +36,54 @@ module TaiGo
         end
       end
 
-      def initialize(auth_code, xdate)
-        @auth_code = auth_code
-        @xdate = xdate
+      def initialize(app_id, app_key)
+        @app_id = app_id
+        @app_key = app_key
       end
 
       def city_bus_stops_data(city_name)
-        city_bus_stops_req_url = Api.city_bus_path(city_name)
+        city_bus_stops_req_url = Api.url(%W[Bus Stop City #{city_name}].join('/'))
         call_motc_url(city_bus_stops_req_url).parse
       end
 
       def city_bus_route_data(city_name)
-        city_bus_route_req_url = Api.city_route_path(city_name)
+        city_bus_route_req_url = Api.url(%W[Bus Route City #{city_name}].join('/') )
         call_motc_url(city_bus_route_req_url).parse
       end
 
-      def self.city_bus_path(path)
-        'http://ptx.transportdata.tw/MOTC/v2/Bus/Stop/City/' + path
-      end
-
-      def self.city_route_path(path)
-        'http://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/' + path
+      def self.url(path)
+        'http://ptx.transportdata.tw/MOTC/v2/' + path
       end
 
       def call_motc_url(url)
-        response = HTTP.headers('x-date' => @xdate,
-                                'Authorization' => @auth_code).get(url)
+        date = time_now_gmt
+        auth_code = generate_token(date)
+        response = HTTP.headers('x-date' => date,
+                                'Authorization' => auth_code).get(url)
+                          
         Response.new(response).response_or_error
+      end
+
+      def generate_token(date)
+        signature = create_signature(@app_key, date)
+        token_string(@app_id, signature)
+      end
+
+      def time_now_gmt
+        Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
+      end
+
+      private
+
+      def create_signature(key, date)
+        sign_date = 'x-date: ' + date
+        sign = Base64.encode64(OpenSSL::HMAC.digest('sha1', key, sign_date))
+        sign.delete!("\n")
+      end
+
+      def token_string(app_id, signature)
+        'hmac username="' + app_id + '", algorithm="hmac-sha1", ' \
+        'headers="x-date", signature="' + signature + '"'
       end
     end
   end

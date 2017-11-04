@@ -35,8 +35,8 @@ routes:
   DepartureStopNameEn: Ku Chi Peak
   DestinationStopNameZh: 古奇峰
   DestinationStopNameEn: Ku Chi Peak
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0010
   RouteID: '0010'
   HasSubRoutes: false
@@ -62,8 +62,8 @@ routes:
   DepartureStopNameEn: Train Station
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0020
   RouteID: '0020'
   HasSubRoutes: true
@@ -116,8 +116,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 交大光復校區
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0100
   RouteID: '0100'
   HasSubRoutes: true
@@ -152,8 +152,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0110
   RouteID: '0110'
   HasSubRoutes: true
@@ -206,8 +206,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 瓦厝
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0113
   RouteID: '0113'
   HasSubRoutes: true
@@ -242,8 +242,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0120
   RouteID: '0120'
   HasSubRoutes: true
@@ -278,8 +278,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0150
   RouteID: '0150'
   HasSubRoutes: true
@@ -350,8 +350,8 @@ routes:
   DepartureStopNameEn: Hsinchu Harbor Outlet Center
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0160
   RouteID: '0160'
   HasSubRoutes: true
@@ -386,8 +386,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 台大醫院新竹分院
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0182
   RouteID: '0182'
   HasSubRoutes: true
@@ -422,8 +422,8 @@ routes:
   DepartureStopNameEn: Bei-Da Bridge
   DestinationStopNameZh: 高鐵新竹站
   DestinationStopNameEn: THSR Hsinchu Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0200
   RouteID: '0200'
   HasSubRoutes: true
@@ -476,8 +476,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0230
   RouteID: '0230'
   HasSubRoutes: true
@@ -530,8 +530,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 玄奘大學
   DestinationStopNameEn: Hsuan Chuang University
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0270
   RouteID: '0270'
   HasSubRoutes: false
@@ -557,8 +557,8 @@ routes:
   DepartureStopNameEn: Train Station
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0310
   RouteID: '0310'
   HasSubRoutes: true
@@ -593,8 +593,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 火車站
   DestinationStopNameEn: Train Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0500
   RouteID: '0500'
   HasSubRoutes: false
@@ -620,8 +620,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 香山區公所
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0510
   RouteID: '0510'
   HasSubRoutes: false
@@ -647,8 +647,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 香山區公所
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0520
   RouteID: '0520'
   HasSubRoutes: true
@@ -683,8 +683,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 新莊車站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0530
   RouteID: '0530'
   HasSubRoutes: false
@@ -710,8 +710,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 新莊車站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0550
   RouteID: '0550'
   HasSubRoutes: true
@@ -764,8 +764,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 新安站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0570
   RouteID: '0570'
   HasSubRoutes: false
@@ -791,8 +791,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 新安站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0571
   RouteID: '0571'
   HasSubRoutes: false
@@ -818,8 +818,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 世博台灣館
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0573
   RouteID: '0573'
   HasSubRoutes: false
@@ -845,8 +845,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 後站(公園路口)
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0575
   RouteID: '0575'
   HasSubRoutes: true
@@ -881,8 +881,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 聖公宮
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0710
   RouteID: '0710'
   HasSubRoutes: false
@@ -908,8 +908,8 @@ routes:
   DepartureStopNameEn: RT-Mart 2 Station
   DestinationStopNameZh: 大潤發2站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0720
   RouteID: '0720'
   HasSubRoutes: true
@@ -944,8 +944,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 陽明清境
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0730
   RouteID: '0730'
   HasSubRoutes: true
@@ -1016,8 +1016,8 @@ routes:
   DepartureStopNameEn: ''
   DestinationStopNameZh: 大潤發2站
   DestinationStopNameEn: ''
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0739
   RouteID: '0739'
   HasSubRoutes: true
@@ -1052,8 +1052,8 @@ routes:
   DepartureStopNameEn: Jingguo Road Entrance
   DestinationStopNameZh: 香山轉運站
   DestinationStopNameEn: Xiang Shan Bus Station
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63
 - RouteUID: HSZ0743
   RouteID: '0743'
   HasSubRoutes: true
@@ -1088,5 +1088,5 @@ routes:
   DepartureStopNameEn: Hsinchu Harbor Outlet Center
   DestinationStopNameZh: 竹中
   DestinationStopNameEn: Zhu Zhong
-  UpdateTime: '2017-10-29T00:19:38+08:00'
-  VersionID: 49
+  UpdateTime: '2017-11-03T12:17:55+08:00'
+  VersionID: 63

@@ -2,9 +2,9 @@
 
 require_relative 'spec_helper.rb'
 
-describe 'Tests Praise library' do
+describe 'Tests MOTC API library' do
   API_VER = 'api/v0.1'.freeze
-  CASSETTE_FILE = 'codepraise_api'.freeze
+  CASSETTE_FILE = 'taigo_api'.freeze
 
   before do
     VCR.insert_cassette CASSETTE_FILE,
@@ -16,16 +16,16 @@ describe 'Tests Praise library' do
     VCR.eject_cassette
   end
 
-  describe 'Repo information' do
-    it 'HAPPY: should provide correct repo attributes' do
-      get "#{API_VER}/repo/#{USERNAME}/#{REPO_NAME}"
+  describe 'City Bus Route information' do
+    it 'HAPPY: should provide correct city attributes' do
+      get "#{API_VER}/routes/#{CITY_NAME}"
       _(last_response.status).must_equal 200
-      repo_data = JSON.parse last_response.body
-      _(repo_data.size).must_be :>, 0
+      routes_data = JSON.parse last_response.body
+      _(routes_data.size).must_be :>, 0
     end
 
-    it 'SAD: should raise exception on incorrect repo' do
-      get "#{API_VER}/repo/#{USERNAME}/bad_repo"
+    it 'SAD: should raise exception on incorrect city' do
+      get "#{API_VER}/routes/tokyo"
       _(last_response.status).must_equal 404
       body = JSON.parse last_response.body
       _(body.keys).must_include 'error'

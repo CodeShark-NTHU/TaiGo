@@ -1,4 +1,7 @@
+# frozen_string_literal: false
+
 require 'dry-struct'
+require_relative '../lib/mapper/bus_stop_mapper.rb'
 
 module TaiGo
   module Entity
@@ -6,7 +9,8 @@ module TaiGo
     class BusStop < Dry::Struct
       attribute :uid, Types::Strict::String
       attribute :authority_id, Types::Strict::String
-      attribute :name, Types::Strict::Object
+      attribute :name, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Name)
+      attribute :coordinates,Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates)
       attribute :address, Types::Strict::String.optional
     end
   end

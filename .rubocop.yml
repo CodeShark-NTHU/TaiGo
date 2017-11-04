@@ -6,6 +6,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - spec/**/*
+    - app.rb
 
 Metrics/LineLength:
   Enabled: true

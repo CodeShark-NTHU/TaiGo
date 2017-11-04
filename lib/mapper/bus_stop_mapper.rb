@@ -1,9 +1,5 @@
 # frozen_string_literal: false
 
-require_relative '../motc_api.rb'
-require_relative '../../entities/init.rb'
-require_relative '../../entities/bus_stop.rb'
-
 module TaiGo
   # Provides access to contributor data
   module MOTC
@@ -39,7 +35,7 @@ module TaiGo
             uid: uid,
             authority_id: authority_id,
             name: name,
-            coordinates: coordinates
+            coordinates: coordinates,
             address: address
           )
         end
@@ -66,25 +62,26 @@ module TaiGo
           @data['stop_address']
         end
 
-      end
-
-      class Name 
-        attr_reader :english, :chinese
-
-        def initialize(en,ch)
-          @english = en
-          @chinese = ch
+        class Name 
+          attr_reader :english, :chinese
+  
+          def initialize(en,ch)
+            @english = en
+            @chinese = ch
+          end
         end
-      end
-
-      class Coordinates
-        attr_reader :latitude, :longitude
-
-        def initialize(lat, long)
-          @latitude = lat
-          @longitude = long
+  
+        class Coordinates
+          attr_reader :latitude, :longitude
+  
+          def initialize(lat, long)
+            @latitude = lat
+            @longitude = long
+          end
         end
+
       end
+
 
     end
   end
