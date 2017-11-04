@@ -10,21 +10,33 @@ gem 'econfig'
 gem 'puma'
 gem 'roda'
 
+# Database related
+gem 'hirb'
+gem 'sequel'
+
 # Data gems
 gem 'dry-struct'
 gem 'dry-types'
 
-# Testing gems
-gem 'minitest'
-gem 'minitest-rg'
-gem 'pry'
-gem 'rack-test'
-gem 'rake'
-gem 'simplecov'
-gem 'vcr'
-gem 'webmock'
+group :test do
+  gem 'minitest'
+  gem 'minitest-rg'
+  gem 'rack-test'
+  gem 'rake'
+  gem 'simplecov'
+  gem 'vcr'
+  gem 'webmock'
+end
 
-# Quality testing gems
-gem 'flog'
-gem 'reek'
-gem 'rubocop'
+group :development, :test do
+  gem 'sqlite3'
+
+  gem 'database_cleaner'
+
+  gem 'pry'
+  gem 'rerun'
+
+  gem 'flog'
+  gem 'reek'
+  gem 'rubocop'
+end
