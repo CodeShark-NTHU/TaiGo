@@ -4,7 +4,7 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:routes) do
+    create_table(:bus_routes) do
       primary_key :uid
       String      :name_zh
       String      :name_en
