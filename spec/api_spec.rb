@@ -31,4 +31,37 @@ describe 'Tests MOTC API library' do
       _(body.keys).must_include 'error'
     end
   end
+
+  describe 'City Stop Bus information' do
+    it 'HAPPY: should provide correct city attributes' do
+      get "#{API_VER}/stops/#{CITY_NAME}"
+      _(last_response.status).must_equal 200
+      routes_data = JSON.parse last_response.body
+      _(routes_data.size).must_be :>, 0
+    end
+
+    it 'SAD: should raise exception on incorrect city' do
+      get "#{API_VER}/stops/tokyo"
+      _(last_response.status).must_equal 404
+      body = JSON.parse last_response.body
+      _(body.keys).must_include 'error'
+    end
+  end
+
+  describe 'City Stop of Routes Bus information' do
+    it 'HAPPY: should provide correct city attributes' do
+      get "#{API_VER}/stop_of_routes/#{CITY_NAME}"
+      _(last_response.status).must_equal 200
+      routes_data = JSON.parse last_response.body
+      _(routes_data.size).must_be :>, 0
+    end
+
+    it 'SAD: should raise exception on incorrect city stop of routes' do
+      get "#{API_VER}/stop_of_routes/tokyo"
+      _(last_response.status).must_equal 404
+      body = JSON.parse last_response.body
+      _(body.keys).must_include 'error'
+    end
+  end
+  
 end

@@ -32,5 +32,29 @@ describe 'Tests Stops of route' do
       stops_of_route = stops_of_route_mapper.load(CITY_NAME)
       _(stops_of_route.size).must_equal CORRECT['size']
     end
+
+    it 'SAD: it should throw a server error message' do
+      proc do
+        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
+        stops_of_route_mapper.load('Tokyo')
+      end.must_raise TaiGo::MOTC::Api::Errors::ServerError
+    end
+
+    describe 'Bus Stop information' do
+      before do
+        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
+        @sor = stops_of_route_mapper.load(CITY_NAME)
+      end
+
+      it 'HAPPY: should identify list of stop of routes combination' do
+        _(@sor.count).must_equal CORRECT['stops'].count
+
+        route_uid = @sor.map(&:route_uid)
+        correct_uid = CORRECT['stops'].map { |c| c['RouteUID'] }
+        _(route_uid).must_equal correct_uid
+      end
+    end
   end
 end

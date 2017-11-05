@@ -65,7 +65,6 @@ module TaiGo
         auth_code = generate_token(date)
         response = HTTP.headers('x-date' => date,
                                 'Authorization' => auth_code).get(url)
-                          
         Response.new(response).response_or_error
       end
 

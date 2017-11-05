@@ -11,34 +11,43 @@ module TaiGo
 
       def load(city_name)
         @stop_of_route_data = @gateway.city_stop_route_data(city_name)
-        load_several(@stop_of_route_data)
+        @temp_hash = []
+        @new_data = change_data_format(@stop_of_route_data)
+        load_several(@new_data)
+      end
+
+      def change_data_format(stop_of_route_data)
+        stop_of_route_data.map do |bus_route_data|
+          route_id = bus_route_data['RouteUID']
+          sub_route_id = bus_route_data['SubRouteUID']
+          direction = bus_route_data['Direction']
+          bus_stop(bus_route_data['Stops'], route_id, sub_route_id, direction)
+        end
+        @temp_hash
+      end
+
+      def bus_stop(data, route_id, sub_route_id, direction)
+        data.map do |stop|
+          stop['RouteUID'] = route_id
+          stop['SubRouteUID'] = sub_route_id
+          stop['Direction'] = direction
+          @temp_hash << stop
+        end
       end
 
       def load_several(stop_of_route_data)
-        stop_of_route_data.map do |bus_route_data|
-          load_several_bus_stop(bus_route_data)
+        stop_of_route_data.map do |stop|
+          StopOfRouteMapper.build_entity(stop)
         end
       end
 
-      def load_several_bus_stop(bus_route_data)
-        uid = bus_route_data['RouteUID']
-        suid = bus_route_data['SubRouteUID']
-        dir = bus_route_data['Direction']
-        bus_route_data['Stops'].map do |stop|
-          StopOfRouteMapper.build_entity(uid, suid, dir, stop)
-        end
-      end
-
-      def self.build_entity(uid, suid, dir, stop)
-        DataMapper.new(uid, suid, dir, stop).build_entity
+      def self.build_entity(stop)
+        DataMapper.new(stop).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(uid, suid, dir, stop)
-          @uid = uid
-          @suid = suid
-          @dir = dir
+        def initialize(stop)
           @stop = stop
         end
 
@@ -56,15 +65,15 @@ module TaiGo
         private
 
         def route_uid
-          @uid
+          @stop['RouteUID']
         end
 
         def sub_route_uid
-          @suid
+          @stop['SubRouteUID']
         end
 
         def direction
-          @dir
+          @stop['Direction']
         end
 
         def stop_uid

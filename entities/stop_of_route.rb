@@ -9,7 +9,7 @@ module TaiGo
       attribute :route_uid, Types::Strict::String
       attribute :sub_route_id, Types::Strict::String
       attribute :direction, Types::Strict::Int
-      attribute :stop_uid, Types::Strict::Int
+      attribute :stop_uid, Types::Strict::String
       attribute :stop_boarding, Types::Strict::Int
       attribute :stop_sequence, Types::Strict::Int
     end

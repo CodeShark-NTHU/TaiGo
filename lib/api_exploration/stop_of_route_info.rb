@@ -4,7 +4,6 @@ require 'http'
 require 'yaml'
 require 'base64'
 require 'openssl'
-require 'json'
 
 config = YAML.safe_load(File.read('config/secrets.yml'))
 
@@ -32,7 +31,7 @@ end
 
 sor_responses = {}
 sor_results = {}
-tempHash = []
+temp_hash = []
 
 ## GOOD REPO (HAPPY)
 good_request = motc_api_path('Hsinchu')
@@ -47,19 +46,19 @@ stop_of_routes.map do |bus_route_data|
     stop['RouteUID'] = route_id
     stop['SubRouteUID'] = sub_route_id
     stop['Direction'] = direction
-    tempHash << stop
+    temp_hash << stop
   end
 end
 
 # 65 avaiable routes in Hsinchu
-sor_results['size'] = stop_of_routes.count
+sor_results['size'] = temp_hash.count
 # list stop of routes
-sor_results['stops'] = tempHash
+sor_results['stops'] = temp_hash
 
 ## BAD REPO (SAD)
 bad_request = motc_api_path('Tokyo')
-# sor_responses[bad_request] = call_motc_url(auth_code, xdate, bad_request)
-# sor_responses[bad_request].parse
+sor_responses[bad_request] = call_motc_url(auth_code, xdate, bad_request)
+sor_responses[bad_request].parse
 
 File.write('spec/fixtures/sor_responses.yml', sor_responses.to_yaml)
 File.write('spec/fixtures/sor_results.yml', sor_results.to_yaml)
