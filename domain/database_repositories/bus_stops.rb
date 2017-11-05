@@ -9,13 +9,13 @@ module TaiGo
             end
 
             def self.find_uid(uid)
-                db_record = Database::BusStopOrm.first(uid: id)&.rebuild_entity
+                db_record = Database::BusStopOrm.first(uid: uid)&.rebuild_entity
                 rebuild_entity(db_record)
             end
 
             def self.find_or_create(entity)
                 find_uid(entity.uid) || create_from(entity)
-              end
+            end
 
             def self.create_from(entity)
                 db_stop = Database::BusStopOrm.create(
