@@ -59,9 +59,9 @@ namespace :db do
   task :drop do
     require_relative 'config/environment.rb'
     # drop according to dependencies
-    app.DB.drop_table :repos_contributors
-    app.DB.drop_table :repos
-    app.DB.drop_table :collaborators
+    app.DB.drop_table :bus_stops
+    app.DB.drop_table :bus_routes
+    app.DB.drop_table :bus_stops_of_routes
     app.DB.drop_table :schema_info
   end
 
