@@ -13,7 +13,7 @@ Sequel.migration do
       String      :depart_name_eh
       String      :destination_name_zh
       String      :destination_name_en
-      String      :auth_id
+      Integer     :auth_id
 
       DateTime    :created_at
       DateTime    :updated_at

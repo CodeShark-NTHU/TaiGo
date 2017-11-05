@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-ENV['RACK_ENV'] = 'development'
+ENV['RACK_ENV'] = 'develpment'
 
 require 'simplecov'
 SimpleCov.start
