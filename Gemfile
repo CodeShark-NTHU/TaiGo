@@ -29,7 +29,7 @@ group :test do
   gem 'webmock'
 end
 
-group :development, : test do
+group :development, :test do
   gem 'sqlite3'
 
   gem 'pry'
@@ -39,4 +39,4 @@ group :development, : test do
   gem 'flog'
   gem 'reek'
   gem 'rubocop'
-end 
+end

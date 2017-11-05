@@ -10,8 +10,8 @@ describe 'Tests Stops of route' do
 
   MOTC_ID = config['motc_id']
   MOTC_KEY = config['motc_key']
-  CORRECT = YAML.safe_load(File.read('spec/fixtures/sor_results.yml'))
-  CORRECT_ROUTE = YAML.safe_load(File.read('spec/fixtures/sor_results.yml'))
+
+  CORRECT_SOR = YAML.safe_load(File.read('spec/fixtures/sor_results.yml'))
 
   CASSETTE_FILE = 'motc_sor_api'.freeze
 
@@ -30,7 +30,7 @@ describe 'Tests Stops of route' do
       api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
       stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
       stops_of_route = stops_of_route_mapper.load(CITY_NAME)
-      _(stops_of_route.size).must_equal CORRECT['size']
+      _(stops_of_route.size).must_equal CORRECT_SOR['size']
     end
 
     it 'SAD: it should throw a server error message' do
@@ -49,10 +49,10 @@ describe 'Tests Stops of route' do
       end
 
       it 'HAPPY: should identify list of stop of routes combination' do
-        _(@sor.count).must_equal CORRECT['stops'].count
+        _(@sor.count).must_equal CORRECT_SOR['stops'].count
 
         route_uid = @sor.map(&:route_uid)
-        correct_uid = CORRECT['stops'].map { |c| c['RouteUID'] }
+        correct_uid = CORRECT_SOR['stops'].map { |c| c['RouteUID'] }
         _(route_uid).must_equal correct_uid
       end
     end

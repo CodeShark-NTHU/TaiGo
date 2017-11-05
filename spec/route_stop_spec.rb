@@ -10,9 +10,9 @@ describe 'Tests Bus Stop library' do
 
   MOTC_ID = config['motc_id']
   MOTC_KEY = config['motc_key']
-  CORRECT_STOP = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
+  CORRECT_ROUTE = YAML.safe_load(File.read('spec/fixtures/br_results.yml'))
 
-  CASSETTE_FILE = 'motc_stop_api'.freeze
+  CASSETTE_FILE = 'motc_route_api'.freeze
 
   before do
     VCR.insert_cassette CASSETTE_FILE,
@@ -25,36 +25,35 @@ describe 'Tests Bus Stop library' do
   end
 
   describe 'City information' do
-    it 'HAPPY: should provide the correct number of bus stops' do
+    it 'HAPPY: should provide the correct number of bus route' do
       api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
-      bstop = bstop_mapper.load(CITY_NAME)
-      _(bstop.size).must_equal CORRECT_STOP['size']
+      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+      broute = broute_mapper.load(CITY_NAME)
+      _(broute.size).must_equal CORRECT_ROUTE['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
         api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
-        bstop_mapper.load('Tokyo')
+        broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+        broute_mapper.load('Tokyo')
       end.must_raise TaiGo::MOTC::Api::Errors::ServerError
     end
   end
 
-  describe 'Bus Stop information' do
+  describe 'Bus Route information' do
     before do
       api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
-      @stops = bstop_mapper.load(CITY_NAME)
+      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
+      @route = broute_mapper.load(CITY_NAME)
     end
 
     it 'HAPPY: should identify bus Stop ' do
-      _(@stops.count).must_equal CORRECT_STOP['stops'].count
+      _(@route.count).must_equal CORRECT_ROUTE['routes'].count
 
-      uid = @stops.map(&:uid)
-      correct_uid = CORRECT_STOP['stops'].map { |c| c['StopUID'] }
+      uid = @route.map(&:route_uid)
+      correct_uid = CORRECT_ROUTE['routes'].map { |c| c['RouteUID'] }
       _(uid).must_equal correct_uid
     end
   end
-
 end
