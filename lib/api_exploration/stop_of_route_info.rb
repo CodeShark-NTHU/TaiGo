@@ -31,18 +31,29 @@ end
 
 sor_responses = {}
 sor_results = {}
+temp_hash = []
 
 ## GOOD REPO (HAPPY)
 good_request = motc_api_path('Hsinchu')
 sor_responses[good_request] = call_motc_url(auth_code, xdate, good_request)
 stop_of_routes = sor_responses[good_request].parse
 
-# puts stop_of_routes
+stop_of_routes.map do |bus_route_data|
+  route_id = bus_route_data['RouteUID']
+  sub_route_id = bus_route_data['SubRouteUID']
+  direction = bus_route_data['Direction']
+  bus_route_data['Stops'].map do |stop|
+    stop['RouteUID'] = route_id
+    stop['SubRouteUID'] = sub_route_id
+    stop['Direction'] = direction
+    temp_hash << stop
+  end
+end
 
 # 65 avaiable routes in Hsinchu
-sor_results['size'] = stop_of_routes.count
+sor_results['size'] = temp_hash.count
 # list stop of routes
-sor_results['stop_of_routes'] = stop_of_routes
+sor_results['stops'] = temp_hash
 
 ## BAD REPO (SAD)
 bad_request = motc_api_path('Tokyo')

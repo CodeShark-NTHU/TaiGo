@@ -51,6 +51,11 @@ module TaiGo
         call_motc_url(city_bus_route_req_url).parse
       end
 
+      def city_stop_route_data(city_name)
+        city_bus_route_req_url = Api.url(%W[Bus StopOfRoute City #{city_name}].join('/') )
+        call_motc_url(city_bus_route_req_url).parse
+      end
+
       def self.url(path)
         'http://ptx.transportdata.tw/MOTC/v2/' + path
       end
@@ -60,7 +65,6 @@ module TaiGo
         auth_code = generate_token(date)
         response = HTTP.headers('x-date' => date,
                                 'Authorization' => auth_code).get(url)
-                          
         Response.new(response).response_or_error
       end
 

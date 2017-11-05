@@ -42,6 +42,21 @@ module TaiGo
             end
           end
 
+          # /api/v0.1/stop_of_routes/:city_name
+          routing.on 'stop_of_routes', String do |city_name|
+            motc_api = TaiGo::MOTC::Api.new(config['motc_id'],
+                                            config['motc_key'])
+            stop_of_routes_mapper = TaiGo::MOTC::StopOfRouteMapper.new(motc_api)
+            begin
+              stop_of_routes = stop_of_routes_mapper.load(city_name)
+            rescue StandardError
+              routing.halt(404, error: 'City not found')
+            end
+            routing.is do
+              { stop_of_routes: stop_of_routes.map(&:to_h) }
+            end
+          end
+
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
             motc_api = TaiGo::MOTC::Api.new(config['motc_id'],

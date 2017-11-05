@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
 module TaiGo
-  # Provides access to contributor data
+  # Provides access to Bus Route data
   module MOTC
-    # Data Mapper for Github contributors
+    # Data Mapper for Bus Route
     class BusRouteMapper
       def initialize(gateway)
         @gateway = gateway
@@ -50,28 +50,30 @@ module TaiGo
           @bus_route_data['AuthorityID']
         end
 
-        def route_name 
-          Name.new(@bus_route_data['RouteName']['En'],  @bus_route_data['RouteName']['Zh_tw'])
-        end
-        
-        def depart_name 
-          Name.new(@bus_route_data['DepartureStopNameEn'],@bus_route_data['DepartureStopNameZh'])
+        def route_name
+          Name.new(@bus_route_data['RouteName']['En'],
+                   @bus_route_data['RouteName']['Zh_tw'])
         end
 
-        def destination_name 
-          Name.new(@bus_route_data['DestinationStopNameEn'], @bus_route_data['DestinationStopNameZh'] )
+        def depart_name
+          Name.new(@bus_route_data['DepartureStopNameEn'],
+                   @bus_route_data['DepartureStopNameZh'])
         end
 
-        class Name 
+        def destination_name
+          Name.new(@bus_route_data['DestinationStopNameEn'],
+                   @bus_route_data['DestinationStopNameZh'])
+        end
+
+        # Extract class name
+        class Name
           attr_reader :english, :chinese
-  
-          def initialize(en,ch)
+
+          def initialize(en, ch)
             @english = en
             @chinese = ch
           end
         end
-
-
       end
     end
   end
