@@ -4,7 +4,7 @@ module TaiGo
    module Database
      ORM = {
        TaiGo::Entity::BusRoute => BusRouteOrm,
-       TaiGo::Entity::ButStop => BusStopOrm
+       TaiGo::Entity::BusStop => BusStopOrm
      }.freeze
    end
  end
