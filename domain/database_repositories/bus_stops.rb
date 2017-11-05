@@ -3,7 +3,7 @@
 module TaiGo
     module Repository
         # Repository for BusStop Entities
-        class BusStop
+        class BusStops
             def self.find_id(id)
                 Database::BusStopOrm.first(id: id)&.rebuild_entity
             end
