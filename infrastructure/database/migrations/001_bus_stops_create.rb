@@ -6,11 +6,12 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:stops) do
-      primary_key :uid
+      primary_key :id
+      String      :uid
       String      :name_zh
       String      :name_en
-      Float       :lang
-      Float       :long
+      Float       :lat
+      Float       :lon
       Integer     :auth_id
       String      :address
 
