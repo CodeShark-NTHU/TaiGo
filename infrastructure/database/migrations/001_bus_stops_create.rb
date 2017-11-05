@@ -5,7 +5,7 @@ require 'sequel'
 # so happy today
 Sequel.migration do
   change do
-    create_table(:bus_stops) do
+    create_table(:stops) do
       primary_key :uid
       String      :name_zh
       String      :name_en
