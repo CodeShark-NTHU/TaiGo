@@ -3,7 +3,7 @@
 module TaiGo
     module Database
       # Object Relational Mapper for BusRoute Entities
-      class BusRouteOrm < Sequel::Model(:bus_routes)
+      class BusRouteOrm < Sequel::Model(:routes)
     
         many_to_many :stops,
                      class: :'TaiGo::Database::BusStopOrm',

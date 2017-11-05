@@ -5,9 +5,9 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:bus_stops_of_routes) do
-      foreign_key :stop_uid, :bus_stops
-      foreign_key :route_uid, :bus_routes
+    create_table(:stops_of_routes) do
+      foreign_key :stop_uid, :stops
+      foreign_key :route_uid, :routes
       Integer     :sub_route_uid
       Integer     :direction
       Integer     :stop_sequence
