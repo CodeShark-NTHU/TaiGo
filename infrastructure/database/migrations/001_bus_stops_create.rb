@@ -12,7 +12,7 @@ Sequel.migration do
       String      :name_en
       Float       :lat
       Float       :lon
-      Integer     :auth_id
+      String      :auth_id
       String      :address
 
       DateTime :created_at

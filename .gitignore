@@ -10,4 +10,4 @@ config/
 spec/fixtures/cassettes/
 
 # Omit database file from version control
-infrastructure/database/*.*
+infrastructure/database/*.db
