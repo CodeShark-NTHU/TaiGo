@@ -39,4 +39,4 @@ group :development, :test do
   gem 'flog'
   gem 'reek'
   gem 'rubocop'
-end 
+end
