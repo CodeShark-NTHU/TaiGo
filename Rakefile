@@ -42,3 +42,16 @@ namespace :quality do
   end
 end
 
+namespace :db do
+  require_relative 'config/environment.rb' # load config info
+  require 'sequel' # TODO: remove after create orm
+
+  Sequel.extension :migration
+  app = TaiGo::Api
+
+  desc 'Run migrations'
+  task :migrate do
+    puts "Migrating #{app.environment} database to latest"
+    Sequel::Migrator.run(app.DB, 'infrastructure/database/migrations')
+  end
+end
