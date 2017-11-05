@@ -18,7 +18,7 @@ module TaiGo
               end
 
             def self.create_from(entity)
-                db_collaborator = Database::BusStopOrm.create(
+                db_stop = Database::BusStopOrm.create(
                   uid: entity.origin_id,
                   name_en: entity.name.english,
                   name_zh: entity.name.chinese,
@@ -28,7 +28,7 @@ module TaiGo
                   address: entity.address
                 )
         
-                self.rebuild_entity(db_collaborator)
+                self.rebuild_entity(db_stop)
               end
 
             def self.rebuild_entity(db_record)
