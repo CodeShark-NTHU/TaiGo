@@ -51,7 +51,7 @@ module TaiGo
         call_motc_url(city_bus_route_req_url).parse
       end
 
-      def city_stop_routes_data(city_name)
+      def city_stop_route_data(city_name)
         city_bus_route_req_url = Api.url(%W[Bus StopOfRoute City #{city_name}].join('/') )
         call_motc_url(city_bus_route_req_url).parse
       end

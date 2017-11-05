@@ -22,7 +22,7 @@ http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Hsinchu: !ruby/object:H
     - - Server
       - nginx
     - - Date
-      - Sat, 04 Nov 2017 20:24:02 GMT
+      - Sun, 05 Nov 2017 02:16:00 GMT
     - - Content-Type
       - application/json; charset=utf-8
     - - Content-Length
@@ -34,7 +34,7 @@ http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Hsinchu: !ruby/object:H
     - - X-Ratelimit-Limit-Day
       - '20000'
     - - X-Ratelimit-Remaining-Day
-      - '19940'
+      - '19951'
     - - Cache-Control
       - no-cache
     - - Pragma
@@ -54,9 +54,9 @@ http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Hsinchu: !ruby/object:H
     - - Access-Control-Allow-Origin
       - "*"
     - - X-Kong-Upstream-Latency
-      - '55'
+      - '40'
     - - X-Kong-Proxy-Latency
-      - '2'
+      - '1'
     - - Via
       - kong/0.11.0
   proxy_headers: !ruby/object:HTTP::Headers
@@ -77,7 +77,7 @@ http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Hsinchu: !ruby/object:H
         headers: 
         chunk: 
       socket: !ruby/object:HTTP::Timeout::Null
-        options: &2 {}
+        options: {}
         socket: !ruby/object:TCPSocket {}
       keep_alive: false
     connection: *1
@@ -867,87 +867,4 @@ http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Hsinchu: !ruby/object:H
       Nan Liao"},"StopBoarding":0,"StopSequence":55,"StopPosition":{"PositionLat":24.84427,"PositionLon":120.93044}},{"StopUID":"HSZ291447","StopID":"291447","StopName":{"Zh_tw":"漁港口","En":"Yu
       Gang Kou"},"StopBoarding":0,"StopSequence":56,"StopPosition":{"PositionLat":24.84487,"PositionLon":120.92928}},{"StopUID":"HSZ291482","StopID":"291482","StopName":{"Zh_tw":"新竹漁港直銷中心","En":"Hsinchu
       Harbor Outlet Center"},"StopBoarding":-1,"StopSequence":57,"StopPosition":{"PositionLat":24.84898,"PositionLon":120.9259}}],"UpdateTime":"2017-11-04T08:38:54+08:00","VersionID":65}]'
-    encoding: !ruby/encoding UTF-8
-http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Tokyo: !ruby/object:HTTP::Response
-  version: '1.1'
-  uri: !ruby/object:HTTP::URI
-    uri: !ruby/object:Addressable::URI
-      validation_deferred: false
-      scheme: http
-      host: ptx.transportdata.tw
-      path: "/MOTC/v2/Bus/StopOfRoute/City/Tokyo"
-      authority: ptx.transportdata.tw
-      uri_string: http://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/Tokyo
-      password: 
-      user: 
-      port: 
-  status: !ruby/marshalable:HTTP::Response::Status
-    :__v2__:
-    - :@code
-    ? - 500
-    : 500
-  headers: !ruby/object:HTTP::Headers
-    pile:
-    - - Server
-      - nginx
-    - - Date
-      - Sat, 04 Nov 2017 20:24:03 GMT
-    - - Content-Type
-      - application/json; charset=utf-8
-    - - Content-Length
-      - '29'
-    - - Connection
-      - close
-    - - X-Ratelimit-Limit-Day
-      - '20000'
-    - - X-Ratelimit-Remaining-Day
-      - '19939'
-    - - Cache-Control
-      - no-cache
-    - - Pragma
-      - no-cache
-    - - Expires
-      - "-1"
-    - - X-Aspnet-Version
-      - 4.0.30319
-    - - X-Powered-By
-      - ASP.NET
-    - - X-Frame-Options
-      - SAMEORIGIN
-    - - X-Content-Type-Options
-      - nosniff
-    - - X-Xss-Protection
-      - 1;mode=block
-    - - Access-Control-Allow-Origin
-      - "*"
-    - - X-Kong-Upstream-Latency
-      - '5'
-    - - X-Kong-Proxy-Latency
-      - '1'
-    - - Via
-      - kong/0.11.0
-  proxy_headers: !ruby/object:HTTP::Headers
-    pile: []
-  content_type: !ruby/struct:HTTP::ContentType
-    mime_type: application/json
-    charset: utf-8
-  body: !ruby/object:HTTP::Response::Body
-    stream: &3 !ruby/object:HTTP::Connection
-      persistent: false
-      keep_alive_timeout: 5.0
-      pending_request: false
-      pending_response: false
-      failed_proxy_connect: false
-      parser: !ruby/object:HTTP::Response::Parser
-        parser: !ruby/object:HTTP::Parser {}
-        finished: false
-        headers: 
-        chunk: 
-      socket: !ruby/object:HTTP::Timeout::Null
-        options: *2
-        socket: !ruby/object:TCPSocket {}
-      keep_alive: false
-    connection: *3
-    streaming: false
-    contents: '{"Message":"發生錯誤。"}'
     encoding: !ruby/encoding UTF-8

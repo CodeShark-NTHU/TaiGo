@@ -55,7 +55,7 @@ module TaiGo
                    @bus_route_data['RouteName']['Zh_tw'])
         end
 
-        def depart_name 
+        def depart_name
           Name.new(@bus_route_data['DepartureStopNameEn'],
                    @bus_route_data['DepartureStopNameZh'])
         end
@@ -69,7 +69,7 @@ module TaiGo
         class Name
           attr_reader :english, :chinese
 
-          def initialize(en,ch)
+          def initialize(en, ch)
             @english = en
             @chinese = ch
           end
