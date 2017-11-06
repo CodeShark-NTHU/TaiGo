@@ -7,13 +7,13 @@ Sequel.migration do
   change do
     create_table(:stops) do
       primary_key :id
-      String      :uid
+      String      :stop_uid
       String      :name_zh
       String      :name_en
       Float       :lat
       Float       :lng
-      Integer     :auth_id
-      String      :address
+      String     :auth_id
+    #  String      :address
 
       DateTime :created_at
       DateTime :updated_at

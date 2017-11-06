@@ -9,7 +9,7 @@ module TaiGo
             end
 
             def self.find_uid(uid)
-                db_record = Database::BusRouteOrm.first(uid: uid)&.rebuild_entity
+                db_record = Database::BusRouteOrm.first(uid: uid)
                 rebuild_entity(db_record)
             end
 
@@ -29,7 +29,7 @@ module TaiGo
                     authority_id: db_record.auth_id,
                     route_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
                     depart_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.depart_name_en,db_record.depart_name_zh),
-                    destination_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.destination_name_en,destination_name_zh),
+                    destination_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.destination_name_en,destination_name_zh)
                    
                 )
               end

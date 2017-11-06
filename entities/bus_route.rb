@@ -13,7 +13,8 @@ module TaiGo
       attribute :depart_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name).optional
       attribute :destination_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name).optional
       attribute :authority_id, Types::String.optional
-      # attribute :sub_route_uid, Types::Strict::String.optional
+      attribute :direction, Types::Strict::Int.optional
+      attribute :sub_route_uid, Types::Strict::String.optional
       # attribute :direction, Types::Strict::Int.optional
     end
   end
