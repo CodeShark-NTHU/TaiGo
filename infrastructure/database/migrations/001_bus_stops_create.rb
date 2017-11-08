@@ -6,8 +6,8 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:stops) do
-      primary_key :id
-      String      :stop_uid
+      #primary_key :id
+      String      :id, primary_key: true
       String      :name_zh
       String      :name_en
       Float       :lat
@@ -17,6 +17,8 @@ Sequel.migration do
 
       DateTime :created_at
       DateTime :updated_at
+
+     
     end
   end
 end

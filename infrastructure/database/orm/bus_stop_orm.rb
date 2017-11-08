@@ -6,7 +6,7 @@ module TaiGo
       class BusStopOrm < Sequel::Model(:stops)
     
         many_to_many :routes,
-                     join_table: :bus_stops_of_routes,
+                     join_table: :stops_of_routes,
                      left_key: :stop_uid, right_key: :route_uid
   
         plugin :timestamps, update_on_create: true

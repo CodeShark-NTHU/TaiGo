@@ -6,16 +6,16 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:stops_of_routes) do
-      foreign_key :stop_uid, :stops
-      foreign_key :route_uid, :routes
+      foreign_key :stop_uid, :stops, type: String
+      foreign_key :route_uid, :routes, type: String
       String      :sub_route_uid
       Integer     :direction
       Integer     :stop_sequence
       Integer     :stop_boarding
       
 
-      #primary_key [:stop_uid, :route_uid, :sub_route_uid, :direction, :stop_sequence]
-      index [:stop_uid, :route_uid, :sub_route_uid, :direction, :stop_sequence]
+      primary_key [:stop_uid, :route_uid]
+      index [:stop_uid, :route_uid]
     end
   end
 end
