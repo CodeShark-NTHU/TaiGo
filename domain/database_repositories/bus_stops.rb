@@ -19,7 +19,7 @@ module TaiGo
 
             def self.create_from(entity)
                 db_stop = Database::BusStopOrm.create(
-                  uid: entity.origin_id,
+                  uid: entity.uid,
                   name_en: entity.name.english,
                   name_zh: entity.name.chinese,
                   lat: entity.coordinates.latitude,
