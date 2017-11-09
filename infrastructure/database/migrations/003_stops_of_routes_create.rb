@@ -6,9 +6,9 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:stops_of_routes) do
-      #foreign_key :stop_uid, :stops, type: String
-      #foreign_key :route_uid, :routes, type: String
       primary_key :id
+      foreign_key :stop_id, :stops, type: String
+      foreign_key :route_id, :routes, type: String
 #      String      :stop_uid
 #      String      :route_uid
       String      :sub_route_uid
