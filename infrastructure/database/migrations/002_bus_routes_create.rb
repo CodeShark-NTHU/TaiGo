@@ -5,18 +5,20 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:routes) do
-      primary_key :id
-      String      :uid
+     # primary_key :id
+      String      :id, primary_key: true
       String      :name_zh
       String      :name_en
       String      :depart_name_zh
-      String      :depart_name_eh
+      String      :depart_name_en
       String      :destination_name_zh
       String      :destination_name_en
       Integer     :auth_id
 
       DateTime    :created_at
       DateTime    :updated_at
+
+     
     end
   end
 end

@@ -3,8 +3,8 @@
 module TaiGo
     module Repository
       For = {
-        Entity::BusStop       => BusStops,
-        Entity::BusRoute => BusRoutes
+        Entity::BusStop         => BusStops,
+        Entity::BusRoute        => BusRoutes
       }.freeze
     end
   end

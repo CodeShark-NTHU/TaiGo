@@ -36,7 +36,9 @@ module TaiGo
             authority_id: authority_id,
             name: name,
             coordinates: coordinates,
-            address: address
+            address: address,
+            sequence: sequence,
+            is_boarding: is_boarding
           )
         end
 
@@ -58,8 +60,12 @@ module TaiGo
           Coordinates.new(@data['StopPosition']['PositionLat'],@data['StopPosition']['PositionLon'])
         end
 
-        def address
-          @data['stop_address']
+        def sequence
+          @data['StopSequence'].blank? ? 0 : @data['StopSequence']
+        end
+
+        def is_boarding
+          @data['StopBoarding'].blank? ? false :  @data['StopBoarding'] == 0
         end
 
         class Name 

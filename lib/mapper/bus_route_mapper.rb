@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require_relative 'bus_sub_route_mapper.rb'
+
 module TaiGo
   # Provides access to Bus Route data
   module MOTC
@@ -21,13 +23,14 @@ module TaiGo
       end
 
       def self.build_entity(bus_route_data)
-        DataMapper.new(bus_route_data).build_entity
+        DataMapper.new(bus_route_data, @gateway).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(bus_route_data)
+        def initialize(bus_route_data, gateway)
           @bus_route_data = bus_route_data
+          @subroutes_mapper = BusSubRouteMapper.new(gateway)
         end
 
         def build_entity
@@ -36,7 +39,8 @@ module TaiGo
             authority_id: authority_id,
             route_name: route_name,
             depart_name: depart_name,
-            destination_name: destination_name
+            destination_name: destination_name,
+            sub_routes: sub_routes
           )
         end
 
@@ -63,6 +67,10 @@ module TaiGo
         def destination_name
           Name.new(@bus_route_data['DestinationStopNameEn'],
                    @bus_route_data['DestinationStopNameZh'])
+        end
+
+        def sub_routes
+          @subroutes_mapper.load_several(@bus_route_data['SubRoutes'])
         end
 
         # Extract class name
