@@ -5,8 +5,8 @@ module TaiGo
     For = {
       Entity::BusStop         => Stops,
       Entity::BusRoute        => Routes,
-      Entity::BusSubRoute     => Sub_outes,
-      Entity::StopOfRoute     => Stop_of_routes
+      Entity::BusSubRoute     => SubRoutes,
+      Entity::StopOfRoute     => StopOfRoutes
     }.freeze
   end
 end

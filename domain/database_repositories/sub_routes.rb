@@ -3,7 +3,7 @@
 module TaiGo
   module Repository
     # Repository for Subroutes
-    class Subroutes
+    class SubRoutes
       def self.find_id(id)
         db_record = Database::SubRouteOrm.first(id: id)
         rebuild_entity(db_record)
@@ -18,6 +18,7 @@ module TaiGo
       # end
 
       def self.create_from(entity, route_id)
+        Database::SubRouteOrm.unrestrict_primary_key
         db_subroute = Database::SubRouteOrm.create(
           id: entity.sub_route_uid,
           route_id: route_id,

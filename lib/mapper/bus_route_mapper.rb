@@ -7,8 +7,11 @@ module TaiGo
   module MOTC
     # Data Mapper for Bus Route
     class BusRouteMapper
-      def initialize(gateway)
-        @gateway = gateway
+      def initialize(config, gateway = TaiGo::MOTC::Api)
+        @config = config
+        @gateway_class = gateway
+        @gateway = @gateway_class.new(@config['motc_id'].to_s,
+                                      @config['motc_key'].to_s)
       end
 
       def load(city_name)
@@ -23,14 +26,14 @@ module TaiGo
       end
 
       def self.build_entity(bus_route_data)
-        DataMapper.new(bus_route_data, @gateway).build_entity
+        DataMapper.new(bus_route_data).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(bus_route_data, gateway)
+        def initialize(bus_route_data)
           @bus_route_data = bus_route_data
-          @subroutes_mapper = BusSubRouteMapper.new(gateway)
+          # @subroutes_mapper = BusSubRouteMapper.new(gateway)
         end
 
         def build_entity
@@ -39,8 +42,8 @@ module TaiGo
             authority_id: authority_id,
             route_name: route_name,
             depart_name: depart_name,
-            destination_name: destination_name,
-            sub_routes: sub_routes
+            destination_name: destination_name
+            # sub_routes: sub_routes
           )
         end
 
@@ -69,10 +72,10 @@ module TaiGo
                    @bus_route_data['DestinationStopNameZh'])
         end
 
-        def sub_routes
-          @subroutes_mapper.load_several(@bus_route_data['SubRoutes'],
-                                         @bus_route_data['RouteUID'])
-        end
+        # def sub_routes
+        #   @subroutes_mapper.load_several(@bus_route_data['SubRoutes'],
+        #                                  @bus_route_data['RouteUID'])
+        # end
 
         # Extract class name
         class Name

@@ -21,6 +21,7 @@ module TaiGo
           longitude: entity.coordinates.longitude,
           auth_id: entity.auth_id
         )
+      end
 
       # entity -> db
       # def self.create(entity) 
@@ -46,7 +47,7 @@ module TaiGo
 
       def self.rebuild_entity(db_record)
         return nil unless db_record
-              
+
         # rebuild entity
         Entity::BusStop.new(
           uid: db_record.id,

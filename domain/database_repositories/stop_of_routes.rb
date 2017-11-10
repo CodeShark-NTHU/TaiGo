@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TaiGo
-  module StopOfRoute
+  module Repository
     # Repository for StopOfRoutes
     class StopOfRoutes
       def self.find_stop_of_route(sub_route_uid, stop_uid, sequence)

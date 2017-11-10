@@ -47,7 +47,7 @@ module TaiGo
         def route_id
           @route_id
         end
-        
+
         def sub_route_name
           Name.new(@sub_routes_data['SubRouteName']['En'],
                    @sub_routes_data['SubRouteName']['Zh_tw'])
