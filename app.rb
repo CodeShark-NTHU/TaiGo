@@ -105,6 +105,36 @@ module TaiGo
               end
             end
           end
+
+          # /api/v0.1/stop_of_routes/:city_name
+          routing.on 'stop_of_routes', String do |city_name|
+            # POST '/api/v0.1/stop_of_routes/:city_name
+            routing.post do
+              begin
+                stop_of_routes = TaiGo::MOTC::StopOfRouteMapper.new(app.config).load(city_name)
+              rescue StandardError
+                routing.halt(404, error: "Bus Sub Route at #{city_name} not found")
+              end
+              stop_of_routes.map do |stopofroute|
+                stored_stop_of_routes = Repository::For[stopofroute.class].find_or_create(stopofroute)
+                response.status = 201
+                response['Location'] = "/api/v0.1/stop_of_routes/#{city_name}"
+                stored_stop_of_routes.to_h
+              end
+            end
+          end
+
+          # /api/v0.1/stop_sequence/:sub_route_id
+          routing.on 'stop_sequence', String do |sub_route_id|
+            # GET /api/v0.1/stop_sequence/:sub_route_id
+            routing.get do
+              stop_sequences = Repository::For[Entity::StopOfRoute].find_all_stop_of_a_sub_route(sub_route_id)
+              routing.halt(404, error: 'Sub Route not found') unless stop_sequences
+              stop_sequences.map do |stop_sequence|
+                stop_sequence.to_h
+              end
+            end
+          end
         end
       end
     end
