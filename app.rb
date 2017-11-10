@@ -29,6 +29,24 @@ module TaiGo
         routing.on 'v0.1' do
           # /api/v0.1/route/:city_name
           routing.on 'routes', String do |city_name|
+            # POST '/api/v0.1/routes/:city_name
+            routing.post do
+              begin
+                routes = TaiGo::MOTC::BusRouteMapper.new(app.config).load(city_name)
+              rescue StandardError
+                routing.halt(404, error: "Bus Routes at #{city_name} not found")
+              end
+              routes.map do |route|
+                stored_routes = Repository::For[route.class].find_or_create(route)
+                response.status = 201
+                response['Location'] = "/api/v0.1/routes/#{city_name}"
+                stored_routes.to_h
+              end
+            end
+          end
+
+          # /api/v0.1/route/:city_name
+          routing.on 'stops', String do |city_name|
             # GET /api/v0.1/routes/:name_ch
             # routing.get do
             #   route = Repository::For[Entity::BusRoute].find_name_ch(city_name)
@@ -36,18 +54,18 @@ module TaiGo
             #   route.to_h
             # end
 
-            # POST '/api/v0.1/routes/:city_name
+            # POST '/api/v0.1/stops/:city_name
             routing.post do
               begin
-                routes = TaiGo::MOTC::BusRouteMapper.new(app.config).load(city_name)
+                stops = TaiGo::MOTC::BusStopMapper.new(app.config).load(city_name)
               rescue StandardError
-                routing.halt(404, error: 'Routes not found')
+                routing.halt(404, error: "Bus Stops at #{city_name} not found")
               end
-              routes.map do |route|
-                stored_routes = Repository::For[route.class].find_or_create(route)
+              stops.map do |stop|
+                stored_stops = Repository::For[stop.class].find_or_create(stop)
                 response.status = 201
-                response['Location'] = "/api/v0.1/routes/#{city_name}"
-                stored_routes.to_h
+                response['Location'] = "/api/v0.1/stops/#{city_name}"
+                stored_stops.to_h
               end
             end
           end

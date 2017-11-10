@@ -4,29 +4,33 @@ module TaiGo
   module Repository
     # Repository for Stops
     class Stops
-
       # use uid find stop in stop table
       def self.find_id(id)
         db_record = Database::StopOrm.first(id: id)
         rebuild_entity(db_record)
       end
 
+      def self.find_or_create(entity)
+        find_id(entity.uid) || create_from(entity)
+      end
+
       def self.create_from(entity)
-        db_collaborator = Database::StopOrm.create(
+        Database::StopOrm.unrestrict_primary_key
+        db_stop = Database::StopOrm.create(
           id: entity.uid,
           name_zh: entity.name.chinese,
           name_en: entity.name.english,
-          address: entity.address,
           latitude: entity.coordinates.latitude,
           longitude: entity.coordinates.longitude,
-          auth_id: entity.auth_id
+          auth_id: entity.authority_id,
+          address: entity.address
         )
+        rebuild_entity(db_stop)
       end
 
       # entity -> db
-      # def self.create(entity) 
+      # def self.create(entity)
       #   raise 'Stop already exists in db' if find(entity)
-        
       #   db_stop = Database::StopOrm.create(
       #     id: entity.uid,
       #     name_en: entity.name.english,
@@ -51,10 +55,10 @@ module TaiGo
         # rebuild entity
         Entity::BusStop.new(
           uid: db_record.id,
-          name: TaiGo::MOTC::BusStopMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
-          coordinates: TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates.new(db_record.latitude,db_record.longitude),
+          name: TaiGo::MOTC::BusStopMapper::DataMapper::Name.new(db_record.name_en, db_record.name_zh),
+          coordinates: TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates.new(db_record.latitude, db_record.longitude),
           authority_id: db_record.auth_id,
-          address: db_record.auth_id
+          address: db_record.address
         )
       end
     end

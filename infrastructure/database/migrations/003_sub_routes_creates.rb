@@ -6,7 +6,7 @@ Sequel.migration do
   change do
     create_table(:sub_routes) do
       String      :id, primary_key: true
-      foreign_key :route_id, :routes
+      foreign_key :route_id, :routes, type: String
       String      :name_zh
       String      :name_en
       String      :headsign

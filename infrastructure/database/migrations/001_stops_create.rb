@@ -10,8 +10,8 @@ Sequel.migration do
       String    	:name_en
       String    	:address
       Float     	:latitude
-      Float       :longitute
-      Integer     :auth_id
+      Float       :longitude
+      String      :auth_id
 
       DateTime    :created_at
       DateTime    :updated_at

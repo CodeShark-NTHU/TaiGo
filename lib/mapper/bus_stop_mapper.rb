@@ -1,12 +1,15 @@
 # frozen_string_literal: false
 
 module TaiGo
-  # Provides access to contributor data
+  # Provides access to bus stop data
   module MOTC
-    # Data Mapper for Github contributors
+    # Data Mapper for Bus Stop Mapper
     class BusStopMapper
-      def initialize(gateway)
-        @gateway = gateway
+      def initialize(config, gateway = TaiGo::MOTC::Api)
+        @config = config
+        @gateway_class = gateway
+        @gateway = @gateway_class.new(@config['motc_id'].to_s,
+                                      @config['motc_key'].to_s)
       end
 
       def load(city_name)
@@ -36,9 +39,7 @@ module TaiGo
             authority_id: authority_id,
             name: name,
             coordinates: coordinates,
-            address: address,
-            sequence: sequence,
-            is_boarding: is_boarding
+            address: address
           )
         end
 
@@ -52,43 +53,40 @@ module TaiGo
           @data['AuthorityID']
         end
 
+        def address
+          @data['Address']
+        end
+
         def name
-          Name.new(@data['StopName']['En'],@data['StopName']['Zh_tw'])
+          Name.new(@data['StopName']['En'],
+                   @data['StopName']['Zh_tw'])
         end
 
         def coordinates
-          Coordinates.new(@data['StopPosition']['PositionLat'],@data['StopPosition']['PositionLon'])
+          Coordinates.new(@data['StopPosition']['PositionLat'],
+                          @data['StopPosition']['PositionLon'])
         end
 
-        def sequence
-          @data['StopSequence'].blank? ? 0 : @data['StopSequence']
-        end
-
-        def is_boarding
-          @data['StopBoarding'].blank? ? false :  @data['StopBoarding'] == 0
-        end
-
-        class Name 
+        # this is a helper class for name
+        class Name
           attr_reader :english, :chinese
-  
-          def initialize(en,ch)
+
+          def initialize(en, ch)
             @english = en
             @chinese = ch
           end
         end
-  
+
+        # this is a helper class for coordinates
         class Coordinates
           attr_reader :latitude, :longitude
-  
+
           def initialize(lat, long)
             @latitude = lat
             @longitude = long
           end
         end
-
       end
-
-
     end
   end
 end

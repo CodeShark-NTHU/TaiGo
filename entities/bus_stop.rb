@@ -10,7 +10,7 @@ module TaiGo
       attribute :uid, Types::Strict::String
       attribute :name, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Name)
       attribute :coordinates, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates)
-      attribute :authority_id, Types::Strict::String.optional
+      attribute :authority_id, Types::Strict::String
       attribute :address, Types::Strict::String.optional
     end
   end
