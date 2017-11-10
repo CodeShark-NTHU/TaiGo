@@ -21,7 +21,7 @@ module TaiGo
       end
 
       def self.find_or_create(entity)
-          find_id(entity.route_uid) || create_from(entity)
+        find_id(entity.route_uid) || create_from(entity)
       end
 
       def self.create_from(entity)

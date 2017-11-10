@@ -18,7 +18,7 @@ signature = Base64.encode64(hash)
 signature.delete!("\n")
 
 auth_code = 'hmac username="' + motc_id +
-            ', algorithm="hmac-sha1", headers="x-date", signature="' +
+            '", algorithm="hmac-sha1", headers="x-date", signature="' +
             signature + '"'
 
 def motc_api_path(path)
@@ -36,8 +36,6 @@ br_results = {}
 good_request = motc_api_path('Hsinchu')
 br_response[good_request] = call_motc_url(auth_code, xdate, good_request)
 routes = br_response[good_request].parse
-
-puts routes
 
 # should be 28
 br_results['size'] = routes.count

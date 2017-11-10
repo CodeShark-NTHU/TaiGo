@@ -9,19 +9,19 @@ module TaiGo
         rebuild_entity(db_record)
       end
 
-      def self.find_or_create(entity, route_id)
-        find_id(entity.sub_route_id) || create_from(entity, route_id)
+      def self.find_or_create(entity)
+        find_id(entity.sub_route_uid) || create_from(entity)
       end
 
       # def sub_routes_list(route_id)
       #   db_record = Database::SubRouteOrm.where(route_id: route_id).all
       # end
 
-      def self.create_from(entity, route_id)
+      def self.create_from(entity)
         Database::SubRouteOrm.unrestrict_primary_key
         db_subroute = Database::SubRouteOrm.create(
           id: entity.sub_route_uid,
-          route_id: route_id,
+          route_id: entity.route_id,
           name_zh: entity.sub_route_name.chinese,
           name_en: entity.sub_route_name.english,
           headsign: entity.headsign,

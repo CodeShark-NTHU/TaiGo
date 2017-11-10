@@ -22,32 +22,39 @@ auth_code = 'hmac username="' + motc_id +
             signature + '"'
 
 def motc_api_path(path)
-  'http://ptx.transportdata.tw/MOTC/v2/Bus/Stop/City/' + path
+  'http://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/' + path
 end
 
 def call_motc_url(auth_code, date, url)
   HTTP.headers('x-date' => date, 'Authorization' => auth_code).get(url)
 end
 
-bs_response = {}
-bs_results = {}
+bsr_response = {}
+bsr_results = {}
+temp_hash = []
 
 ## GOOD REPO (HAPPY)
 good_request = motc_api_path('Hsinchu')
-bs_response[good_request] = call_motc_url(auth_code, xdate, good_request)
-stops = bs_response[good_request].parse
+bsr_response[good_request] = call_motc_url(auth_code, xdate, good_request)
+routes = bsr_response[good_request].parse
 
-# should be 956 bus stop in Hsinchu
-bs_results['size'] = stops.count
-# should be 12 (Hsinchu authority code)
-bs_results['AuthorityID'] = stops[0]['AuthorityID']
-# should provide all information about 956 bus stop
-bs_results['stops'] = stops
+routes.map do |route|
+  route_uid = route['RouteUID']
+  route['SubRoutes'].map do |subr|
+    subr['RouteUID'] = route_uid
+    temp_hash << subr
+  end
+end
+
+# 65 available routes in Hsinchu
+bsr_results['size'] = temp_hash.count
+# list stop of routes
+bsr_results['routes'] = temp_hash
 
 ## BAD REPO (SAD)
 bad_request = motc_api_path('Tokyo')
-bs_response[bad_request] = call_motc_url(auth_code, xdate, bad_request)
-bs_response[bad_request].parse
+bsr_response[bad_request] = call_motc_url(auth_code, xdate, bad_request)
+bsr_response[bad_request].parse
 
-File.write('spec/fixtures/bs_response.yml', bs_response.to_yaml)
-File.write('spec/fixtures/bs_results.yml', bs_results.to_yaml)
+File.write('spec/fixtures/bsr_response.yml', bsr_response.to_yaml)
+File.write('spec/fixtures/bsr_results.yml', bsr_results.to_yaml)

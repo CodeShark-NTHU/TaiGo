@@ -5,8 +5,11 @@ module TaiGo
   module MOTC
     # Data Mapper for Bus Route
     class StopOfRouteMapper
-      def initialize(gateway)
-        @gateway = gateway
+      def initialize(config, gateway = TaiGo::MOTC::Api)
+        @config = config
+        @gateway_class = gateway
+        @gateway = @gateway_class.new(@config['motc_id'].to_s,
+                                      @config['motc_key'].to_s)
       end
 
       def load(city_name)
@@ -53,7 +56,7 @@ module TaiGo
 
         def build_entity
           Entity::StopOfRoute.new(
-            sub_route_id: sub_route_uid,
+            sub_route_uid: sub_route_uid,
             stop_uid: stop_uid,
             stop_boarding: stop_boarding,
             stop_sequence: stop_sequence
