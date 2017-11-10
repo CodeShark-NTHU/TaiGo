@@ -5,7 +5,7 @@ require 'sequel'
 Sequel.migration do
   change do
     create_table(:stops) do
-      String      :id, primary_key: true
+      String :id, primary_key: true
       String    	:name_zh
       String    	:name_en
       String    	:address

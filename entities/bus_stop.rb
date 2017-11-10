@@ -12,8 +12,6 @@ module TaiGo
       attribute :coordinates, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates)
       attribute :authority_id, Types::Strict::String.optional
       attribute :address, Types::Strict::String.optional
-      #attribute :sequence, Types::Strict::Int.optional
-      #attribute :is_boarding, Types::Strict::Bool.optional
     end
   end
 end

@@ -8,6 +8,7 @@ module TaiGo
     # Domain entity object for git BusRoute
     class BusSubRoute < Dry::Struct
       attribute :sub_route_uid, Types::Strict::String
+      attribute :route_id, Types::Strict::String
       attribute :sub_route_name, Types.Instance(TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name)
       attribute :headsign, Types::String.optional
       attribute :direction, Types::Int.optional

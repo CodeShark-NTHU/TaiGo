@@ -70,7 +70,8 @@ module TaiGo
         end
 
         def sub_routes
-          @subroutes_mapper.load_several(@bus_route_data['SubRoutes'])
+          @subroutes_mapper.load_several(@bus_route_data['SubRoutes'],
+                                         @bus_route_data['RouteUID'])
         end
 
         # Extract class name
