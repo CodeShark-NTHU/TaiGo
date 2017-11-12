@@ -8,8 +8,8 @@ describe 'Tests Bus Stop library' do
   Econfig.env = 'development'.to_s
   Econfig.root = '.'
 
-  MOTC_ID = config['motc_id']
-  MOTC_KEY = config['motc_key']
+ # MOTC_ID = config['motc_id']
+  #MOTC_KEY = config['motc_key']
   CORRECT_STOP = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
 
   CASSETTE_FILE = 'motc_stop_api'.freeze
@@ -26,16 +26,16 @@ describe 'Tests Bus Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
       bstop = bstop_mapper.load(CITY_NAME)
       _(bstop.size).must_equal CORRECT_STOP['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+        #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
         bstop_mapper.load('Tokyo')
       end.must_raise TaiGo::MOTC::Api::Errors::ServerError
     end
@@ -43,8 +43,8 @@ describe 'Tests Bus Stop library' do
 
   describe 'Bus Stop information' do
     before do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
       @stops = bstop_mapper.load(CITY_NAME)
     end
 

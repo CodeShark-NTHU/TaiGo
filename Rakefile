@@ -61,7 +61,8 @@ namespace :db do
     # drop according to dependencies
     app.DB.drop_table :stops
     app.DB.drop_table :routes
-    app.DB.drop_table :stops_of_routes
+    app.DB.drop_table :sub_routes
+    app.DB.drop_table :stop_of_routes
     app.DB.drop_table :schema_info
   end
 

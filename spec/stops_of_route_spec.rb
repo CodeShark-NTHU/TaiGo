@@ -8,8 +8,8 @@ describe 'Tests Stops of route' do
   Econfig.env = 'development'.to_s
   Econfig.root = '.'
 
-  MOTC_ID = config['motc_id']
-  MOTC_KEY = config['motc_key']
+  #MOTC_ID = config['motc_id']
+  #MOTC_KEY = config['motc_key']
 
   CORRECT_SOR = YAML.safe_load(File.read('spec/fixtures/sor_results.yml'))
 
@@ -27,24 +27,24 @@ describe 'Tests Stops of route' do
 
   describe 'Number of Stops in specific Route information' do
     it 'HAPPY: should provide the correct number of bus stops of the route' do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
+      #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+      stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(app.config)
       stops_of_route = stops_of_route_mapper.load(CITY_NAME)
       _(stops_of_route.size).must_equal CORRECT_SOR['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
+       # api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(app.config)
         stops_of_route_mapper.load('Tokyo')
       end.must_raise TaiGo::MOTC::Api::Errors::ServerError
     end
 
     describe 'Bus Stop information' do
       before do
-        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(api)
+        #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        stops_of_route_mapper = TaiGo::MOTC::StopOfRouteMapper.new(app.config)
         @sor = stops_of_route_mapper.load(CITY_NAME)
       end
 
