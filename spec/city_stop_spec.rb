@@ -8,12 +8,11 @@ describe 'Tests Bus Stop library' do
   Econfig.env = 'development'.to_s
   Econfig.root = '.'
 
-  MOTC_ID = config['motc_id']
-  MOTC_KEY = config['motc_key']
-  CORRECT = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
-  CORRECT_ROUTE = YAML.safe_load(File.read('spec/fixtures/br_results.yml'))
+ # MOTC_ID = config['motc_id']
+  #MOTC_KEY = config['motc_key']
+  CORRECT_STOP = YAML.safe_load(File.read('spec/fixtures/bs_results.yml'))
 
-  CASSETTE_FILE = 'motc_api'.freeze
+  CASSETTE_FILE = 'motc_stop_api'.freeze
 
   before do
     VCR.insert_cassette CASSETTE_FILE,
@@ -27,65 +26,35 @@ describe 'Tests Bus Stop library' do
 
   describe 'City information' do
     it 'HAPPY: should provide the correct number of bus stops' do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
       bstop = bstop_mapper.load(CITY_NAME)
-      _(bstop.size).must_equal CORRECT['size']
-    end
-
-    it 'HAPPY: should provide the correct number of bus route' do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
-      broute = broute_mapper.load(CITY_NAME)
-      _(broute.size).must_equal CORRECT_ROUTE['size']
+      _(bstop.size).must_equal CORRECT_STOP['size']
     end
 
     it 'SAD: it should throw a server error message' do
       proc do
-        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+        #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+        bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
         bstop_mapper.load('Tokyo')
-      end.must_raise TaiGo::MOTC::Api::Errors::ServerError
-    end
-
-    it 'SAD: it should throw a server error message' do
-      proc do
-        api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-        broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
-        broute_mapper.load('Tokyo')
       end.must_raise TaiGo::MOTC::Api::Errors::ServerError
     end
   end
 
   describe 'Bus Stop information' do
     before do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(api)
+      #api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
+      bstop_mapper = TaiGo::MOTC::BusStopMapper.new(app.config)
       @stops = bstop_mapper.load(CITY_NAME)
     end
 
     it 'HAPPY: should identify bus Stop ' do
-      _(@stops.count).must_equal CORRECT['stops'].count
+      _(@stops.count).must_equal CORRECT_STOP['stops'].count
 
       uid = @stops.map(&:uid)
-      correct_uid = CORRECT['stops'].map { |c| c['StopUID'] }
+      correct_uid = CORRECT_STOP['stops'].map { |c| c['StopUID'] }
       _(uid).must_equal correct_uid
     end
   end
 
-  describe 'Bus Route information' do
-    before do
-      api = TaiGo::MOTC::Api.new(MOTC_ID, MOTC_KEY)
-      broute_mapper = TaiGo::MOTC::BusRouteMapper.new(api)
-      @route = broute_mapper.load(CITY_NAME)
-    end
-
-    it 'HAPPY: should identify bus Stop ' do
-      _(@route.count).must_equal CORRECT_ROUTE['routes'].count
-
-      uid = @route.map(&:route_uid)
-      correct_uid = CORRECT_ROUTE['routes'].map { |c| c['RouteUID'] }
-      _(uid).must_equal correct_uid
-    end
-  end
 end
