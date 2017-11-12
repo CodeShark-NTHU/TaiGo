@@ -102,15 +102,19 @@ module TaiGo
           routing.on 'stop_sequence', String do |sub_route_id|
             # GET /api/v0.1/stop_sequence/:sub_route_id
             routing.get do
-              stop_sequences = FindDatabaseRepo.call(
+              stops_of_a_route = FindDatabaseStopOfRoute.call(
                 sub_route_id: sub_route_id
               )
-              routing.halt(404, error: 'Sub Route not found') unless stop_sequences
-              # it still wrong !!!!!! the way to present the result
-              stop_sequences.map do |stop_sequence|
-                stop_sequence.to_h
+              http_response = HttpResponseRepresenter.new(stops_of_a_route.value)
+              response.status = http_response.http_code
+              if stops_of_a_route.success?
+                (stops_of_a_route.value.message).map do |stop|
+                  StopOfRouteRepresenter.new(stop).to_json
+                end
+              else
+                http_response.to_json
               end
-          end
+            end
           end
         end
       end
