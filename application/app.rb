@@ -75,7 +75,6 @@ module TaiGo
                 stored_sroutes = Repository::For[subroute.class].find_or_create(subroute)
                 response.status = 201
                 response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-                stored_sroutes.to_h
                 SubRouteRepresenter.new(stored_sroutes).to_json
               end
             end
@@ -94,7 +93,6 @@ module TaiGo
                 stored_stop_of_routes = Repository::For[stopofroute.class].find_or_create(stopofroute)
                 response.status = 201
                 response['Location'] = "/api/v0.1/stop_of_routes/#{city_name}"
-                # stored_stop_of_routes.to_h
                 StopOfRouteRepresenter.new(stored_stop_of_routes).to_json
               end
             end
@@ -109,8 +107,8 @@ module TaiGo
               )
               routing.halt(404, error: 'Sub Route not found') unless stop_sequences
               # it still wrong !!!!!! the way to present the result
-              stop_sequences.map do |stop_sequence| 
-                StopOfRouteRepresenter.new(stop_sequence).to_json
+              stop_sequences.map do |stop_sequence|
+                stop_sequence.to_h
               end
           end
           end
