@@ -14,7 +14,7 @@ module TaiGo
 
       def load(city_name)
         @city_bus_stops_data = @gateway.city_bus_stops_data(city_name)
-        load_several(@city_bus_stops_data)
+        find_several(@city_bus_stops_data)
       end
 
       def load_several(city_bus_stops_data)

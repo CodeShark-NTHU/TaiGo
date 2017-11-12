@@ -5,6 +5,8 @@ module TaiGo
     # Repository for StopOfRoutes
     class StopOfRoutes
       def self.find_all_stop_of_a_sub_route(sub_route_id)
+        # db_record = Database::StopOfRouteOrm.find(sub_route_id: sub_route_id)
+        # rebuild_entity(db_record)
         db_records = Database::StopOfRouteOrm.where(sub_route_id: sub_route_id)
         xxx = db_records.map do |db_record|
           rebuild_entity(db_record)
