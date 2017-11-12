@@ -9,8 +9,8 @@ module TaiGo
   module Entity
     # Domain entity object for git BusRoute
     class BusRoute < Dry::Struct
-      attribute :route_uid, Types::Strict::String
-      attribute :route_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name)
+      attribute :route_uid, Types::Strict::String # maybe change to route_id?
+      attribute :route_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name) # maybe change to name?
       attribute :depart_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name).optional
       attribute :destination_name, Types.Instance(TaiGo::MOTC::BusRouteMapper::DataMapper::Name).optional
       attribute :authority_id, Types::String.optional
