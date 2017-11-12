@@ -13,6 +13,5 @@ module TaiGo
     property :stop_boarding
     property :stop_sequence
     #collection :stop, extend: BusStopRepresenter
-
   end
 end

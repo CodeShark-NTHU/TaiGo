@@ -14,6 +14,5 @@ module TaiGo
     property :destination_name, extend: NameRepresenter
     property :authority_id
     #collection :sub_routes, extend: SubRouteRepresenter
-
   end
 end

@@ -8,10 +8,10 @@ gem 'http'
 
 # Web app related
 gem 'econfig'
-gem 'pry' # to run console in production
 gem 'puma'
-gem 'rake' # to run migrations in production
 gem 'roda'
+# gem 'pry' # to run console in production
+# gem 'rake' # to run migrations in production
 
 # Database related
 gem 'hirb'
@@ -44,6 +44,7 @@ group :development, :test do
 
   gem 'database_cleaner'
 
+  gem 'pry'
   gem 'rerun'
 
   gem 'flog'
@@ -51,6 +52,6 @@ group :development, :test do
   gem 'rubocop'
 end
 
-group :production do
-  gem 'pg'
-end
+# group :production do
+#   gem 'pg'
+# end
