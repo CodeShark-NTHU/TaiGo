@@ -31,34 +31,42 @@ module TaiGo
           routing.on 'routes', String do |city_name|
             # POST '/api/v0.1/routes/:city_name
             routing.post do
-              routes = LoadFromMotcRoute.call(
+              routes_service_result = LoadFromMotcRoute.new.call(
                 config: app.config,
                 city_name: city_name
-              )
-              routes.map do |route|
-                stored_routes = Repository::For[route.class].find_or_create(route)
-                response.status = 201
+              )             
+              http_response = HttpResponseRepresenter.new(routes_service_result.value) 
+              response.status = http_response.http_code
+              if routes_service_result.success?
                 response['Location'] = "/api/v0.1/routes/#{city_name}"
-                BusRouteRepresenter.new(stored_routes).to_json
-              end
+                routes_service_result.value.message.map do |r|
+                  BusRouteRepresenter.new(r).to_json
+                end
+              else
+                http_response.to_json
+              end             
             end
           end
+
 
           # /api/v0.1/stops/:city_name
           routing.on 'stops', String do |city_name|
             # POST '/api/v0.1/stops/:city_name
             routing.post do
-              stops = LoadFromMotcStop.call(
+              stops_service_result = LoadFromMotcStop.new.call(
                 config: app.config,
                 city_name: city_name
               )
-              # it still wrong !!!!!! the way to present the result
-              stops.map do |stop|
-                stored_stops = Repository::For[stop.class].find_or_create(stop)
-                response.status = 201
+              http_response = HttpResponseRepresenter.new(stops_service_result.value) 
+              response.status = http_response.http_code
+              if stops_service_result.success?
                 response['Location'] = "/api/v0.1/stops/#{city_name}"
-                BusStopRepresenter.new(stored_stops).to_json
-              end
+                stops_service_result.value.message.map do |s|
+                  BusStopRepresenter.new(s).to_json
+                end
+              else
+                http_response.to_json
+              end             
             end
           end
 
@@ -66,17 +74,20 @@ module TaiGo
           routing.on 'sub_routes', String do |city_name|
             # POST '/api/v0.1/sub_routes/:city_name
             routing.post do
-              subroutes = LoadFromMotcSubRoute.call(
+              subroute_service_result = LoadFromMotcSubRoute.new.call(
                 config: app.config,
                 city_name: city_name
               )
-              # it still wrong !!!!!! the way to present the result
-              subroutes.map do |subroute|
-                stored_sroutes = Repository::For[subroute.class].find_or_create(subroute)
-                response.status = 201
+              http_response = HttpResponseRepresenter.new(subroute_service_result.value) 
+              response.status = http_response.http_code
+              if subroute_service_result.success?
                 response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-                SubRouteRepresenter.new(stored_sroutes).to_json
-              end
+                subroute_service_result.value.message.map do |sr|
+                  SubRouteRepresenter.new(sr).to_json
+                end
+              else
+                http_response.to_json
+              end             
             end
           end
 
@@ -84,17 +95,20 @@ module TaiGo
           routing.on 'stop_of_routes', String do |city_name|
             # POST '/api/v0.1/stop_of_routes/:city_name
             routing.post do
-              stop_of_routes = LoadFromMotcStopOfRoute.call(
+              stop_of_routes_service_result = LoadFromMotcStopOfRoute.new.call(
                 config: app.config,
                 city_name: city_name
               )
-              # it still wrong !!!!!! the way to present the result
-              stop_of_routes.map do |stopofroute|
-                stored_stop_of_routes = Repository::For[stopofroute.class].find_or_create(stopofroute)
-                response.status = 201
+              http_response = HttpResponseRepresenter.new(stop_of_routes_service_result.value) 
+              response.status = http_response.http_code
+              if stop_of_routes_service_result.success?
                 response['Location'] = "/api/v0.1/stop_of_routes/#{city_name}"
-                StopOfRouteRepresenter.new(stored_stop_of_routes).to_json
-              end
+                stop_of_routes_service_result.value.message.map do |sor|
+                  StopOfRouteRepresenter.new(sor).to_json
+                end
+              else
+                http_response.to_json
+              end             
             end
           end
 

@@ -4,7 +4,7 @@ require 'dry/transaction'
 
 module TaiGo
   # Transaction to load subroutes from Motc and save to database
-  class LoadFromMotcSubroutes
+  class LoadFromMotcSubRoute
     include Dry::Transaction
 
     step :get_subroutes_from_motc
@@ -22,26 +22,26 @@ module TaiGo
     def filter_the_subroutes_not_in_db(input)
       # only store the subroutes which not in db to subroutes_set
       subroutes_set = []
-      input[:subroutes].map do |subroutes|
-        # don't forget if we change subroutes uid to id ,here have to change to subroutes.id
-        unless Repository::For[subroutes.class].find_id(subroutes.uid).nil?
-          subroutes_set << subroutes 
+      input[:subroutes].map do |subroute|
+        # don't forget if we change subroutes uid to id ,here have to change to subroute.id
+        if Repository::For[subroute.class].find_id(subroute.sub_route_uid).nil?
+          subroutes_set << subroute 
         end
       end
 
       if subroutes_set.empty?
         return Left(Result.new(:conflict, 'all of subroutes already loaded'))
       else
-        return Right(Result.new(:unstored_subroutes, subroutes_set))
+        return Right(unstored_subroutes: subroutes_set)
       end
     end
 
     def store_subroutes_in_repository(input)
       stored_subroutes = []
-      input[:unstored_subroutes].map do |subroutes|
-         stored_subroutes << Repository::For[subroutes.class].create_from(input[:subroutes])
+      input[:unstored_subroutes].map do |subroute|
+         stored_subroutes << Repository::For[subroute.class].create_from(subroute)
       end
-      Right(Result.new(:created subroutes, stored_subroutes))
+      Right(Result.new(:created, stored_subroutes))
     rescue StandardError => e
       puts e.to_s
       Left(Result.new(:internal_error, 'Could not store remote repository'))

@@ -24,7 +24,7 @@ module TaiGo
       stop_set = []
       input[:stops].map do |stop|
         # don't forget if we change stop uid to id ,here have to change to stop.id
-        unless Repository::For[stop.class].find_id(stop.uid).nil?
+        if Repository::For[stop.class].find_id(stop.uid).nil?
           stop_set << stop 
         end
       end
@@ -32,16 +32,16 @@ module TaiGo
       if stop_set.empty?
         return Left(Result.new(:conflict, 'all of stops already loaded'))
       else
-        return Right(Result.new(:unstored_stops, stop_set))
+        return Right(unstored_stops: stop_set)
       end
     end
 
     def store_stops_in_repository(input)
       stored_stops = []
       input[:unstored_stops].map do |stop|
-         stored_stops << Repository::For[stop.class].create_from(input[:stop])
+         stored_stops << Repository::For[stop.class].create_from(stop)
       end
-      Right(Result.new(:created stops, stored_stops))
+      Right(Result.new(:created, stored_stops))
     rescue StandardError => e
       puts e.to_s
       Left(Result.new(:internal_error, 'Could not store remote repository'))

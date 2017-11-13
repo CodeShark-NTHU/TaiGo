@@ -24,7 +24,7 @@ module TaiGo
       route_set = []
       input[:routes].map do |route|
         # don't forget if we change route uid to id ,here have to change to route.id
-        unless Repository::For[route.class].find_id(route.uid).nil?
+        if Repository::For[route.class].find(route).nil?
           route_set << route 
         end
       end
@@ -32,16 +32,17 @@ module TaiGo
       if route_set.empty?
         return Left(Result.new(:conflict, 'all of routes already loaded'))
       else
-        return Right(Result.new(:unstored_routes, route_set))
+        return Right(unstored_routes: route_set)
       end
     end
 
     def store_routes_in_repository(input)
       stored_routes = []
       input[:unstored_routes].map do |route|
-         stored_routes << Repository::For[route.class].create_from(input[:route])
+         stored_routes << Repository::For[route.class].create_from(route)
       end
-      Right(Result.new(:created routes, stored_routes))
+      #created -> 201
+      return Right(Result.new(:created, stored_routes))
     rescue StandardError => e
       puts e.to_s
       Left(Result.new(:internal_error, 'Could not store remote repository'))

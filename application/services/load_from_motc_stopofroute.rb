@@ -23,7 +23,7 @@ module TaiGo
       # only store the stopofroute which not in db to stopofroute_set
       stopofroute_set = []
       input[:stopofroutes].map do |sor|
-        unless Repository::For[sor.class].find_stop_of_route(sor.sub_route_id, sor.stop_id, sor.sequence).nil?
+        if Repository::For[sor.class].find_stop_of_route(sor.sub_route_uid, sor.stop_uid, sor.stop_sequence).nil?
           stopofroute_set << sor 
         end
       end
@@ -31,19 +31,19 @@ module TaiGo
       if stopofroute_set.empty?
         return Left(Result.new(:conflict, 'all of stopofroute already loaded'))
       else
-        return Right(Result.new(:unstored_stopofroute, stopofroute_set))
+        return Right(unstored_stopofroute: stopofroute_set)
       end
     end
 
     def store_stopofroute_in_repository(input)
       stored_stopofroute = []
       input[:unstored_stopofroute].map do |sor|
-         stored_stopofroute << Repository::For[sor.class].create_from(input[:sor])
+         stored_stopofroute << Repository::For[sor.class].create_from(sor)
       end
-      Right(Result.new(:created stopofroute, stored_stopofroute))
+      Right(Result.new(:created, stored_stopofroute))
     rescue StandardError => e
       puts e.to_s
       Left(Result.new(:internal_error, 'Could not store remote repository'))
-    end
+    end   
   end
 end
