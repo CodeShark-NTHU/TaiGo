@@ -15,69 +15,56 @@ describe 'Tests MOTC API library' do
   after do
     VCR.eject_cassette
   end
-
-  describe 'Bus Route Tests' do
-    it 'HAPPY: it should return status 200 and data' do
-      post "#{API_VER}/routes/#{CITY_NAME}"
-      _(last_response.status).must_equal 201
-      routes_data = JSON.parse last_response.body
-      _(routes_data.size).must_be :>, 0
+  
+  describe 'MOTC information' do
+    before do
+      app.DB[:stop_of_routes].delete
+      app.DB[:sub_routes].delete
+      app.DB[:routes].delete
+      app.DB[:stops].delete
     end
 
-    it 'SAD: should return a 404 not found error and must have error message' do
-      post "#{API_VER}/routes/tokyo"
-      _(last_response.status).must_equal 404
-      body = JSON.parse last_response.body
-      _(body.keys).must_include 'error'
-    end
-  end
+    describe 'POSTing to create entities from MOTC' do
+      it 'HAPPY: should retrieve and store repo and collaborators' do
+        post "#{API_VER}/routes/#{CITY_NAME}"
+        _(last_response.status).must_equal 201
+        _(last_response.header['Location'].size).must_be :>, 0
+        repo_data = JSON.parse last_response.body
+        _(repo_data.size).must_be :>, 0
+      end
 
-  describe 'Bus Stop Tests' do
-    it 'HAPPY: it should return status 200 and data' do
-      post "#{API_VER}/stops/#{CITY_NAME}"
-      _(last_response.status).must_equal 201
-      routes_data = JSON.parse last_response.body
-      _(routes_data.size).must_be :>, 0
-    end
+      it 'SAD: should report error if no routes found' do
+        post "#{API_VER}/routes/sad_city_name"
+        _(last_response.status).must_equal 404
+      end
 
-    it 'SAD: should return a 404 not found error and must have error message' do
-      post "#{API_VER}/stops/tokyo"
-      _(last_response.status).must_equal 404
-      body = JSON.parse last_response.body
-      _(body.keys).must_include 'error'
-    end
-  end
-
-  describe 'Sub-Route Tests' do
-    it 'HAPPY: it should return status 200 and data' do
-      post "#{API_VER}/sub_routes/#{CITY_NAME}"
-      _(last_response.status).must_equal 201
-      routes_data = JSON.parse last_response.body
-      _(routes_data.size).must_be :>, 0
+      it 'BAD: should report error if duplicate Github repo found' do
+        post "#{API_VER}/routes/#{CITY_NAME}"
+        _(last_response.status).must_equal 201
+        post "#{API_VER}/routes/#{CITY_NAME}"
+        _(last_response.status).must_equal 409
+      end
     end
 
-    it 'SAD: should return a 404 not found error and must have error message' do
-      post "#{API_VER}/sub_routes/tokyo"
-      _(last_response.status).must_equal 404
-      body = JSON.parse last_response.body
-      _(body.keys).must_include 'error'
-    end
-  end
+    describe 'GETing database entities' do
+      before do
+        TaiGo::FindDatabaseStopOfRoute.new.call(
+          config: app.config,
+          sub_route_id: SUB_ROUTE_ID
+        )
+      end
 
+      it 'HAPPY: should find stored subroute sequence list' do
+        get "#{API_VER}/stop_sequence/#{SUB_ROUTE_ID}"
+        _(last_response.status).must_equal 200
+        repo_data = JSON.parse last_response.body
+        _(repo_data.size).must_be :>, 0
+      end
 
-   describe 'Stop of Routes Tests' do
-    it 'HAPPY: it should return status 200 and data' do
-      post "#{API_VER}/stop_of_routes/#{CITY_NAME}"
-      _(last_response.status).must_equal 201
-      routes_data = JSON.parse last_response.body
-      _(routes_data.size).must_be :>, 0
-    end
-
-    it 'SAD: should return a 404 not found error and must have error message' do
-      post "#{API_VER}/stop_of_routes/tokyo"
-      _(last_response.status).must_equal 404
-      body = JSON.parse last_response.body
-      _(body.keys).must_include 'error'
+      it 'SAD: should report error if no database repo entity found' do
+        get "##{API_VER}/stop_sequence/not_exist_id"
+        _(last_response.status).must_equal 404
+      end
     end
   end
 
