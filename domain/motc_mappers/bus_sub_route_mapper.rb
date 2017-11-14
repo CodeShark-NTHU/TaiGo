@@ -53,9 +53,9 @@ module TaiGo
 
         def build_entity
           Entity::BusSubRoute.new(
-            sub_route_uid: sub_route_uid,
+            id: id,
             route_id: route_id,
-            sub_route_name: sub_route_name,
+            name: name,
             headsign: headsign,
             direction: direction
           )
@@ -63,7 +63,7 @@ module TaiGo
 
         private
 
-        def sub_route_uid
+        def id
           @sub_route['SubRouteUID']
         end
 
@@ -71,7 +71,7 @@ module TaiGo
           @sub_route['RouteUID']
         end
 
-        def sub_route_name
+        def name
           Name.new(@sub_route['SubRouteName']['En'],
                    @sub_route['SubRouteName']['Zh_tw'])
         end

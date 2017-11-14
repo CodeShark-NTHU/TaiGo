@@ -66,7 +66,7 @@ module TaiGo
                 end
               else
                 http_response.to_json
-              end             
+              end
             end
           end
 
@@ -87,7 +87,7 @@ module TaiGo
                 end
               else
                 http_response.to_json
-              end             
+              end
             end
           end
 
@@ -99,7 +99,7 @@ module TaiGo
                 config: app.config,
                 city_name: city_name
               )
-              http_response = HttpResponseRepresenter.new(stop_of_routes_service_result.value) 
+              http_response = HttpResponseRepresenter.new(stop_of_routes_service_result.value)
               response.status = http_response.http_code
               if stop_of_routes_service_result.success?
                 response['Location'] = "/api/v0.1/stop_of_routes/#{city_name}"
@@ -108,7 +108,7 @@ module TaiGo
                 end
               else
                 http_response.to_json
-              end             
+              end
             end
           end
 
@@ -122,7 +122,8 @@ module TaiGo
               http_response = HttpResponseRepresenter.new(stops_of_a_route.value)
               response.status = http_response.http_code
               if stops_of_a_route.success?
-                (stops_of_a_route.value.message).map do |stop|
+                stops = stops_of_a_route.value.message
+                stops.map do |stop|
                   StopOfRouteRepresenter.new(stop).to_json
                 end
               else

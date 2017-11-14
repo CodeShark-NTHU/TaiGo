@@ -14,7 +14,7 @@ module TaiGo
 
       def load(city_name)
         @city_bus_stops_data = @gateway.city_bus_stops_data(city_name)
-        find_several(@city_bus_stops_data)
+        load_several(@city_bus_stops_data)
       end
 
       def load_several(city_bus_stops_data)
@@ -35,7 +35,7 @@ module TaiGo
 
         def build_entity
           Entity::BusStop.new(
-            uid: uid,
+            id: id,
             authority_id: authority_id,
             name: name,
             coordinates: coordinates,
@@ -45,7 +45,7 @@ module TaiGo
 
         private
 
-        def uid
+        def id
           @data['StopUID']
         end
 

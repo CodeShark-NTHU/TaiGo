@@ -56,8 +56,8 @@ module TaiGo
 
         def build_entity
           Entity::StopOfRoute.new(
-            sub_route_uid: sub_route_uid,
-            stop_uid: stop_uid,
+            sub_route_id: sub_route_id,
+            stop_id: stop_id,
             stop_boarding: stop_boarding,
             stop_sequence: stop_sequence
           )
@@ -65,11 +65,11 @@ module TaiGo
 
         private
 
-        def sub_route_uid
+        def sub_route_id
           @stop['SubRouteUID']
         end
 
-        def stop_uid
+        def stop_id
           @stop['StopUID']
         end
 

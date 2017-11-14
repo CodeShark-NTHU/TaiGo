@@ -51,9 +51,9 @@ describe 'Tests Stops of route' do
       it 'HAPPY: should identify list of stop of routes combination' do
         _(@sor.count).must_equal CORRECT_SOR['stops'].count
 
-        sub_route_uid = @sor.map(&:sub_route_uid)
+        sub_route_id = @sor.map(&:sub_route_id)
         correct_uid = CORRECT_SOR['stops'].map { |c| c['SubRouteUID'] }
-        _(sub_route_uid).must_equal correct_uid
+        _(sub_route_id).must_equal correct_uid
       end
     end
   end
