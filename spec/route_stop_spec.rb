@@ -51,9 +51,9 @@ describe 'Tests Bus Stop library' do
     it 'HAPPY: should identify bus Stop ' do
       _(@route.count).must_equal CORRECT_ROUTE['routes'].count
 
-      uid = @route.map(&:route_uid)
+      id = @route.map(&:id)
       correct_uid = CORRECT_ROUTE['routes'].map { |c| c['RouteUID'] }
-      _(uid).must_equal correct_uid
+      _(id).must_equal correct_uid
     end
   end
 end

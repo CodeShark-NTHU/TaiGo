@@ -1,6 +1,7 @@
 # frozen_string_literal: false
 
 source 'https://rubygems.org'
+ruby '2.4.2'
 
 # Networking gems
 gem 'http'
@@ -9,6 +10,8 @@ gem 'http'
 gem 'econfig'
 gem 'puma'
 gem 'roda'
+# gem 'pry' # to run console in production
+# gem 'rake' # to run migrations in production
 
 # Database related
 gem 'hirb'
@@ -18,7 +21,14 @@ gem 'sequel'
 gem 'dry-struct'
 gem 'dry-types'
 
-# Testing gems
+# Representers
+gem 'roar'
+gem 'multi_json'
+
+# Services
+gem 'dry-monads'
+gem 'dry-transaction'
+
 group :test do
   gem 'minitest'
   gem 'minitest-rg'
@@ -31,12 +41,17 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  
+
+  gem 'database_cleaner'
+
   gem 'pry'
   gem 'rerun'
 
-  # Quality testing gems
   gem 'flog'
   gem 'reek'
   gem 'rubocop'
 end
+
+# group :production do
+#   gem 'pg'
+# end

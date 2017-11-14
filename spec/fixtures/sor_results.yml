@@ -1,5 +1,5 @@
 ---
-size: 1906
+size: 1902
 stops:
 - StopUID: HSZ294384
   StopID: '294384'
@@ -2705,39 +2705,13 @@ stops:
   RouteUID: HSZ0020
   SubRouteUID: HSZ0020A1
   Direction: 0
-- StopUID: HSZ291296
-  StopID: '291296'
-  StopName:
-    Zh_tw: 貿易二村
-    En: ''
-  StopBoarding: 0
-  StopSequence: 17
-  StopPosition:
-    PositionLat: 24.79593
-    PositionLon: 121.0022
-  RouteUID: HSZ0020
-  SubRouteUID: HSZ0020A1
-  Direction: 0
-- StopUID: HSZ291294
-  StopID: '291294'
-  StopName:
-    Zh_tw: 建功公園
-    En: ''
-  StopBoarding: 0
-  StopSequence: 18
-  StopPosition:
-    PositionLat: 24.79427
-    PositionLon: 121.00258
-  RouteUID: HSZ0020
-  SubRouteUID: HSZ0020A1
-  Direction: 0
 - StopUID: HSZ293681
   StopID: '293681'
   StopName:
     Zh_tw: 過溝
     En: Guo Gou
   StopBoarding: 0
-  StopSequence: 19
+  StopSequence: 17
   StopPosition:
     PositionLat: 24.79177
     PositionLon: 121.00323
@@ -2750,7 +2724,7 @@ stops:
     Zh_tw: 神學院
     En: ''
   StopBoarding: 0
-  StopSequence: 20
+  StopSequence: 18
   StopPosition:
     PositionLat: 24.78907
     PositionLon: 121.00266
@@ -2763,7 +2737,7 @@ stops:
     Zh_tw: 梅竹山莊
     En: ''
   StopBoarding: 0
-  StopSequence: 21
+  StopSequence: 19
   StopPosition:
     PositionLat: 24.78955
     PositionLon: 121.00047
@@ -2776,7 +2750,7 @@ stops:
     Zh_tw: 交大光復校區
     En: ''
   StopBoarding: -1
-  StopSequence: 22
+  StopSequence: 20
   StopPosition:
     PositionLat: 24.78831
     PositionLon: 120.99941
@@ -2835,39 +2809,13 @@ stops:
   RouteUID: HSZ0020
   SubRouteUID: HSZ0020A2
   Direction: 1
-- StopUID: HSZ291782
-  StopID: '291782'
-  StopName:
-    Zh_tw: 建功公園
-    En: ''
-  StopBoarding: 0
-  StopSequence: 5
-  StopPosition:
-    PositionLat: 24.79412
-    PositionLon: 121.00272
-  RouteUID: HSZ0020
-  SubRouteUID: HSZ0020A2
-  Direction: 1
-- StopUID: HSZ291781
-  StopID: '291781'
-  StopName:
-    Zh_tw: 貿易二村
-    En: ''
-  StopBoarding: 0
-  StopSequence: 6
-  StopPosition:
-    PositionLat: 24.7959
-    PositionLon: 121.00227
-  RouteUID: HSZ0020
-  SubRouteUID: HSZ0020A2
-  Direction: 1
 - StopUID: HSZ291780
   StopID: '291780'
   StopName:
     Zh_tw: 建功高中
     En: ''
   StopBoarding: 0
-  StopSequence: 7
+  StopSequence: 5
   StopPosition:
     PositionLat: 24.79704
     PositionLon: 121.00174
@@ -2880,7 +2828,7 @@ stops:
     Zh_tw: 文教新村
     En: ''
   StopBoarding: 0
-  StopSequence: 8
+  StopSequence: 6
   StopPosition:
     PositionLat: 24.79671
     PositionLon: 120.999276
@@ -2893,7 +2841,7 @@ stops:
     Zh_tw: 清大
     En: National Tsing Hua University
   StopBoarding: 0
-  StopSequence: 9
+  StopSequence: 7
   StopPosition:
     PositionLat: 24.79645
     PositionLon: 120.99747
@@ -2906,7 +2854,7 @@ stops:
     Zh_tw: 光復中學
     En: Kuang-Fu Senior High School
   StopBoarding: 0
-  StopSequence: 10
+  StopSequence: 8
   StopPosition:
     PositionLat: 24.79834
     PositionLon: 120.99484
@@ -2919,7 +2867,7 @@ stops:
     Zh_tw: 馬偕醫院
     En: Mackay Memorial Hospital
   StopBoarding: 0
-  StopSequence: 11
+  StopSequence: 9
   StopPosition:
     PositionLat: 24.79955
     PositionLon: 120.99188
@@ -2932,7 +2880,7 @@ stops:
     Zh_tw: 學府路口
     En: Xue Fu Road Entrance
   StopBoarding: 0
-  StopSequence: 12
+  StopSequence: 10
   StopPosition:
     PositionLat: 24.8002363982494
     PositionLon: 120.986719624049
@@ -2945,7 +2893,7 @@ stops:
     Zh_tw: 水源地
     En: Shui Yuan Di
   StopBoarding: 0
-  StopSequence: 13
+  StopSequence: 11
   StopPosition:
     PositionLat: 24.7978037536695
     PositionLon: 120.985658886138
@@ -2958,7 +2906,7 @@ stops:
     Zh_tw: 交大博愛校區
     En: ''
   StopBoarding: 0
-  StopSequence: 14
+  StopSequence: 12
   StopPosition:
     PositionLat: 24.79842
     PositionLon: 120.98382
@@ -2971,7 +2919,7 @@ stops:
     Zh_tw: 博愛街口
     En: ''
   StopBoarding: 0
-  StopSequence: 15
+  StopSequence: 13
   StopPosition:
     PositionLat: 24.79949
     PositionLon: 120.98119
@@ -2984,7 +2932,7 @@ stops:
     Zh_tw: 學園商場
     En: Xue Yuan Market
   StopBoarding: 0
-  StopSequence: 16
+  StopSequence: 14
   StopPosition:
     PositionLat: 24.79868
     PositionLon: 120.97799
@@ -2997,7 +2945,7 @@ stops:
     Zh_tw: 公園
     En: Park
   StopBoarding: 0
-  StopSequence: 17
+  StopSequence: 15
   StopPosition:
     PositionLat: 24.801711
     PositionLon: 120.977587
@@ -3010,7 +2958,7 @@ stops:
     Zh_tw: 老人大學
     En: University for the elderly
   StopBoarding: 0
-  StopSequence: 18
+  StopSequence: 16
   StopPosition:
     PositionLat: 24.80285
     PositionLon: 120.97949
@@ -3023,7 +2971,7 @@ stops:
     Zh_tw: 東門國小
     En: Tung Men Primary School
   StopBoarding: 0
-  StopSequence: 19
+  StopSequence: 17
   StopPosition:
     PositionLat: 24.80643
     PositionLon: 120.97365
@@ -3036,7 +2984,7 @@ stops:
     Zh_tw: 親仁里
     En: ''
   StopBoarding: 0
-  StopSequence: 20
+  StopSequence: 18
   StopPosition:
     PositionLat: 24.807445
     PositionLon: 120.971667
@@ -3049,7 +2997,7 @@ stops:
     Zh_tw: 東門市場
     En: Dong Men Market
   StopBoarding: 0
-  StopSequence: 21
+  StopSequence: 19
   StopPosition:
     PositionLat: 24.80561
     PositionLon: 120.96954
@@ -3062,7 +3010,7 @@ stops:
     Zh_tw: 火車站
     En: ''
   StopBoarding: -1
-  StopSequence: 22
+  StopSequence: 20
   StopPosition:
     PositionLat: 24.80312
     PositionLon: 120.971227

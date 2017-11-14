@@ -11,13 +11,13 @@ module TaiGo
       end
 
       def self.find_or_create(entity)
-        find_id(entity.uid) || create_from(entity)
+        find_id(entity.id) || create_from(entity)
       end
 
       def self.create_from(entity)
         Database::StopOrm.unrestrict_primary_key
         db_stop = Database::StopOrm.create(
-          id: entity.uid,
+          id: entity.id,
           name_zh: entity.name.chinese,
           name_en: entity.name.english,
           latitude: entity.coordinates.latitude,
@@ -54,7 +54,7 @@ module TaiGo
 
         # rebuild entity
         Entity::BusStop.new(
-          uid: db_record.id,
+          id: db_record.id,
           name: TaiGo::MOTC::BusStopMapper::DataMapper::Name.new(db_record.name_en, db_record.name_zh),
           coordinates: TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates.new(db_record.latitude, db_record.longitude),
           authority_id: db_record.auth_id,

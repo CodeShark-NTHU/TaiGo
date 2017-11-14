@@ -4,11 +4,6 @@ module TaiGo
   module Repository
     # Repository for Routes
     class Routes
-
-      def self.find(entity)
-        find_id(entity.route_uid)
-      end
-
       def self.find_id(id)
         db_record = Database::RouteOrm.first(id: id)
         rebuild_entity(db_record)
@@ -21,7 +16,7 @@ module TaiGo
       end
 
       def self.find_or_create(entity)
-        find_id(entity.route_uid) || create_from(entity)
+        find_id(entity.id) || create_from(entity)
       end
 
       def self.create_from(entity)
@@ -29,9 +24,9 @@ module TaiGo
 
         Database::RouteOrm.unrestrict_primary_key
         db_route = Database::RouteOrm.create(
-          id: entity.route_uid,
-          name_en: entity.route_name.english,
-          name_zh: entity.route_name.chinese,
+          id: entity.id,
+          name_en: entity.name.english,
+          name_zh: entity.name.chinese,
           dep_en: entity.depart_name.english,
           dep_zh: entity.depart_name.chinese,
           dest_en: entity.destination_name.english,
@@ -59,8 +54,8 @@ module TaiGo
         # end
 
         Entity::BusRoute.new(
-          route_uid: db_record.id,
-          route_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
+          id: db_record.id,
+          name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
           depart_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.dep_en,db_record.dep_zh),
           destination_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.dest_en,db_record.dest_zh),
           authority_id: db_record.auth_id
