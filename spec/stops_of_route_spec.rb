@@ -8,9 +8,6 @@ describe 'Tests Stops of route' do
   Econfig.env = 'development'.to_s
   Econfig.root = '.'
 
-  #MOTC_ID = config['motc_id']
-  #MOTC_KEY = config['motc_key']
-
   CORRECT_SOR = YAML.safe_load(File.read('spec/fixtures/sor_results.yml'))
 
   CASSETTE_FILE = 'motc_sor_api'.freeze

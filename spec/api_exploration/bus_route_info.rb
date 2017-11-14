@@ -7,17 +7,17 @@ require 'openssl'
 
 config = YAML.safe_load(File.read('config/secrets.yml'))
 
-motc_id = config['development']['motc_id']
-motc_key = config['development']['motc_key']
+MOTC_ID = config['development']['MOTC_ID']
+MOTC_KEY = config['development']['MOTC_KEY']
 
 xdate = Time.now.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
 sign_date = 'x-date: ' + xdate
 
-hash = OpenSSL::HMAC.digest('sha1', motc_key, sign_date)
+hash = OpenSSL::HMAC.digest('sha1', MOTC_KEY, sign_date)
 signature = Base64.encode64(hash)
 signature.delete!("\n")
 
-auth_code = 'hmac username="' + motc_id +
+auth_code = 'hmac username="' + MOTC_ID +
             '", algorithm="hmac-sha1", headers="x-date", signature="' +
             signature + '"'
 

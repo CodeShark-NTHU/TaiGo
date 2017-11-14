@@ -29,6 +29,6 @@ VCR.configure do |c|
   c.cassette_library_dir = CASSETTES_FOLDER
   c.hook_into :webmock
 
-  # username = app.config['motc_id']
+  # username = app.config['MOTC_ID']
   # c.filter_sensitive_data('<username>') { username }
 end

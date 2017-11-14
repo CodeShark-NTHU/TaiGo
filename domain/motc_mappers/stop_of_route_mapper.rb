@@ -8,8 +8,8 @@ module TaiGo
       def initialize(config, gateway = TaiGo::MOTC::Api)
         @config = config
         @gateway_class = gateway
-        @gateway = @gateway_class.new(@config['motc_id'].to_s,
-                                      @config['motc_key'].to_s)
+        @gateway = @gateway_class.new(@config['MOTC_ID'].to_s,
+                                      @config['MOTC_KEY'].to_s)
       end
 
       def load(city_name)
