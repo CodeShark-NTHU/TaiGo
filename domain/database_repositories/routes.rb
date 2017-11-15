@@ -49,17 +49,19 @@ module TaiGo
       def self.rebuild_entity(db_record)
         return nil unless db_record
 
-        # sroutes = db_record.sub_routes.map do |db_sroutes|
-          # SubRoutes.rebuild_entity(db_sroutes)
-        # end
+        sub_routes = []
+
+        sub_routes = db_record.sub_routes.map do |db_sroutes|
+          SubRoutes.rebuild_entity(db_sroutes)
+        end
 
         Entity::BusRoute.new(
           id: db_record.id,
           name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
           depart_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.dep_en,db_record.dep_zh),
           destination_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name.new(db_record.dest_en,db_record.dest_zh),
-          authority_id: db_record.auth_id
-          # sub_routes: sroutes
+          authority_id: db_record.auth_id,
+          owned_sub_routes: sub_routes
         )
       end
 

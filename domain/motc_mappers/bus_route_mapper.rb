@@ -42,8 +42,8 @@ module TaiGo
             authority_id: authority_id,
             name: name,
             depart_name: depart_name,
-            destination_name: destination_name
-            # sub_routes: sub_routes
+            destination_name: destination_name,
+            owned_sub_routes: []
           )
         end
 

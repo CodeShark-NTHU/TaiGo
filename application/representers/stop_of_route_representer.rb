@@ -12,6 +12,6 @@ module TaiGo
     property :stop_id # maybe change to stop_id (consistency)?
     property :stop_boarding
     property :stop_sequence
-    #collection :stop, extend: BusStopRepresenter
+    property :stop, extend: BusStopRepresenter
   end
 end

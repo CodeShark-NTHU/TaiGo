@@ -4,7 +4,7 @@ module TaiGo
   module Database
     # Object-Relational Mapper for Routes
     class RouteOrm < Sequel::Model(:routes)
-      one_to_many :owned_sub_routes,
+      one_to_many :sub_routes,
                   class: :'TaiGo::Database::SubRouteOrm',
                   key: :route_id
 

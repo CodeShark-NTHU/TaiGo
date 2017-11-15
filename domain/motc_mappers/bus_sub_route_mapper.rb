@@ -57,7 +57,8 @@ module TaiGo
             route_id: route_id,
             name: name,
             headsign: headsign,
-            direction: direction
+            direction: direction, 
+            owned_stop_of_routes: []
           )
         end
 

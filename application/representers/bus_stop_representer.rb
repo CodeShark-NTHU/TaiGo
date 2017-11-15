@@ -8,8 +8,8 @@ module TaiGo
   class BusStopRepresenter < Roar::Decorator
     include Roar::JSON
 
-    property :id # maybe change this to stop_id?
-    property :name, extend: NameRepresenter # maybe change to stop_name for consistency? 
+    property :id 
+    property :name, extend: NameRepresenter
     property :coordinates, extend: CoordinateRepresenter
     property :authority_id
 

@@ -11,13 +11,8 @@ module TaiGo
     plugin :json
     plugin :halt
 
-    # extend Econfig::Shortcut
-    # Econfig.env = environment.to_s
-    # Econfig.root = '.'
-
     route do |routing|
       app = Api
-      # config = Api.config
 
       # GET / request
       routing.root do
@@ -27,6 +22,29 @@ module TaiGo
       routing.on 'api' do
         # /api/v0.1 branch
         routing.on 'v0.1' do
+
+          # #/api/v0.1/:city_name
+          # routing.on String do |city_name|
+          #   #/api/v0.1/:city_name/sub_routes
+          #   routing.on 'sub_routes' do
+
+          #   end
+
+          #   #/api/v0.1/:city_name/routes
+          #   routing.on 'routes' do
+              
+          #   end
+          # end
+
+
+          # #/api/v0.1/:city_name
+          # routing.on 'sub_route', String do |sub_id|
+          #   #/api/v0.1/:city_name/sub_routes
+          #   routing.get do
+
+          #   end
+          # end
+
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
             # POST '/api/v0.1/routes/:city_name
@@ -34,8 +52,8 @@ module TaiGo
               routes_service_result = LoadFromMotcRoute.new.call(
                 config: app.config,
                 city_name: city_name
-              )             
-              http_response = HttpResponseRepresenter.new(routes_service_result.value) 
+              )
+              http_response = HttpResponseRepresenter.new(routes_service_result.value)
               response.status = http_response.http_code
               if routes_service_result.success?
                 response['Location'] = "/api/v0.1/routes/#{city_name}"
@@ -44,10 +62,9 @@ module TaiGo
                 end
               else
                 http_response.to_json
-              end             
+              end
             end
           end
-
 
           # /api/v0.1/stops/:city_name
           routing.on 'stops', String do |city_name|
@@ -70,6 +87,7 @@ module TaiGo
             end
           end
 
+         
           # /api/v0.1/sub_routes/:city_name
           routing.on 'sub_routes', String do |city_name|
             # POST '/api/v0.1/sub_routes/:city_name
@@ -78,7 +96,7 @@ module TaiGo
                 config: app.config,
                 city_name: city_name
               )
-              http_response = HttpResponseRepresenter.new(subroute_service_result.value) 
+              http_response = HttpResponseRepresenter.new(subroute_service_result.value)
               response.status = http_response.http_code
               if subroute_service_result.success?
                 response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
@@ -89,6 +107,7 @@ module TaiGo
                 http_response.to_json
               end
             end
+
           end
 
           # /api/v0.1/stop_of_routes/:city_name
@@ -111,6 +130,7 @@ module TaiGo
               end
             end
           end
+
 
           # /api/v0.1/stop_sequence/:sub_route_id
           routing.on 'stop_sequence', String do |sub_route_id|

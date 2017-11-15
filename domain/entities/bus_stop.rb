@@ -7,8 +7,8 @@ module TaiGo
   module Entity
     # Domain entity object for git BusStop
     class BusStop < Dry::Struct
-      attribute :id, Types::Strict::String # maybe change this to stop_id?
-      attribute :name, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Name) # maybe change to stop_name for consistency? 
+      attribute :id, Types::Strict::String
+      attribute :name, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Name)
       attribute :coordinates, Types.Instance(TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates)
       attribute :authority_id, Types::Strict::String
       attribute :address, Types::Strict::String.optional

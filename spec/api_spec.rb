@@ -144,6 +144,14 @@ describe 'Tests MOTC API library' do
         get "#{API_VER}/stop_sequence/not_exist_id"
         _(last_response.status).must_equal 404
       end
+
+      # it 'HAPPY: stop_of_route should have information of a stop' do
+      #   get "#{API_VER}/stop_sequence/#{SUB_ROUTE_ID}"
+      #   stop_of_routes_data = JSON.parse last_response.body
+
+      #   _(stop_of_routes_data.stop.size).must_be :>, 0
+      # end
+
     end
   end
 end

@@ -22,8 +22,8 @@ gem 'dry-struct'
 gem 'dry-types'
 
 # Representers
-gem 'roar'
 gem 'multi_json'
+gem 'roar'
 
 # Services
 gem 'dry-monads'
