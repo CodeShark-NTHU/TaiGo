@@ -11,3 +11,9 @@ spec/fixtures/cassettes/*.yml
 
 # Omit database file from version control
 infrastructure/database/*.db
+
+# Ignore app.yml
+config/app.yml
+
+#  Ignore bundle folder
+.bundle/
