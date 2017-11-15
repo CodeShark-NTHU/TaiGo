@@ -1,0 +1,7 @@
+---
+development:
+  DB_FILENAME: infrastructure/database/dev.db
+
+test:
+  DB_FILENAME: infrastructure/database/test.db
+
