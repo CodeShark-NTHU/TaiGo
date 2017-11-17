@@ -8,10 +8,10 @@ gem 'http'
 
 # Web app related
 gem 'econfig'
+gem 'pry' # to run console in production
 gem 'puma'
+gem 'rake' # to run migrations in production
 gem 'roda'
-# gem 'pry' # to run console in production
-# gem 'rake' # to run migrations in production
 
 # Database related
 gem 'hirb'
@@ -33,7 +33,6 @@ group :test do
   gem 'minitest'
   gem 'minitest-rg'
   gem 'rack-test'
-  gem 'rake'
   gem 'simplecov'
   gem 'vcr'
   gem 'webmock'
@@ -44,7 +43,6 @@ group :development, :test do
 
   gem 'database_cleaner'
 
-  gem 'pry'
   gem 'rerun'
 
   gem 'flog'
