@@ -1,4 +1,6 @@
-## goHsinchu
+## TaiGo
+
+[ ![Codeship Status for CodeShark-NTHU/TaiGo](https://app.codeship.com/projects/2b6e5ae0-add7-0135-7c42-1ab1a35cdadc/status?branch=master)](https://app.codeship.com/projects/257309)
 
 ### Overview
 
