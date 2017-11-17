@@ -9,7 +9,7 @@ describe 'Tests MOTC API library' do
   before do
     VCR.insert_cassette CASSETTE_FILE,
                         record: :new_episodes,
-                        match_requests_on: %i[method uri headers]
+                        match_requests_on: %i[method uri]
   end
 
   after do
