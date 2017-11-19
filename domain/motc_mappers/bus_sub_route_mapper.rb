@@ -8,8 +8,8 @@ module TaiGo
       def initialize(config, gateway = TaiGo::MOTC::Api)
         @config = config
         @gateway_class = gateway
-        @gateway = @gateway_class.new(@config['motc_id'].to_s,
-                                      @config['motc_key'].to_s)
+        @gateway = @gateway_class.new(@config['MOTC_ID'].to_s,
+                                      @config['MOTC_KEY'].to_s)
       end
 
       def load(city_name)
@@ -53,17 +53,18 @@ module TaiGo
 
         def build_entity
           Entity::BusSubRoute.new(
-            sub_route_uid: sub_route_uid,
+            id: id,
             route_id: route_id,
-            sub_route_name: sub_route_name,
+            name: name,
             headsign: headsign,
-            direction: direction
+            direction: direction, 
+            owned_stop_of_routes: []
           )
         end
 
         private
 
-        def sub_route_uid
+        def id
           @sub_route['SubRouteUID']
         end
 
@@ -71,7 +72,7 @@ module TaiGo
           @sub_route['RouteUID']
         end
 
-        def sub_route_name
+        def name
           Name.new(@sub_route['SubRouteName']['En'],
                    @sub_route['SubRouteName']['Zh_tw'])
         end

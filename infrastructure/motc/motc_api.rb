@@ -42,18 +42,18 @@ module TaiGo
       end
 
       def city_bus_stops_data(city_name)
-        city_bus_stops_req_url = Api.url(%W[Bus Stop City #{city_name}].join('/'))
-        call_motc_url(city_bus_stops_req_url).parse
+        url = Api.url(%W[Bus Stop City #{city_name}].join('/'))
+        call_motc_url(url).parse
       end
 
       def city_bus_route_data(city_name)
-        city_bus_route_req_url = Api.url(%W[Bus Route City #{city_name}].join('/') )
-        call_motc_url(city_bus_route_req_url).parse
+        url = Api.url(%W[Bus Route City #{city_name}].join('/'))
+        call_motc_url(url).parse
       end
 
       def city_stop_route_data(city_name)
-        city_bus_route_req_url = Api.url(%W[Bus StopOfRoute City #{city_name}].join('/') )
-        call_motc_url(city_bus_route_req_url).parse
+        url = Api.url(%W[Bus StopOfRoute City #{city_name}].join('/'))
+        call_motc_url(url).parse
       end
 
       def self.url(path)

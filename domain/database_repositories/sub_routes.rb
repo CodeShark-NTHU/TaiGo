@@ -10,7 +10,7 @@ module TaiGo
       end
 
       def self.find_or_create(entity)
-        find_id(entity.sub_route_uid) || create_from(entity)
+        find_id(entity.id) || create_from(entity)
       end
 
       # def sub_routes_list(route_id)
@@ -20,10 +20,10 @@ module TaiGo
       def self.create_from(entity)
         Database::SubRouteOrm.unrestrict_primary_key
         db_subroute = Database::SubRouteOrm.create(
-          id: entity.sub_route_uid,
+          id: entity.id,
           route_id: entity.route_id,
-          name_zh: entity.sub_route_name.chinese,
-          name_en: entity.sub_route_name.english,
+          name_zh: entity.name.chinese,
+          name_en: entity.name.english,
           headsign: entity.headsign,
           direction: entity.direction
         )
@@ -33,13 +33,19 @@ module TaiGo
 
       def self.rebuild_entity(db_record)
         return nil unless db_record
+        stop_of_routes = []
+        stop_of_routes = db_record.stop_of_routes.map do |stop_of_route|
+          StopOfRoutes.rebuild_entity(stop_of_route)
+        end
+
 
         Entity::BusSubRoute.new(
-          sub_route_uid: db_record.id,
+          id: db_record.id,
           route_id: db_record.route_id,
-          sub_route_name: TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
+          name: TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
           headsign: db_record.headsign,
-          direction: db_record.direction
+          direction: db_record.direction,
+          owned_stop_of_routes: stop_of_routes
         )
       end
     end

@@ -8,8 +8,8 @@ module TaiGo
       def initialize(config, gateway = TaiGo::MOTC::Api)
         @config = config
         @gateway_class = gateway
-        @gateway = @gateway_class.new(@config['motc_id'].to_s,
-                                      @config['motc_key'].to_s)
+        @gateway = @gateway_class.new(@config['MOTC_ID'].to_s,
+                                      @config['MOTC_KEY'].to_s)
       end
 
       def load(city_name)
@@ -35,7 +35,7 @@ module TaiGo
 
         def build_entity
           Entity::BusStop.new(
-            uid: uid,
+            id: id,
             authority_id: authority_id,
             name: name,
             coordinates: coordinates,
@@ -45,7 +45,7 @@ module TaiGo
 
         private
 
-        def uid
+        def id
           @data['StopUID']
         end
 

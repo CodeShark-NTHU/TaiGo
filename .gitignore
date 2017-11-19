@@ -4,10 +4,16 @@
 coverage/
 
 # Ignore Secret Key 
-config/
+config/secrets.yml
 
 # Ignore Cassetes
-spec/fixtures/cassettes/
+spec/fixtures/cassettes/*.yml
 
 # Omit database file from version control
 infrastructure/database/*.db
+
+# Ignore app.yml
+config/app.yml
+
+#  Ignore bundle folder
+.bundle/
