@@ -108,7 +108,7 @@ module TaiGo
                 end
               else
                 http_response.to_json
-              end             
+              end
             end
           end
 
