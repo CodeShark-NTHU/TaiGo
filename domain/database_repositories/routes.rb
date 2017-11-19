@@ -4,6 +4,11 @@ module TaiGo
   module Repository
     # Repository for Routes
     class Routes
+
+      def self.all
+        Database::RouteOrm.all.map { |db_record| rebuild_entity(db_record) }
+      end
+
       def self.find_id(id)
         db_record = Database::RouteOrm.first(id: id)
         rebuild_entity(db_record)

@@ -22,29 +22,28 @@ module TaiGo
       routing.on 'api' do
         # /api/v0.1 branch
         routing.on 'v0.1' do
-
+          # Future development
           # #/api/v0.1/:city_name
           # routing.on String do |city_name|
           #   #/api/v0.1/:city_name/sub_routes
           #   routing.on 'sub_routes' do
-
           #   end
-
           #   #/api/v0.1/:city_name/routes
           #   routing.on 'routes' do
-              
           #   end
           # end
-
-
           # #/api/v0.1/:city_name
           # routing.on 'sub_route', String do |sub_id|
           #   #/api/v0.1/:city_name/sub_routes
           #   routing.get do
-
           #   end
           # end
-
+          routing.on 'all_routes' do
+            routing.get do
+              routes = Repository::For[Entity::BusRoute].all
+              BusRoutesRepresenter.new(Routes.new(routes)).to_json
+            end
+          end
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
             # POST '/api/v0.1/routes/:city_name
@@ -87,7 +86,6 @@ module TaiGo
             end
           end
 
-         
           # /api/v0.1/sub_routes/:city_name
           routing.on 'sub_routes', String do |city_name|
             # POST '/api/v0.1/sub_routes/:city_name
@@ -107,7 +105,6 @@ module TaiGo
                 http_response.to_json
               end
             end
-
           end
 
           # /api/v0.1/stop_of_routes/:city_name
@@ -130,7 +127,6 @@ module TaiGo
               end
             end
           end
-
 
           # /api/v0.1/stop_sequence/:sub_route_id
           routing.on 'stop_sequence', String do |sub_route_id|
