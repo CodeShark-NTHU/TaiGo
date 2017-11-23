@@ -23,6 +23,7 @@ require_relative 'test_load_all'
 
 CITY_NAME = 'Hsinchu'.freeze
 SUB_ROUTE_ID = 'HSZ000701'.freeze
+ROUTE_NAME = '81'.freeze
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 
 VCR.configure do |c|

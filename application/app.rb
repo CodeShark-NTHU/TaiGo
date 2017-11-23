@@ -44,6 +44,17 @@ module TaiGo
               BusRoutesRepresenter.new(Routes.new(routes)).to_json
             end
           end
+
+          # /api/v0.1/position/:city_name/:route_name
+          routing.on 'position', String do |city_name, route_name|
+            # GET '/api/v0.1/position/:city_name/:route_name
+            routing.get do
+              bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
+              positions = bpos_mapper.load(city_name, route_name)              
+              BusPositionsRepresenter.new(Positions.new(positions)).to_json
+            end
+          end
+
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
             # POST '/api/v0.1/routes/:city_name

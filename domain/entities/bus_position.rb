@@ -10,10 +10,10 @@ module TaiGo
       attribute :plate_numb, Types::Strict::String
       attribute :sub_route_id, Types::Strict::String
       attribute :coordinates, Types.Instance(TaiGo::MOTC::BusPositionMapper::DataMapper::Coordinates)
-      attribute :speed, Types::Strict::Int.optional
-      attribute :azimuth, Types::Strict::Int.optional
-      attribute :duty_status, Types::Strict::String.optional
-      attribute :bus_status, Types::Strict::String.optional
+      attribute :speed, Types::Int.optional
+      attribute :azimuth, Types::Int.optional
+      attribute :duty_status, Types::String.optional
+      attribute :bus_status, Types::String.optional
     end
   end
 end
