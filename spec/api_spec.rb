@@ -25,6 +25,19 @@ describe 'Tests MOTC API library' do
     end
 
     describe 'POSTing to create routes entities from MOTC' do
+      it 'HAPPY: should retrieve bus position info' do
+        get "#{API_VER}/positions/#{CITY_NAME}/#{ROUTE_NAME}"
+        _(last_response.status).must_equal 200
+        position_data = JSON.parse last_response.body
+        _(position_data.count).must_be :>, 0
+      end
+
+      it 'BAD: should report error if no bus position found' do
+        proc do
+          get "#{API_VER}/positions/sad_city_name/sad_route_name"
+        end.must_raise TaiGo::MOTC::Api::Errors::ServerError
+      end
+
       it 'HAPPY: should retrieve and store routes' do
         post "#{API_VER}/routes/#{CITY_NAME}"
         _(last_response.status).must_equal 201
@@ -144,14 +157,6 @@ describe 'Tests MOTC API library' do
         get "#{API_VER}/stop_sequence/not_exist_id"
         _(last_response.status).must_equal 404
       end
-
-      # it 'HAPPY: stop_of_route should have information of a stop' do
-      #   get "#{API_VER}/stop_sequence/#{SUB_ROUTE_ID}"
-      #   stop_of_routes_data = JSON.parse last_response.body
-
-      #   _(stop_of_routes_data.stop.size).must_be :>, 0
-      # end
-
     end
   end
 end
