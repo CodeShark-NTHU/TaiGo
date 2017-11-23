@@ -1,0 +1,53 @@
+---
+RouteName: '81'
+location:
+- PlateNumb: '048-FV'
+  OperatorID: '18'
+  RouteUID: HSZ0007
+  RouteID: '0007'
+  RouteName:
+    Zh_tw: '81'
+    En: '81'
+  SubRouteUID: HSZ000701
+  SubRouteID: '000701'
+  SubRouteName:
+    Zh_tw: '81'
+    En: '81'
+  Direction: 0
+  BusPosition:
+    PositionLat: 24.7942083333333
+    PositionLon: 121.01344
+  Speed: 0.0
+  Azimuth: 102.0
+  DutyStatus: 0
+  BusStatus: 0
+  MessageType: 1
+  GPSTime: '2017-11-23T16:42:19+08:00'
+  TransTime: '2017-11-23T16:42:18+08:00'
+  SrcRecTime: '2017-11-23T16:42:20+08:00'
+  UpdateTime: '2017-11-23T16:42:24+08:00'
+- PlateNumb: 367-V6
+  OperatorID: '18'
+  RouteUID: HSZ0007
+  RouteID: '0007'
+  RouteName:
+    Zh_tw: '81'
+    En: '81'
+  SubRouteUID: HSZ0007A1
+  SubRouteID: 0007A1
+  SubRouteName:
+    Zh_tw: '81'
+    En: '81'
+  Direction: 0
+  BusPosition:
+    PositionLat: 24.77872
+    PositionLon: 120.985393333333
+  Speed: 0.0
+  Azimuth: 49.0
+  DutyStatus: 0
+  BusStatus: 0
+  MessageType: 1
+  GPSTime: '2017-11-23T16:42:04+08:00'
+  TransTime: '2017-11-23T16:42:05+08:00'
+  SrcRecTime: '2017-11-23T16:42:04+08:00'
+  UpdateTime: '2017-11-23T16:42:13+08:00'
