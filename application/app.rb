@@ -50,7 +50,7 @@ module TaiGo
             # GET '/api/v0.1/positions/:city_name/:route_name
             routing.get do
               bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
-              positions = bpos_mapper.load(city_name, route_name)              
+              positions = bpos_mapper.load(city_name, route_name)
               BusPositionsRepresenter.new(Positions.new(positions)).to_json
             end
           end
@@ -67,9 +67,8 @@ module TaiGo
               response.status = http_response.http_code
               if routes_service_result.success?
                 response['Location'] = "/api/v0.1/routes/#{city_name}"
-                routes_service_result.value.message.map do |r|
-                  BusRouteRepresenter.new(r).to_json
-                end
+                routes = routes_service_result.value.message
+                BusRoutesRepresenter.new(Routes.new(routes)).to_json
               else
                 http_response.to_json
               end
@@ -84,13 +83,12 @@ module TaiGo
                 config: app.config,
                 city_name: city_name
               )
-              http_response = HttpResponseRepresenter.new(stops_service_result.value) 
+              http_response = HttpResponseRepresenter.new(stops_service_result.value)
               response.status = http_response.http_code
               if stops_service_result.success?
                 response['Location'] = "/api/v0.1/stops/#{city_name}"
-                stops_service_result.value.message.map do |s|
-                  BusStopRepresenter.new(s).to_json
-                end
+                stops = stops_service_result.value.message
+                BusStopsRepresenter.new(Stops.new(stops)).to_json
               else
                 http_response.to_json
               end
@@ -109,9 +107,8 @@ module TaiGo
               response.status = http_response.http_code
               if subroute_service_result.success?
                 response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-                subroute_service_result.value.message.map do |sr|
-                  SubRouteRepresenter.new(sr).to_json
-                end
+                subroutes = subroute_service_result.value.message
+                BusSubRoutesRepresenter.new(Subroutes.new(subroutes)).to_json
               else
                 http_response.to_json
               end
@@ -130,9 +127,8 @@ module TaiGo
               response.status = http_response.http_code
               if stop_of_routes_service_result.success?
                 response['Location'] = "/api/v0.1/stop_of_routes/#{city_name}"
-                stop_of_routes_service_result.value.message.map do |sor|
-                  StopOfRouteRepresenter.new(sor).to_json
-                end
+                stopofroutes = stop_of_routes_service_result.value.message
+                StopOfRoutesRepresenter.new(Stopofroutes.new(stopofroutes)).to_json
               else
                 http_response.to_json
               end
@@ -149,10 +145,11 @@ module TaiGo
               http_response = HttpResponseRepresenter.new(stops_of_a_route.value)
               response.status = http_response.http_code
               if stops_of_a_route.success?
-                stops = stops_of_a_route.value.message
-                stops.map do |stop|
-                  StopOfRouteRepresenter.new(stop).to_json
-                end
+                stopofroutes = stops_of_a_route.value.message
+                StopOfRoutesRepresenter.new(Stopofroutes.new(stopofroutes)).to_json
+                # stops.map do |stop|
+                #   StopOfRouteRepresenter.new(stop).to_json
+                # end
               else
                 http_response.to_json
               end
