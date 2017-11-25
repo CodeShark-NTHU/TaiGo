@@ -22,22 +22,63 @@ module TaiGo
       routing.on 'api' do
         # /api/v0.1 branch
         routing.on 'v0.1' do
-          # Future development
-          # #/api/v0.1/:city_name
-          # routing.on String do |city_name|
-          #   #/api/v0.1/:city_name/sub_routes
-          #   routing.on 'sub_routes' do
-          #   end
-          #   #/api/v0.1/:city_name/routes
-          #   routing.on 'routes' do
-          #   end
-          # end
-          # #/api/v0.1/:city_name
-          # routing.on 'sub_route', String do |sub_id|
-          #   #/api/v0.1/:city_name/sub_routes
-          #   routing.get do
-          #   end
-          # end
+          # /api/v0.1/:city_name
+          routing.on 'bus', String do |city_name|
+            # /api/v0.1/:city_name/routes
+            routing.on 'routes' do
+              routing.get do
+                routes = Repository::For[Entity::BusRoute].all
+                BusRoutesRepresenter.new(Routes.new(routes)).to_json
+              end
+            end
+            # /api/v0.1/:city_name/stops
+            routing.on 'stops' do
+              routing.get do
+                stops = Repository::For[Entity::BusStop].all
+                BusStopsRepresenter.new(Stops.new(stops)).to_json
+              end
+            end
+          end
+          # /api/v0.1/route/:route_id
+          routing.on 'route', String do |route_id|
+            # GET '/api/v0.1/route/:route_id
+            routing.get do
+              route = Repository::For[Entity::BusRoute].find_id(route_id)
+              BusRouteRepresenter.new(route).to_json
+            end
+          end
+          # /api/v0.1/stop/:stop_id
+          routing.on 'stop', String do |stop_id|
+            # GET '/api/v0.1/stop/:stop_id/sub_route
+            routing.on 'sub_route' do
+              routing.get do
+                sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute].find_stop_id(stop_id)
+                StopOfRoutesRepresenter.new(Stopofroutes.new(sub_routes_of_a_stop)).to_json
+              end
+            end
+            # GET '/api/v0.1/stop/:stop_id
+            routing.get do
+              stop = Repository::For[Entity::BusStop].find_id(stop_id)
+              BusStopRepresenter.new(stop).to_json
+            end
+          end
+          # /api/v0.1/sub_route/:sub_route_id
+          routing.on 'sub_route', String do |sub_route_id|
+            # GET '/api/v0.1/sub_route/:sub_route_id/stops
+            routing.on 'stops' do
+              routing.get do
+                stops_of_a_sub_route = Repository::For[Entity::StopOfRoute]
+                                       .find_all_stop_of_a_sub_route(sub_route_id)
+                StopOfRoutesRepresenter.new(Stopofroutes.new(stops_of_a_sub_route)).to_json
+              end
+            end
+            # GET '/api/v0.1/sub_route/:sub_route_id
+            routing.get do
+              sub_route = Repository::For[Entity::BusSubRoute].find_id(sub_route_id)
+              SubRouteRepresenter.new(sub_route).to_json
+            end
+          end
+
           routing.on 'all_routes' do
             routing.get do
               routes = Repository::For[Entity::BusRoute].all
@@ -147,9 +188,6 @@ module TaiGo
               if stops_of_a_route.success?
                 stopofroutes = stops_of_a_route.value.message
                 StopOfRoutesRepresenter.new(Stopofroutes.new(stopofroutes)).to_json
-                # stops.map do |stop|
-                #   StopOfRouteRepresenter.new(stop).to_json
-                # end
               else
                 http_response.to_json
               end
