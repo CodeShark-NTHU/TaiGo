@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-# frozen_string_literal: false
 
 require_relative 'bus_stop_representer'
+# require_relative 'sub_route_representer'
 
 module TaiGo
   # Representer class for converting BusRoute attributes to json
@@ -12,7 +12,6 @@ module TaiGo
     property :stop_id # maybe change to stop_id (consistency)?
     property :stop_boarding
     property :stop_sequence
-    # property :sub_route, extend: SubRouteRepresenter
     property :stop, extend: BusStopRepresenter
   end
 end

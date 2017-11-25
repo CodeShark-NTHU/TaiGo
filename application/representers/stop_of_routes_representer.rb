@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# frozen_string_literal: false
 
 require_relative 'bus_stop_representer'
 
