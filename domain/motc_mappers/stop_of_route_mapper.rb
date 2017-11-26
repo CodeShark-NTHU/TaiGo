@@ -60,10 +60,7 @@ module TaiGo
             stop_id: stop_id,
             stop_boarding: stop_boarding,
             stop_sequence: stop_sequence,
-<<<<<<< HEAD
-=======
             # sub_route: nil,
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
             stop: nil
           )
         end

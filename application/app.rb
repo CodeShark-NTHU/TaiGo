@@ -22,34 +22,16 @@ module TaiGo
       routing.on 'api' do
         # /api/v0.1 branch
         routing.on 'v0.1' do
-<<<<<<< HEAD
-          # Future development
-          # #/api/v0.1/:city_name
-          # routing.on String do |city_name|
-          #   #/api/v0.1/:city_name/sub_routes
-          #   routing.on 'sub_routes' do
-          #   end
-          #   #/api/v0.1/:city_name/routes
-          #   routing.on 'routes' do
-          #   end
-          # end
-          # #/api/v0.1/:city_name
-          # routing.on 'sub_route', String do |sub_id|
-          #   #/api/v0.1/:city_name/sub_routes
-          #   routing.get do
-          #   end
-          # end
-=======
           # /api/v0.1/:city_name
           routing.on 'bus', String do |city_name| 
-            # /api/v0.1/:city_name/routes
+            # /api/v0.1/bus/:city_name/routes
             routing.on 'routes' do
               routing.get do
                 routes = Repository::For[Entity::BusRoute].all
                 BusRoutesRepresenter.new(Routes.new(routes)).to_json
               end
             end
-            # /api/v0.1/:city_name/stops
+            # /api/v0.1/bus/:city_name/stops
             routing.on 'stops' do
               routing.get do
                 stops = Repository::For[Entity::BusStop].all
@@ -57,7 +39,7 @@ module TaiGo
               end
             end
           end
-          # /api/v0.1/route/:route_id
+          # /api/v0.1/bus/route/:route_id
           routing.on 'route', String do |route_id|
             # GET '/api/v0.1/route/:route_id
             routing.get do
@@ -97,15 +79,12 @@ module TaiGo
             end
           end
 
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
           routing.on 'all_routes' do
             routing.get do
               routes = Repository::For[Entity::BusRoute].all
               BusRoutesRepresenter.new(Routes.new(routes)).to_json
             end
           end
-<<<<<<< HEAD
-=======
 
           # /api/v0.1/positions/:city_name/:route_name
           routing.on 'positions', String do |city_name, route_name|
@@ -113,11 +92,24 @@ module TaiGo
             routing.get do
               bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
               positions = bpos_mapper.load(city_name, route_name)
+              puts positions
               BusPositionsRepresenter.new(Positions.new(positions)).to_json
             end
           end
 
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
+          # /api/v0.1/search/stop/coordinates/:lat/:lng
+          routing.on 'search' do
+            routing.on 'stop' do
+              routing.on 'coordinates', String do |lat, lng|
+                # GET ' /api/v0.1/search/stop/coordinates/:lat/:lng'
+                routing.get do
+                  stops = LoadNeighborStop.new.call(user_lat: lat, user_lng: lng)
+                  BusStopsRepresenter.new(Stops.new(stops.value)).to_json
+                end
+              end
+            end
+          end
+
           # /api/v0.1/routes/:city_name
           routing.on 'routes', String do |city_name|
             # POST '/api/v0.1/routes/:city_name
@@ -208,15 +200,8 @@ module TaiGo
               http_response = HttpResponseRepresenter.new(stops_of_a_route.value)
               response.status = http_response.http_code
               if stops_of_a_route.success?
-<<<<<<< HEAD
-                stops = stops_of_a_route.value.message
-                stops.map do |stop|
-                  StopOfRouteRepresenter.new(stop).to_json
-                end
-=======
                 stopofroutes = stops_of_a_route.value.message
                 StopOfRoutesRepresenter.new(Stopofroutes.new(stopofroutes)).to_json
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
               else
                 http_response.to_json
               end

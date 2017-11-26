@@ -54,14 +54,11 @@ module TaiGo
       def city_stop_route_data(city_name)
         url = Api.url(%W[Bus StopOfRoute City #{city_name}].join('/'))
         call_motc_url(url).parse
-<<<<<<< HEAD
-=======
       end
 
       def city_bus_position_data(city_name, route_name)
         url = Api.url(%W[Bus RealTimeByFrequency City #{city_name} #{route_name}].join('/'))
         call_motc_url(url).parse
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
       end
 
       def self.url(path)

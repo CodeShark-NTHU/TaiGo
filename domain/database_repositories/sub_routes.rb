@@ -33,10 +33,6 @@ module TaiGo
         stop_of_routes = db_record.stop_of_routes.map do |stop_of_route|
           StopOfRoutes.rebuild_entity(stop_of_route)
         end
-<<<<<<< HEAD
-
-=======
->>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
 
         Entity::BusSubRoute.new(
           id: db_record.id,
