@@ -8,6 +8,5 @@ module TaiGo
 
     property :english
     property :chinese
-    
   end
 end

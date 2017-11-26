@@ -4,7 +4,11 @@ module TaiGo
   module Repository
     # Repository for Stops
     class Stops
-      # use uid find stop in stop table
+      def self.all
+        Database::StopOrm.all.map { |db_record| rebuild_entity(db_record) }
+      end
+
+      # use id find stop in stop table
       def self.find_id(id)
         db_record = Database::StopOrm.first(id: id)
         rebuild_entity(db_record)

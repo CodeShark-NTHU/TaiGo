@@ -25,6 +25,22 @@ describe 'Tests MOTC API library' do
     end
 
     describe 'POSTing to create routes entities from MOTC' do
+<<<<<<< HEAD
+=======
+      it 'HAPPY: should retrieve bus position info' do
+        get "#{API_VER}/positions/#{CITY_NAME}/#{ROUTE_NAME}"
+        _(last_response.status).must_equal 200
+        position_data = JSON.parse last_response.body
+        _(position_data.count).must_be :>, 0
+      end
+
+      it 'BAD: should report error if no bus position found' do
+        proc do
+          get "#{API_VER}/positions/sad_city_name/sad_route_name"
+        end.must_raise TaiGo::MOTC::Api::Errors::ServerError
+      end
+
+>>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
       it 'HAPPY: should retrieve and store routes' do
         post "#{API_VER}/routes/#{CITY_NAME}"
         _(last_response.status).must_equal 201
@@ -55,6 +71,8 @@ describe 'Tests MOTC API library' do
         post "#{API_VER}/sub_routes/#{CITY_NAME}"
         _(last_response.status).must_equal 201
         _(last_response.header['Location'].size).must_be :>, 0
+<<<<<<< HEAD
+=======
         repo_data = JSON.parse last_response.body
         _(repo_data.size).must_be :>, 0
       end
@@ -77,6 +95,42 @@ describe 'Tests MOTC API library' do
         post "#{API_VER}/stops/#{CITY_NAME}"
         _(last_response.status).must_equal 201
         _(last_response.header['Location'].size).must_be :>, 0
+>>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
+        repo_data = JSON.parse last_response.body
+        _(repo_data.size).must_be :>, 0
+      end
+
+<<<<<<< HEAD
+      it 'SAD: should report error if no sub_routes found' do
+        post "#{API_VER}/sub_routes/sad_city_name"
+        _(last_response.status).must_equal 404
+      end
+
+      it 'BAD: should report error if duplicate sub_routes found' do
+        post "#{API_VER}/sub_routes/#{CITY_NAME}"
+        _(last_response.status).must_equal 201
+        post "#{API_VER}/sub_routes/#{CITY_NAME}"
+=======
+      it 'SAD: should report error if no stps found' do
+        post "#{API_VER}/stops/sad_city_name"
+        _(last_response.status).must_equal 404
+      end
+
+      it 'BAD: should report error if duplicate stps found' do
+        post "#{API_VER}/stops/#{CITY_NAME}"
+        _(last_response.status).must_equal 201
+        post "#{API_VER}/stops/#{CITY_NAME}"
+>>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
+        _(last_response.status).must_equal 409
+      end
+    end
+
+<<<<<<< HEAD
+    describe 'POSTing to create stops entities from MOTC' do
+      it 'HAPPY: should retrieve and store stops' do
+        post "#{API_VER}/stops/#{CITY_NAME}"
+        _(last_response.status).must_equal 201
+        _(last_response.header['Location'].size).must_be :>, 0
         repo_data = JSON.parse last_response.body
         _(repo_data.size).must_be :>, 0
       end
@@ -94,6 +148,8 @@ describe 'Tests MOTC API library' do
       end
     end
 
+=======
+>>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
     describe 'POSTing to create stop_of_routes entities from MOTC' do
       before do
         post "#{API_VER}/routes/#{CITY_NAME}"
@@ -144,6 +200,7 @@ describe 'Tests MOTC API library' do
         get "#{API_VER}/stop_sequence/not_exist_id"
         _(last_response.status).must_equal 404
       end
+<<<<<<< HEAD
 
       # it 'HAPPY: stop_of_route should have information of a stop' do
       #   get "#{API_VER}/stop_sequence/#{SUB_ROUTE_ID}"
@@ -152,6 +209,8 @@ describe 'Tests MOTC API library' do
       #   _(stop_of_routes_data.stop.size).must_be :>, 0
       # end
 
+=======
+>>>>>>> 5d6f29e31f7ff87d229f33d3ec4de7896bc2fb13
     end
   end
 end
