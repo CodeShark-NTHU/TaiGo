@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'bus_stop_representer'
+require_relative 'stop_of_route_representer.rb'
 
 module TaiGo
   # Representer class for converting BusRoute attributes to json
