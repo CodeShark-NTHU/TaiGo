@@ -92,7 +92,7 @@ module TaiGo
             routing.get do
               bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
               positions = bpos_mapper.load(city_name, route_name)
-              puts positions
+              # puts positions
               BusPositionsRepresenter.new(Positions.new(positions)).to_json
             end
           end
