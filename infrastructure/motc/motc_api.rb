@@ -56,6 +56,11 @@ module TaiGo
         call_motc_url(url).parse
       end
 
+      def city_bus_position_data(city_name, route_name)
+        url = Api.url(%W[Bus RealTimeByFrequency City #{city_name} #{route_name}].join('/'))
+        call_motc_url(url).parse
+      end
+
       def self.url(path)
         'http://ptx.transportdata.tw/MOTC/v2/' + path
       end

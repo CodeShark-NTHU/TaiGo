@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-require_relative 'name_representer.rb'
 require_relative 'coordinate_representer.rb'
 
 module TaiGo
   # Representer class for converting BusRoute attributes to json
-  class BusStopRepresenter < Roar::Decorator
+  class BusPositionRepresenter < Roar::Decorator
     include Roar::JSON
 
-    property :id
-    property :name, extend: NameRepresenter
+    property :plate_numb
+    property :sub_route_id
     property :coordinates, extend: CoordinateRepresenter
-    property :authority_id
+    property :speed
+    property :azimuth
+    property :duty_status
+    property :bus_status
   end
 end

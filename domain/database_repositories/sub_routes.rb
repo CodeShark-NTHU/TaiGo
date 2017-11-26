@@ -13,10 +13,6 @@ module TaiGo
         find_id(entity.id) || create_from(entity)
       end
 
-      # def sub_routes_list(route_id)
-      #   db_record = Database::SubRouteOrm.where(route_id: route_id).all
-      # end
-
       def self.create_from(entity)
         Database::SubRouteOrm.unrestrict_primary_key
         db_subroute = Database::SubRouteOrm.create(
@@ -37,7 +33,6 @@ module TaiGo
         stop_of_routes = db_record.stop_of_routes.map do |stop_of_route|
           StopOfRoutes.rebuild_entity(stop_of_route)
         end
-
 
         Entity::BusSubRoute.new(
           id: db_record.id,

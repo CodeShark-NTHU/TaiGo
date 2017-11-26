@@ -1,0 +1,169 @@
+---
+http://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/81: !ruby/object:HTTP::Response
+  version: '1.1'
+  uri: !ruby/object:HTTP::URI
+    uri: !ruby/object:Addressable::URI
+      validation_deferred: false
+      scheme: http
+      host: ptx.transportdata.tw
+      path: "/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/81"
+      authority: ptx.transportdata.tw
+      uri_string: http://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/81
+      password: 
+      user: 
+      port: 
+  status: !ruby/marshalable:HTTP::Response::Status
+    :__v2__:
+    - :@code
+    ? - 200
+    : 200
+  headers: !ruby/object:HTTP::Headers
+    pile:
+    - - Server
+      - nginx
+    - - Date
+      - Thu, 23 Nov 2017 08:42:40 GMT
+    - - Content-Type
+      - application/json; charset=utf-8
+    - - Content-Length
+      - '1043'
+    - - Connection
+      - close
+    - - Vary
+      - Accept-Encoding
+    - - X-Ratelimit-Limit-Day
+      - '20000'
+    - - X-Ratelimit-Remaining-Day
+      - '19997'
+    - - Cache-Control
+      - no-cache
+    - - Pragma
+      - no-cache
+    - - Expires
+      - "-1"
+    - - X-Aspnet-Version
+      - 4.0.30319
+    - - X-Powered-By
+      - ASP.NET
+    - - X-Frame-Options
+      - SAMEORIGIN
+    - - X-Content-Type-Options
+      - nosniff
+    - - X-Xss-Protection
+      - 1;mode=block
+    - - Access-Control-Allow-Origin
+      - "*"
+    - - X-Kong-Upstream-Latency
+      - '8'
+    - - X-Kong-Proxy-Latency
+      - '1'
+    - - Via
+      - kong/0.11.0
+  proxy_headers: !ruby/object:HTTP::Headers
+    pile: []
+  content_type: !ruby/struct:HTTP::ContentType
+    mime_type: application/json
+    charset: utf-8
+  body: !ruby/object:HTTP::Response::Body
+    stream: &1 !ruby/object:HTTP::Connection
+      persistent: false
+      keep_alive_timeout: 5.0
+      pending_request: false
+      pending_response: false
+      failed_proxy_connect: false
+      parser: !ruby/object:HTTP::Response::Parser
+        parser: !ruby/object:HTTP::Parser {}
+        finished: false
+        headers: 
+        chunk: 
+      socket: !ruby/object:HTTP::Timeout::Null
+        options: &2 {}
+        socket: !ruby/object:TCPSocket {}
+      keep_alive: false
+    connection: *1
+    streaming: false
+    contents: '[{"PlateNumb":"048-FV","OperatorID":"18","RouteUID":"HSZ0007","RouteID":"0007","RouteName":{"Zh_tw":"81","En":"81"},"SubRouteUID":"HSZ000701","SubRouteID":"000701","SubRouteName":{"Zh_tw":"81","En":"81"},"Direction":0,"BusPosition":{"PositionLat":24.7942083333333,"PositionLon":121.01344},"Speed":0.0,"Azimuth":102.0,"DutyStatus":0,"BusStatus":0,"MessageType":1,"GPSTime":"2017-11-23T16:42:19+08:00","TransTime":"2017-11-23T16:42:18+08:00","SrcRecTime":"2017-11-23T16:42:20+08:00","UpdateTime":"2017-11-23T16:42:24+08:00"},{"PlateNumb":"367-V6","OperatorID":"18","RouteUID":"HSZ0007","RouteID":"0007","RouteName":{"Zh_tw":"81","En":"81"},"SubRouteUID":"HSZ0007A1","SubRouteID":"0007A1","SubRouteName":{"Zh_tw":"81","En":"81"},"Direction":0,"BusPosition":{"PositionLat":24.77872,"PositionLon":120.985393333333},"Speed":0.0,"Azimuth":49.0,"DutyStatus":0,"BusStatus":0,"MessageType":1,"GPSTime":"2017-11-23T16:42:04+08:00","TransTime":"2017-11-23T16:42:05+08:00","SrcRecTime":"2017-11-23T16:42:04+08:00","UpdateTime":"2017-11-23T16:42:13+08:00"}]'
+    encoding: !ruby/encoding UTF-8
+http://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/some_route: !ruby/object:HTTP::Response
+  version: '1.1'
+  uri: !ruby/object:HTTP::URI
+    uri: !ruby/object:Addressable::URI
+      validation_deferred: false
+      scheme: http
+      host: ptx.transportdata.tw
+      path: "/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/some_route"
+      authority: ptx.transportdata.tw
+      uri_string: http://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeByFrequency/City/Hsinchu/some_route
+      password: 
+      user: 
+      port: 
+  status: !ruby/marshalable:HTTP::Response::Status
+    :__v2__:
+    - :@code
+    ? - 200
+    : 200
+  headers: !ruby/object:HTTP::Headers
+    pile:
+    - - Server
+      - nginx
+    - - Date
+      - Thu, 23 Nov 2017 08:42:40 GMT
+    - - Content-Type
+      - application/json; charset=utf-8
+    - - Content-Length
+      - '2'
+    - - Connection
+      - close
+    - - X-Ratelimit-Limit-Day
+      - '20000'
+    - - X-Ratelimit-Remaining-Day
+      - '19996'
+    - - Cache-Control
+      - no-cache
+    - - Pragma
+      - no-cache
+    - - Expires
+      - "-1"
+    - - X-Aspnet-Version
+      - 4.0.30319
+    - - X-Powered-By
+      - ASP.NET
+    - - X-Frame-Options
+      - SAMEORIGIN
+    - - X-Content-Type-Options
+      - nosniff
+    - - X-Xss-Protection
+      - 1;mode=block
+    - - Access-Control-Allow-Origin
+      - "*"
+    - - X-Kong-Upstream-Latency
+      - '8'
+    - - X-Kong-Proxy-Latency
+      - '0'
+    - - Via
+      - kong/0.11.0
+  proxy_headers: !ruby/object:HTTP::Headers
+    pile: []
+  content_type: !ruby/struct:HTTP::ContentType
+    mime_type: application/json
+    charset: utf-8
+  body: !ruby/object:HTTP::Response::Body
+    stream: &3 !ruby/object:HTTP::Connection
+      persistent: false
+      keep_alive_timeout: 5.0
+      pending_request: false
+      pending_response: false
+      failed_proxy_connect: false
+      parser: !ruby/object:HTTP::Response::Parser
+        parser: !ruby/object:HTTP::Parser {}
+        finished: false
+        headers: 
+        chunk: 
+      socket: !ruby/object:HTTP::Timeout::Null
+        options: *2
+        socket: !ruby/object:TCPSocket {}
+      keep_alive: false
+    connection: *3
+    streaming: false
+    contents: "[]"
+    encoding: !ruby/encoding UTF-8

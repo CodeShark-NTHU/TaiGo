@@ -5,8 +5,7 @@ module TaiGo
   class CoordinateRepresenter < Roar::Decorator
     include Roar::JSON
 
-    property :latitude 
+    property :latitude
     property :longitude
-
   end
 end
