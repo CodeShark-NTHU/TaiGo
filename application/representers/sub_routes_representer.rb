@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'name_representer.rb'
-require_relative 'coordinate_representer.rb'
+# require_relative 'name_representer.rb'
+# require_relative 'coordinate_representer.rb'
+require_relative 'sub_route_representer.rb'
+
 
 module TaiGo
   # Representer class for converting BusRoute attributes to json
