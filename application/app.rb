@@ -102,9 +102,14 @@ module TaiGo
             routing.on 'stop' do
               routing.on 'coordinates', String do |lat, lng|
                 # GET ' /api/v0.1/search/stop/coordinates/:lat/:lng'
+                find_result = FindDatabaseAllOfStops.call()
+                routing.halt(404, 'There are no stops in db') if find_result.failure?
+                @allofstops = find_result.value.message
                 routing.get do
-                  stops = LoadNeighborStop.new.call(user_lat: lat, user_lng: lng)
-                  BusStopsRepresenter.new(Stops.new(stops.value)).to_json
+                  dest = Destination::FindNearestStops.new(@allofstops)
+                  dest.initialize_dest(lat,lng)
+                  nearest_stops = dest.find_nearest_stops()
+                  BusStopsRepresenter.new(Stops.new(nearest_stops.value)).to_json
                 end
               end
             end

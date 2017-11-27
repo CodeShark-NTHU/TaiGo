@@ -3,22 +3,20 @@
 module TaiGo
   # for cal dist
   module Tool
-    module CalDistance
+    class CalDistance
       include Math
 
-      def initialize(user_lat, user_lng, stop_lat, stop_lng)
-        @user_lat = user_lat
-        @user_lng = user_lng
-        @stop_lat = stop_lat
-        @stop_lng = stop_lng
+      def initialize(pin_lat, pin_lng)
+        @pin_lat = pin_lat
+        @pin_lng = pin_lng
       end
 
-      def self.cal_dist()
-        lat_diff = (user_lat - stop_lat) * PI / 180.0
-        lng_diff = (user_lng - stop_lng) * PI / 180.0
+      def cal_distance(stop_lat, stop_lng)
+        lat_diff = (pin_lat - stop_lat) * PI / 180.0
+        lng_diff = (pin_lng - stop_lng) * PI / 180.0
         lat_sin = Math.sin(lat_diff / 2.0)**2
         lng_sin = Math.sin(lng_diff / 2.0)**2
-        first = Math.sqrt(lat_sin + Math.cos(user_lat * PI / 180.0) * Math.cos(user_lng * PI / 180.0) * lng_sin)
+        first = Math.sqrt(lat_sin + Math.cos(pin_lat * PI / 180.0) * Math.cos(pin_lng * PI / 180.0) * lng_sin)
         result = Math.asin(first) * 2 * 6378137.0
         result
       end
