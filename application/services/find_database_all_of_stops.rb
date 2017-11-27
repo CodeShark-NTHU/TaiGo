@@ -10,9 +10,8 @@ module TaiGo
   module FindDatabaseAllOfStops
     extend Dry::Monads::Either::Mixin
 
-    def self.call(input)
-      stops = Repository::For[Entity::BusStop]
-                         .find_all_of_stops()
+    def self.call
+      stops = Repository::For[Entity::BusStop].all
       if stops.empty?
         Left(Result.new(:not_found, "there are not stops in db."))
       else

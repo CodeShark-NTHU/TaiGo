@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../domain/tool/cal_distance.rb'
+require_relative '../tool/cal_distance.rb'
 
 module TaiGo
   module Entity
@@ -12,7 +12,7 @@ module TaiGo
         @allofstops = allofstops
       end
 
-      def initialize_dest(dest_lat,dest_lng)
+      def initialize_dest(dest_lat, dest_lng)
         @tmpCal = Tool::CalDistance.new(dest_lat, dest_lng)
       end
 
@@ -23,7 +23,7 @@ module TaiGo
       def find_nearest_stops()
         distance_set = {}
         @allofstops.map do |stop|
-          result = @tmpCal.cal_distance(stop.coordinates.latitude , stop.coordinates.longitude)
+          result = @tmpCal.cal_distance(stop.coordinates.latitude, stop.coordinates.longitude)
           distance_set[stop] = result
         end
         distance_set = sort_by_distance(distance_set)
