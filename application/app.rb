@@ -25,14 +25,14 @@ module TaiGo
             # /api/v0.1/bus/:city_name/routes
             routing.on 'routes' do
               routing.get do
-                routes = Repository::For[Entity::BusRoute].all
+                routes = Repository::For[Entity::BusRoute].find_city_name(city_name)
                 BusRoutesRepresenter.new(Routes.new(routes)).to_json
               end
             end
             # /api/v0.1/bus/:city_name/stops
             routing.on 'stops' do
               routing.get do
-                stops = Repository::For[Entity::BusStop].all
+                stops = Repository::For[Entity::BusStop].find_city_name(city_name)
                 BusStopsRepresenter.new(Stops.new(stops)).to_json
               end
             end

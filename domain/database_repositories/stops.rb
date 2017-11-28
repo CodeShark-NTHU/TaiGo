@@ -8,6 +8,11 @@ module TaiGo
         Database::StopOrm.all.map { |db_record| rebuild_entity(db_record) }
       end
 
+      def self.find_city_name(city_name)
+        db_record = Database::StopOrm.where(city_name: city_name)
+        db_record.map { |rec| rebuild_entity(rec) }
+      end
+
       def self.find_id(id)
         db_record = Database::StopOrm.first(id: id)
         rebuild_entity(db_record)
