@@ -9,7 +9,7 @@ module TaiGo
 
     property :id
     property :route_id
-    property :name
+    property :name, extend: NameRepresenter
     property :headsign
     property :direction
   end
