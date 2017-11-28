@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
 module TaiGo
-  # Provides access to bus stop data
+  # Provides access to MOTC Bus Real Time Position Data
   module MOTC
-    # Data Mapper for Bus Stop Mapper
+    # Data Mapper for Bus Position Mapper
     class BusPositionMapper
       def initialize(config, gateway = TaiGo::MOTC::Api)
         @config = config

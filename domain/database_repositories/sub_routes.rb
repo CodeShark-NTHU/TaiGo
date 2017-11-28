@@ -2,7 +2,7 @@
 
 module TaiGo
   module Repository
-    # Repository for Subroutes
+    # Repository for Subroutes tabe
     class SubRoutes
       def self.find_id(id)
         db_record = Database::SubRouteOrm.first(id: id)
@@ -28,8 +28,8 @@ module TaiGo
       end
 
       def self.rebuild_entity(db_record)
-        return nil unless db_record
-        stop_of_routes = []
+        # return nil unless db_record
+        # stop_of_routes = []
         stop_of_routes = db_record.stop_of_routes.map do |stop_of_route|
           StopOfRoutes.rebuild_entity(stop_of_route)
         end
@@ -37,7 +37,8 @@ module TaiGo
         Entity::BusSubRoute.new(
           id: db_record.id,
           route_id: db_record.route_id,
-          name: TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name.new(db_record.name_en,db_record.name_zh),
+          name: TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name
+                .new(db_record.name_en,db_record.name_zh),
           headsign: db_record.headsign,
           direction: db_record.direction,
           owned_stop_of_routes: stop_of_routes

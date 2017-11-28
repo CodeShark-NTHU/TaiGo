@@ -5,7 +5,7 @@ require_relative '../motc_mappers/bus_position_mapper.rb'
 
 module TaiGo
   module Entity
-    # Domain entity object for git BusStop
+    # Domain entity object for Bus Position
     class BusPosition < Dry::Struct
       attribute :plate_numb, Types::Strict::String
       attribute :sub_route_id, Types::Strict::String

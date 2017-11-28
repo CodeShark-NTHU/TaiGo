@@ -5,7 +5,7 @@ require_relative 'bus_stop.rb'
 
 module TaiGo
   module Entity
-    # Domain entity object for Stop Of Route
+    # Domain entity object for StopOfRoute
     class StopOfRoute < Dry::Struct
       attribute :sub_route_id, Types::Strict::String
       attribute :stop_id, Types::Strict::String

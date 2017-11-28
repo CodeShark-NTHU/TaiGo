@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 require 'roda'
-# require 'econfig'
-# require_relative 'lib/init.rb'
 
 module TaiGo
-  # Web API
+  # TaiGo Web API
   class Api < Roda
     plugin :environments
     plugin :json
@@ -23,7 +21,7 @@ module TaiGo
         # /api/v0.1 branch
         routing.on 'v0.1' do
           # /api/v0.1/:city_name
-          routing.on 'bus', String do |city_name| 
+          routing.on 'bus', String do |city_name|
             # /api/v0.1/bus/:city_name/routes
             routing.on 'routes' do
               routing.get do
