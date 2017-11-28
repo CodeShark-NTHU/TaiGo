@@ -3,7 +3,7 @@
 require_relative 'coordinate_representer.rb'
 
 module TaiGo
-  # Representer class for converting BusRoute attributes to json
+  # Representer class for converting Bus Position attributes to json
   class BusPositionRepresenter < Roar::Decorator
     include Roar::JSON
 

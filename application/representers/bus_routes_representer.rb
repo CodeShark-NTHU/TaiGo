@@ -2,8 +2,8 @@
 
 require_relative 'bus_route_representer'
 
-# Represents essential Repo information for API output
 module TaiGo
+  # Representer class for converting BusRoutes attributes to json
   class BusRoutesRepresenter < Roar::Decorator
     include Roar::JSON
 

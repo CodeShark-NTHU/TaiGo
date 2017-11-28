@@ -2,8 +2,8 @@
 
 require_relative 'bus_position_representer'
 
-# Represents essential Bus Position information for API output
 module TaiGo
+  # Representer class for converting Bus Positions attributes to json
   class BusPositionsRepresenter < Roar::Decorator
     include Roar::JSON
 

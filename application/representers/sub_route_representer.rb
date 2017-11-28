@@ -3,7 +3,7 @@
 require_relative 'name_representer'
 
 module TaiGo
-  # Representer class for converting BusRoute attributes to json
+  # Representer class for converting SubRoute attributes to json
   class SubRouteRepresenter < Roar::Decorator
     include Roar::JSON
 
