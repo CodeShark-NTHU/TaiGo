@@ -33,6 +33,7 @@ module TaiGo
           dep_zh: entity.depart_name.chinese,
           dest_en: entity.destination_name.english,
           dest_zh: entity.destination_name.chinese,
+          city_name: entity.city_name,
           auth_id: entity.authority_id
         )
         rebuild_entity(db_route)
@@ -56,6 +57,7 @@ module TaiGo
           destination_name: TaiGo::MOTC::BusRouteMapper::DataMapper::Name
                             .new(db_record.dest_en,db_record.dest_zh),
           authority_id: db_record.auth_id,
+          city_name: db_record.city_name,
           owned_sub_routes: sub_routes
         )
       end

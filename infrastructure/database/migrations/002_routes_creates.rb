@@ -12,6 +12,7 @@ Sequel.migration do
       String      :dep_en
       String      :dest_zh
       String      :dest_en
+      String      :city_name
       Integer     :auth_id
 
       DateTime    :created_at
