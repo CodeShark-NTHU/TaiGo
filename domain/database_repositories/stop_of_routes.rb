@@ -41,8 +41,11 @@ module TaiGo
       def self.rebuild_entity(db_record)
         return nil unless db_record
 
-        stop = nil
+        # stop = nil
         stop = Stops.rebuild_entity(db_record.stop)
+
+        # subroute = nil
+        subroute = SubRoutes.rebuild_entity(db_record.sub_route)
 
         # rebuild entity
         Entity::StopOfRoute.new(
@@ -50,6 +53,7 @@ module TaiGo
           stop_id: db_record.stop_id,
           stop_sequence: db_record.sequence,
           stop_boarding: db_record.boarding,
+          sub_route: subroute,
           stop: stop
         )
       end

@@ -2,7 +2,7 @@
 
 require 'dry-struct'
 require_relative '../motc_mappers/bus_sub_route_mapper.rb'
-require_relative 'stop_of_route.rb'
+# require_relative 'stop_of_route.rb'
 
 module TaiGo
   module Entity
