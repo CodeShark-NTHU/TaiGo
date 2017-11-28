@@ -12,5 +12,6 @@ module TaiGo
     property :name, extend: NameRepresenter
     property :coordinates, extend: CoordinateRepresenter
     property :authority_id
+    property :city_name
   end
 end

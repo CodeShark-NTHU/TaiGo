@@ -26,6 +26,7 @@ module TaiGo
           latitude: entity.coordinates.latitude,
           longitude: entity.coordinates.longitude,
           auth_id: entity.authority_id,
+          city_name: entity.city_name,
           address: entity.address
         )
         rebuild_entity(db_stop)
@@ -42,6 +43,7 @@ module TaiGo
           coordinates: TaiGo::MOTC::BusStopMapper::DataMapper::Coordinates
                        .new(db_record.latitude, db_record.longitude),
           authority_id: db_record.auth_id,
+          city_name: db_record.city_name,
           address: db_record.address
         )
       end
