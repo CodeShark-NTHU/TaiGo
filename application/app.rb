@@ -153,25 +153,25 @@ module TaiGo
             end
           end
 
-          # /api/v0.1/sub_routes/:city_name
-          routing.on 'sub_routes', String do |city_name|
-            # POST '/api/v0.1/sub_routes/:city_name
-            routing.post do
-              subroute_service_result = LoadFromMotcSubRoute.new.call(
-                config: app.config,
-                city_name: city_name
-              )
-              http_response = HttpResponseRepresenter.new(subroute_service_result.value)
-              response.status = http_response.http_code
-              if subroute_service_result.success?
-                response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-                subroutes = subroute_service_result.value.message
-                BusSubRoutesRepresenter.new(Subroutes.new(subroutes)).to_json
-              else
-                http_response.to_json
-              end
-            end
-          end
+          # # /api/v0.1/sub_routes/:city_name
+          # routing.on 'sub_routes', String do |city_name|
+          #   # POST '/api/v0.1/sub_routes/:city_name
+          #   routing.post do
+          #     subroute_service_result = LoadFromMotcSubRoute.new.call(
+          #       config: app.config,
+          #       city_name: city_name
+          #     )
+          #     http_response = HttpResponseRepresenter.new(subroute_service_result.value)
+          #     response.status = http_response.http_code
+          #     if subroute_service_result.success?
+          #       response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
+          #       subroutes = subroute_service_result.value.message
+          #       BusSubRoutesRepresenter.new(Subroutes.new(subroutes)).to_json
+          #     else
+          #       http_response.to_json
+          #     end
+          #   end
+          # end
 
           # /api/v0.1/stop_of_routes/:city_name
           routing.on 'stop_of_routes', String do |city_name|

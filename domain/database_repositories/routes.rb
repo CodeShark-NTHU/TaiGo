@@ -41,6 +41,13 @@ module TaiGo
           city_name: entity.city_name,
           auth_id: entity.authority_id
         )
+
+        entity.sub_routes.each do |sub_route|
+          stored_subroute = SubRoutes.find_or_create(sub_route)
+          subroute = Database::SubRouteOrm.first(id: stored_subroute.id)
+          db_route.add_sub_route(subroute)
+        end
+
         rebuild_entity(db_route)
       end
 
@@ -63,7 +70,8 @@ module TaiGo
                             .new(db_record.dest_en,db_record.dest_zh),
           authority_id: db_record.auth_id,
           city_name: db_record.city_name,
-          owned_sub_routes: sub_routes
+          sub_routes: sub_routes
+          # owned_sub_routes: sub_routes
         )
       end
     end

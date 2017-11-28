@@ -39,9 +39,9 @@ module TaiGo
       end
 
       def self.rebuild_entity(db_record)
-        # return nil unless db_record
+        return nil unless db_record
 
-        # stop = nil
+        stop = nil
         stop = Stops.rebuild_entity(db_record.stop)
 
         # rebuild entity

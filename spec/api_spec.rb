@@ -59,32 +59,6 @@ describe 'Tests MOTC API library' do
       end
     end
 
-    describe 'POSTing to create sub_routes entities from MOTC' do
-      before do
-        post "#{API_VER}/routes/#{CITY_NAME}"
-      end
-
-      it 'HAPPY: should retrieve and store sub_routes' do
-        post "#{API_VER}/sub_routes/#{CITY_NAME}"
-        _(last_response.status).must_equal 201
-        _(last_response.header['Location'].size).must_be :>, 0
-        repo_data = JSON.parse last_response.body
-        _(repo_data.size).must_be :>, 0
-      end
-
-      it 'SAD: should report error if no sub_routes found' do
-        post "#{API_VER}/sub_routes/sad_city_name"
-        _(last_response.status).must_equal 404
-      end
-
-      it 'BAD: should report error if duplicate sub_routes found' do
-        post "#{API_VER}/sub_routes/#{CITY_NAME}"
-        _(last_response.status).must_equal 201
-        post "#{API_VER}/sub_routes/#{CITY_NAME}"
-        _(last_response.status).must_equal 409
-      end
-    end
-
     describe 'POSTing to create stops entities from MOTC' do
       it 'HAPPY: should retrieve and store stops' do
         post "#{API_VER}/stops/#{CITY_NAME}"
@@ -109,9 +83,8 @@ describe 'Tests MOTC API library' do
 
     describe 'POSTing to create stop_of_routes entities from MOTC' do
       before do
-        post "#{API_VER}/routes/#{CITY_NAME}"
-        post "#{API_VER}/sub_routes/#{CITY_NAME}"
         post "#{API_VER}/stops/#{CITY_NAME}"
+        post "#{API_VER}/routes/#{CITY_NAME}"
       end
 
       it 'HAPPY: should retrieve and stop_of_route' do
@@ -138,12 +111,8 @@ describe 'Tests MOTC API library' do
     describe 'GETing database stop_of_route entities' do
       before do
         post "#{API_VER}/routes/#{CITY_NAME}"
-        post "#{API_VER}/sub_routes/#{CITY_NAME}"
         post "#{API_VER}/stops/#{CITY_NAME}"
         post "#{API_VER}/stop_of_routes/#{CITY_NAME}"
-        # TaiGo::FindDatabaseStopOfRoute.call(
-        #   sub_route_id: SUB_ROUTE_ID
-        # )
       end
 
       it 'HAPPY: should find stored stop_of_route sequence list' do

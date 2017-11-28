@@ -9,11 +9,11 @@ module TaiGo
     # Domain entity object for BusSubRoute
     class BusSubRoute < Dry::Struct
       attribute :id, Types::Strict::String
-      attribute :route_id, Types::Strict::String
+      attribute :route_id, Types::Strict::String.optional
       attribute :name, Types.Instance(TaiGo::MOTC::BusSubRouteMapper::DataMapper::Name)
       attribute :headsign, Types::String.optional
       attribute :direction, Types::Int.optional
-      attribute :owned_stop_of_routes, Types::Strict::Array.member(StopOfRoute).optional
+      # attribute :owned_stop_of_routes, Types::Strict::Array.member(StopOfRoute).optional
     end
   end
 end

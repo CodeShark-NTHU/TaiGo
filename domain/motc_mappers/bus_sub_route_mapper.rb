@@ -34,9 +34,11 @@ module TaiGo
         end
       end
 
-      def load_several(sub_routes_data)
+      def load_several(sub_routes_data, route_id = nil)
+        @route_id = route_id
         @sub_routes_data = sub_routes_data
         @sub_routes_data.map do |sub_route|
+          sub_route['RouteUID'] = @route_id unless !@route_id.nil?
           BusSubRouteMapper.build_entity(sub_route)
         end
       end

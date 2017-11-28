@@ -21,20 +21,20 @@ module TaiGo
 
       def load_several(city_bus_route_data, city_name)
         city_bus_route_data.map do |bus_route_data|
-          BusRouteMapper.build_entity(bus_route_data, city_name)
+          BusRouteMapper.build_entity(bus_route_data, city_name, @config, @gateway_class)
         end
       end
 
-      def self.build_entity(bus_route_data, city_name)
-        DataMapper.new(bus_route_data, city_name).build_entity
+      def self.build_entity(bus_route_data, city_name, config, gateway_class)
+        DataMapper.new(bus_route_data, city_name, config, gateway_class).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(bus_route_data, city_name)
+        def initialize(bus_route_data, city_name, config, gateway)
           @bus_route_data = bus_route_data
           @city_name = city_name
-          # @subroutes_mapper = BusSubRouteMapper.new(gateway)
+          @subroutes_mapper = BusSubRouteMapper.new(config, gateway)
         end
 
         def build_entity
@@ -45,7 +45,8 @@ module TaiGo
             depart_name: depart_name,
             destination_name: destination_name,
             city_name: city_name,
-            owned_sub_routes: []
+            sub_routes: sub_routes
+            # owned_sub_routes: []
           )
         end
 
@@ -75,10 +76,12 @@ module TaiGo
         end
 
         attr_reader :city_name
-        # def sub_routes
-        #   @subroutes_mapper.load_several(@bus_route_data['SubRoutes'],
-        #                                  @bus_route_data['RouteUID'])
-        # end
+
+        def sub_routes
+          @subroutes_mapper.load_several(@bus_route_data['SubRoutes'],
+                                         @bus_route_data['RouteUID'])
+        end
+
         # class City
         class Name
           attr_reader :english, :chinese

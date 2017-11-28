@@ -13,6 +13,7 @@ module TaiGo
     property :depart_name, extend: NameRepresenter
     property :destination_name, extend: NameRepresenter
     property :city_name
+    collection :sub_routes, extend: SubRouteRepresenter
     property :authority_id
   end
 end
