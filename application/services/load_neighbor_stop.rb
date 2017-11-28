@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'dry/transaction'
-require_relative '../../domain/tool/cal_dist.rb'
+require_relative '../../domain/tool/cal_distance.rb'
 
 module TaiGo
   # Transaction to load routes from Motc and save to database
