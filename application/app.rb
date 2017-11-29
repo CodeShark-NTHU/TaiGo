@@ -90,7 +90,7 @@ module TaiGo
             routing.get do
               bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
               positions = bpos_mapper.load(city_name, route_name)
-              # puts positions
+              puts positions
               BusPositionsRepresenter.new(Positions.new(positions)).to_json
             end
           end
@@ -106,13 +106,11 @@ module TaiGo
                 routing.get do
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_dest(lat, lng)
-                  nearest_stops = dest.find_nearest_stops()
-                  
-                  nearest_stops.map do |n_s|
-                    FindDatabaseStopOfRouteByStopID.call(n_s).value.message.map do |s|
-                    StopOfRoutesRepresenter.new(Stopofroutes.new(s)).to_json
-                    end
-                  end
+                  nearest_stop = dest.find_nearest_stop
+                  # return Array of Array
+                  sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
+                  # puts sor.size
+                  StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
                 end
               end
             end
