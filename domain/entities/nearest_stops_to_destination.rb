@@ -6,7 +6,7 @@ module TaiGo
   module Entity
     # FindNearestStops
     class FindNearestStops
-      NEAREST_STOP_NUM = 5 # for return to user.
+      NEAREST_STOP_NUM = 1 # for return to user.
 
       def initialize(allofstops)
         @allofstops = allofstops

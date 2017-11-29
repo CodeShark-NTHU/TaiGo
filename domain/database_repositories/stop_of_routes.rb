@@ -14,6 +14,12 @@ module TaiGo
         db_records.map { |db_record| rebuild_entity(db_record) }
       end
 
+      def self.find_all_stop_of_a_sub_route_which_include_this_stop(stop_id)
+        db_records = Database::StopOfRouteOrm.distinct.where(stop_id: stop_id)
+        db_records.map { |db_record| rebuild_entity(db_record) }
+        db_records.map { |entity| find_all_stop_of_a_sub_route(entity.sub_route.id)}
+      end
+
       def self.find_stop_of_route(sub_route_id, stop_id, sequence)
         db_record = Database::StopOfRouteOrm.first(sub_route_id: sub_route_id,
                                                    stop_id: stop_id,

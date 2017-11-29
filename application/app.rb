@@ -107,7 +107,12 @@ module TaiGo
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_dest(lat, lng)
                   nearest_stops = dest.find_nearest_stops()
-                  BusStopsRepresenter.new(Stops.new(nearest_stops)).to_json
+                  
+                  nearest_stops.map do |n_s|
+                    FindDatabaseStopOfRouteByStopID.call(n_s).value.message.map do |s|
+                    StopOfRoutesRepresenter.new(Stopofroutes.new(s)).to_json
+                    end
+                  end
                 end
               end
             end
