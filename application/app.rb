@@ -100,18 +100,58 @@ module TaiGo
             routing.on 'stop' do
               routing.on 'coordinates', String do |lat, lng|
                 # GET ' /api/v0.1/search/stop/coordinates/:lat/:lng'
-                find_result = FindDatabaseAllOfStops.call
-                routing.halt(404, 'There are no stops in db') if find_result.failure?
-                @allofstops = find_result.value.message
                 routing.get do
+                  find_result = FindDatabaseAllOfStops.call
+                  routing.halt(404, 'There are no stops in db') if find_result.failure?
+                  @allofstops = find_result.value.message
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_dest(lat, lng)
-                  nearest_stop = dest.find_nearest_stop
-                  # return Array of Array
-                  sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
-                  # puts sor.size
-                  StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
+                  nearest_stop = dest.find_top_nearest_stops # pick top 3
+                  stops = []
+                  nearest_stop.each do |y|
+                    # puts y.coordinates.latitude
+                    h = { "stop_id" => y.id }
+                    h["name_zh"] = y.name.chinese
+                    h["name_en"] = y.name.english
+                    h["latitude"] = y.coordinates.latitude
+                    h["longitude"] = y.coordinates.longitude
+                    h["city_name"] = y.city_name
+                    h["address"] = y.address
+                    x = []
+                    a = Repository::For[Entity::StopOfRoute].find_stop_id(y.id)
+                    a.map do |b|
+                      m = { "sub_route_id" => b.sub_route_id }
+                      m['name_zh'] = b.sub_route.name.chinese
+                      m['name_en'] = b.sub_route.name.english
+                      m['route_id'] = b.sub_route.route_id
+                      m['headsign'] = b.sub_route.headsign
+                      m['direction'] = b.sub_route.direction
+                      m['stop_sequence'] = b.stop_sequence
+                      x << m
+                      # x << StopOfRouteRepresenter.new(b).to_json
+                      # puts x
+                    end
+                    h["sub_route"] = x
+                    stops << h
+                    # # y = StopOfRoutesRepresenter.new(Stopofroutes.new(a)).to_json
+                  end
+                  stops
+                  # BusStopsRepresenter(Stops.new(nearest_stop)).to_json
+                  # sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute].find_stop_id(nearest_stop.id)
+                  # StopOfRoutesRepresenter.new(Stopofroutes.new(sub_routes_of_a_stop)).to_json
+                  # sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
+                  # StopOfRoutesRepresenter.new(Stopofroutes.new(sor)).to_json
+                  # StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
                 end
+                # routing.get do
+                #   dest = Entity::FindNearestStops.new(@allofstops)
+                #   dest.initialize_dest(lat, lng)
+                #   nearest_stop = dest.find_nearest_stop
+                #   # return Array of Array
+                #   sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
+                #   # puts sor.size
+                #   StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
+                # end
               end
             end
           end
@@ -155,26 +195,6 @@ module TaiGo
               end
             end
           end
-
-          # # /api/v0.1/sub_routes/:city_name
-          # routing.on 'sub_routes', String do |city_name|
-          #   # POST '/api/v0.1/sub_routes/:city_name
-          #   routing.post do
-          #     subroute_service_result = LoadFromMotcSubRoute.new.call(
-          #       config: app.config,
-          #       city_name: city_name
-          #     )
-          #     http_response = HttpResponseRepresenter.new(subroute_service_result.value)
-          #     response.status = http_response.http_code
-          #     if subroute_service_result.success?
-          #       response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-          #       subroutes = subroute_service_result.value.message
-          #       BusSubRoutesRepresenter.new(Subroutes.new(subroutes)).to_json
-          #     else
-          #       http_response.to_json
-          #     end
-          #   end
-          # end
 
           # /api/v0.1/stop_of_routes/:city_name
           routing.on 'stop_of_routes', String do |city_name|
