@@ -100,10 +100,10 @@ module TaiGo
             routing.on 'stop' do
               routing.on 'coordinates', String do |lat, lng|
                 # GET ' /api/v0.1/search/stop/coordinates/:lat/:lng'
-                find_result = FindDatabaseAllOfStops.call
-                routing.halt(404, 'There are no stops in db') if find_result.failure?
-                @allofstops = find_result.value.message
                 routing.get do
+                  find_result = FindDatabaseAllOfStops.call
+                  routing.halt(404, 'There are no stops in db') if find_result.failure?
+                  @allofstops = find_result.value.message
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_dest(lat, lng)
                   nearest_stop = dest.find_nearest_stop
@@ -174,26 +174,6 @@ module TaiGo
               end
             end
           end
-
-          # # /api/v0.1/sub_routes/:city_name
-          # routing.on 'sub_routes', String do |city_name|
-          #   # POST '/api/v0.1/sub_routes/:city_name
-          #   routing.post do
-          #     subroute_service_result = LoadFromMotcSubRoute.new.call(
-          #       config: app.config,
-          #       city_name: city_name
-          #     )
-          #     http_response = HttpResponseRepresenter.new(subroute_service_result.value)
-          #     response.status = http_response.http_code
-          #     if subroute_service_result.success?
-          #       response['Location'] = "/api/v0.1/sub_routes/#{city_name}"
-          #       subroutes = subroute_service_result.value.message
-          #       BusSubRoutesRepresenter.new(Subroutes.new(subroutes)).to_json
-          #     else
-          #       http_response.to_json
-          #     end
-          #   end
-          # end
 
           # /api/v0.1/stop_of_routes/:city_name
           routing.on 'stop_of_routes', String do |city_name|
