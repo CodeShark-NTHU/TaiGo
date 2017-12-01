@@ -107,10 +107,29 @@ module TaiGo
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_dest(lat, lng)
                   nearest_stop = dest.find_nearest_stop
+                  puts nearest_stop.class
                   # return Array of Array
-                  sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
+                  # sor = FindDatabaseStopOfRouteByStopID.call(nearest_stop).value.message
                   # puts sor.size
-                  StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
+                  # StopOfRoutesRepresenter.new(Stopofroutes.new(sor[0])).to_json
+                end
+              end
+            end
+          end
+
+
+          # /api/v0.1/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
+          routing.on 'search' do
+            routing.on 'stop' do
+              routing.on 'coordinates', String do |start_lat, start_lng, dest_lat, dest_lng|
+                # GET ' /api/v0.1/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng'
+                find_result = FindDatabaseAllOfStops.call
+                routing.halt(404, 'There are no stops in db') if find_result.failure?
+                @allofstops = find_result.value.message
+                routing.get do
+                  dest = Entity::FindNearestStops.new(@allofstops)
+                  dest.initialize_dest(lat, lng)
+                  nearest_stop = dest.find_nearest_stop
                 end
               end
             end

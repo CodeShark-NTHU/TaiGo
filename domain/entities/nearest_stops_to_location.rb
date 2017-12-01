@@ -12,8 +12,8 @@ module TaiGo
         @allofstops = allofstops
       end
 
-      def initialize_dest(dest_lat, dest_lng)
-        @tmpCal = Tool::CalDistance.new(dest_lat, dest_lng)
+      def initialize_dest(lat, lng)
+        @tmpCal = Tool::CalDistance.new(lat, lng)
       end
 
       def sort_by_distance(set)
@@ -37,6 +37,7 @@ module TaiGo
           distance_set[stop] = result
         end
         distance_set = sort_by_distance(distance_set)
+        # will return the stop entity
         distance_set.keys[0]
       end
     end
