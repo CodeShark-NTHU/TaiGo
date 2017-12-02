@@ -13,7 +13,7 @@ module TaiGo
         @allofstops = allofstops
       end
 
-      def initialize_dest(lat, lng)
+      def initialize_location(lat, lng)
         @tmpCal = Tool::CalDistance.new(lat, lng)
       end
 
