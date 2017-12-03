@@ -14,8 +14,8 @@ module TaiGo
         end
       end
 
-      routing.on 'city', String do |city_name|
-        # #{API_ROOT}/bus/city/:city_name/routes
+      routing.on String do |city_name|
+        # #{API_ROOT}/bus/:city_name/routes
         routing.on 'routes' do
           # GET '#{API_ROOT}/bus/:city_name/routes'
           routing.get do
@@ -49,7 +49,7 @@ module TaiGo
             stops = Repository::For[Entity::BusStop].find_city_name(city_name)
             BusStopsRepresenter.new(Stops.new(stops)).to_json
           end
-          # POST '{API_ROOT}/stops/:city_name
+          # POST '#{API_ROOT}/stops/:city_name'
           routing.post do
             stops_service_result = LoadFromMotcStop.new.call(
               config: app.config,
@@ -68,9 +68,9 @@ module TaiGo
           end
         end
 
-        # {API_ROOT}/bus/city/:city_name/stop_of_routes
+        # #{API_ROOT}/bus/city/:city_name/stop_of_routes
         routing.on 'stop_of_routes' do
-          # POST '{API_ROOT}/bus/city/:city_name/stop_of_routes
+          # POST '#{API_ROOT}/bus/city/:city_name/stop_of_routes
           routing.post do
             stop_of_routes_service_result = LoadFromMotcStopOfRoute.new.call(
               config: app.config,

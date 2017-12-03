@@ -5,7 +5,7 @@ module TaiGo
   class Api < Roda
     plugin :all_verbs
 
-    route('route') do |routing|
+    route('sub_route') do |routing|
       # #{API_ROOT}/route index request
       routing.is do
         routing.get do
@@ -15,17 +15,26 @@ module TaiGo
       end
 
       # #{API_ROOT}/sub_route/:sub_route_id
-      routing.on 'sub_route', String do |sub_route_id|
-        # GET #{API_ROOT}/sub_route/:sub_route_id/stops
+      routing.on String do |sub_route_id|
+        # GET '#{API_ROOT}/sub_route/:sub_route_id/stops'
         routing.on 'stops' do
           routing.get do
-            stops_of_a_sub_route = Repository::For[Entity::StopOfRoute]
-                                   .find_all_stop_of_a_sub_route(sub_route_id)
-            StopOfRoutesRepresenter.new(Stopofroutes
-                                   .new(stops_of_a_sub_route)).to_json
+            stops_of_a_sub_route = FindDatabaseStopOfRoute.call(
+              sub_route_id: sub_route_id
+            )
+            http_response = HttpResponseRepresenter
+                            .new(stops_of_a_sub_route.value)
+            response.status = http_response.http_code
+            if stops_of_a_sub_route.success?
+              stop_of_routes = stops_of_a_sub_route.value.message
+              StopOfRoutesRepresenter.new(Stopofroutes
+                                     .new(stop_of_routes)).to_json
+            else
+              http_response.to_json
+            end
           end
         end
-        # GET #{API_ROOT}/sub_route/:sub_route_id
+        # GET '#{API_ROOT}/sub_route/:sub_route_id'
         routing.get do
           sub_route = Repository::For[Entity::BusSubRoute].find_id(sub_route_id)
           SubRouteRepresenter.new(sub_route).to_json

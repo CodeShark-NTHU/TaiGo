@@ -25,7 +25,6 @@ module TaiGo
       routing.root do
         message = "TaiGo API v0.1 up in #{Api.environment} mode"
         HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
-        # { 'message' => "TaiGo API v0.1 up in #{app.environment} mode" }
       end
 
       routing.on 'api' do

@@ -13,9 +13,9 @@ module TaiGo
           HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
         end
       end
-      # {API_ROOT}/route/:route_id
-      routing.on 'route', String do |route_id|
-        # GET {API_ROOT}/route/:route_id
+      # '#{API_ROOT}/route/:route_id'
+      routing.on String do |route_id|
+        # GET '#{API_ROOT}/route/:route_id'
         routing.get do
           route = Repository::For[Entity::BusRoute].find_id(route_id)
           BusRouteRepresenter.new(route).to_json

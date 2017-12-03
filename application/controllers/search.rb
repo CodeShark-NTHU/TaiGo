@@ -9,7 +9,7 @@ module TaiGo
       # #{API_ROOT}/search index request
       routing.is do
         routing.get do
-          message = 'API to get the coordinates of data'
+          message = 'API to get the possbile routes between start and destination'
           HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
         end
       end
