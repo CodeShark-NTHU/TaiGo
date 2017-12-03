@@ -11,6 +11,7 @@ Sequel.migration do
       String    	:address
       Float     	:latitude
       Float       :longitude
+      String      :city_name
       String      :auth_id
 
       DateTime    :created_at

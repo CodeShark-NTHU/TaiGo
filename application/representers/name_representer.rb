@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-# Represents essential Repo information for API output
 module TaiGo
-  # Representer class for converting BusRoute attributes to json
+  # Representer class for converting Name property to json
   class NameRepresenter < Roar::Decorator
     include Roar::JSON
 

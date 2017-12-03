@@ -14,23 +14,24 @@ module TaiGo
 
       def load(city_name)
         @city_bus_stops_data = @gateway.city_bus_stops_data(city_name)
-        load_several(@city_bus_stops_data)
+        load_several(@city_bus_stops_data, city_name)
       end
 
-      def load_several(city_bus_stops_data)
+      def load_several(city_bus_stops_data, city_name)
         city_bus_stops_data.map do |bus_stop_data|
-          BusStopMapper.build_entity(bus_stop_data)
+          BusStopMapper.build_entity(bus_stop_data, city_name)
         end
       end
 
-      def self.build_entity(bus_stop_data)
-        DataMapper.new(bus_stop_data).build_entity
+      def self.build_entity(bus_stop_data, city_name)
+        DataMapper.new(bus_stop_data, city_name).build_entity
       end
 
       # Extracts entity specific elements from data structure
       class DataMapper
-        def initialize(data)
+        def initialize(data, city_name)
           @data = data
+          @city_name = city_name
         end
 
         def build_entity
@@ -39,6 +40,7 @@ module TaiGo
             authority_id: authority_id,
             name: name,
             coordinates: coordinates,
+            city_name: city_name,
             address: address
           )
         end
@@ -67,6 +69,7 @@ module TaiGo
                           @data['StopPosition']['PositionLon'])
         end
 
+        attr_reader :city_name        
         # this is a helper class for name
         class Name
           attr_reader :english, :chinese

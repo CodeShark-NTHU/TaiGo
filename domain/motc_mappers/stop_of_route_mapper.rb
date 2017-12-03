@@ -1,9 +1,9 @@
 # frozen_string_literal: false
 
 module TaiGo
-  # Provides access to Bus Route data
+  # Provides access to Bus Stop of Route data
   module MOTC
-    # Data Mapper for Bus Route
+    # Data Mapper for Bus Stop of Route
     class StopOfRouteMapper
       def initialize(config, gateway = TaiGo::MOTC::Api)
         @config = config
@@ -60,7 +60,7 @@ module TaiGo
             stop_id: stop_id,
             stop_boarding: stop_boarding,
             stop_sequence: stop_sequence,
-            # sub_route: nil,
+            sub_route: nil,
             stop: nil
           )
         end

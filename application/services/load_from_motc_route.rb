@@ -22,7 +22,11 @@ module TaiGo
     def filter_the_routes_not_in_db(input)
       # only store the routes which not in db to route_set
       route_set = []
+
       input[:routes].map do |route|
+        # route.sub_routes.map do |x|
+        #   puts x.id
+        # end
         # if we change route uid to id ,here have to change to route.id
         route_set << route if Repository::For[route.class].find_id(route.id).nil?
       end

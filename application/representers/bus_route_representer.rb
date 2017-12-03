@@ -8,10 +8,12 @@ module TaiGo
   class BusRouteRepresenter < Roar::Decorator
     include Roar::JSON
 
-    property :id # maybe change to route_id?
-    property :name, extend: NameRepresenter # maybe change to name?
+    property :id
+    property :name, extend: NameRepresenter
     property :depart_name, extend: NameRepresenter
     property :destination_name, extend: NameRepresenter
+    property :city_name
+    collection :sub_routes, extend: SubRouteRepresenter
     property :authority_id
   end
 end

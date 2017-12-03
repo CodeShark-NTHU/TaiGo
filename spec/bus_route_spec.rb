@@ -43,7 +43,7 @@ describe 'Tests Bus Stop library' do
       @route = broute_mapper.load(CITY_NAME)
     end
 
-    it 'HAPPY: should identify bus Stop ' do
+    it 'HAPPY: should identify Bus Route ' do
       _(@route.count).must_equal CORRECT_ROUTE['routes'].count
 
       id = @route.map(&:id)

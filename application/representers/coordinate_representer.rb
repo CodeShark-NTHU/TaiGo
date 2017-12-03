@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module TaiGo
-  # Representer class for converting BusRoute attributes to json
+  # Representer class for converting Coordinates property to json
   class CoordinateRepresenter < Roar::Decorator
     include Roar::JSON
 

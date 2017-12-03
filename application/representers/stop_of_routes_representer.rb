@@ -3,7 +3,7 @@
 require_relative 'stop_of_route_representer.rb'
 
 module TaiGo
-  # Representer class for converting BusRoute attributes to json
+  # Representer class for converting StopOfRoutes attributes to json
   class StopOfRoutesRepresenter < Roar::Decorator
     include Roar::JSON
 
