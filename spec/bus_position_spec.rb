@@ -35,19 +35,4 @@ describe 'Tests Bus Position library' do
       _(bpos.size).must_be :<, 1
     end
   end
-
-  # describe 'Bus Position information' do
-  #   before do
-  #     bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
-  #     @pos = bpos_mapper.load(CITY_NAME, ROUTE_NAME)
-  #   end
-
-  #   it 'HAPPY: should identify bus Stop ' do
-  #     _(@pos.count).must_equal CORRECT_STOP['location'].count
-
-  #     id = @pos.map(&:sub_route_id)
-  #     correct_id = CORRECT_STOP['location'].map { |c| c['SubRouteUID'] }
-  #     _(id).must_equal correct_id
-  #   end
-  # end
 end
