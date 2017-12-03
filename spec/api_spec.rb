@@ -41,7 +41,7 @@ describe 'Tests MOTC API library' do
       end
 
       it 'SAD: should report error if no routes found' do
-        post "#{API_VER}/bus/sad_city_name/routes"        
+        post "#{API_VER}/bus/sad_city_name/routes"
         _(last_response.status).must_equal 404
       end
 
