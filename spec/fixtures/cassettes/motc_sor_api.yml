@@ -3345,4 +3345,70 @@ http_interactions:
       string: '{"Message":"要求無效。"}'
     http_version: 
   recorded_at: Tue, 28 Nov 2017 12:08:17 GMT
+- request:
+    method: get
+    uri: http://ptx.transportdata.tw/MOTC/v2/Bus/RealTimeByFrequency/City/sad_city_name/sad_route_name
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Date:
+      - Sun, 03 Dec 2017 07:51:36 GMT
+      Authorization:
+      - hmac username="1ee236af2773428283e83f904f1aa4e9", algorithm="hmac-sha1", headers="x-date",
+        signature="kR3j4Lw4DzDjN+w1SYHK+AsqQ5Q="
+      Connection:
+      - close
+      Host:
+      - ptx.transportdata.tw
+      User-Agent:
+      - http.rb/3.0.0
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 03 Dec 2017 07:51:37 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '29'
+      Connection:
+      - close
+      X-Ratelimit-Limit-Day:
+      - '20000'
+      X-Ratelimit-Remaining-Day:
+      - '19999'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1;mode=block
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Upstream-Latency:
+      - '6'
+      X-Kong-Proxy-Latency:
+      - '5'
+      Via:
+      - kong/0.11.0
+    body:
+      encoding: UTF-8
+      string: '{"Message":"要求無效。"}'
+    http_version: 
+  recorded_at: Sun, 03 Dec 2017 07:51:37 GMT
 recorded_with: VCR 3.0.3

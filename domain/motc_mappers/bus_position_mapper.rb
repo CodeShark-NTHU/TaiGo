@@ -13,7 +13,8 @@ module TaiGo
       end
 
       def load(city_name, route_name)
-        @city_bus_position_data = @gateway.city_bus_position_data(city_name, route_name)
+        @city_bus_position_data = @gateway.city_bus_position_data(city_name,
+                                                                  route_name)
         load_several(@city_bus_position_data)
       end
 
