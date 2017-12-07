@@ -85,7 +85,7 @@ module TaiGo
           end
 
           # /api/v0.1/positions/:city_name/:route_name
-          routing.on 'positions', String do |city_name, route_name|
+          routing.on 'positions', String, String do |city_name, route_name|
             # GET '/api/v0.1/positions/:city_name/:route_name
             routing.get do
               bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
@@ -98,7 +98,7 @@ module TaiGo
           # /api/v0.1/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
           routing.on 'search' do
             routing.on 'stop' do
-              routing.on 'coordinates', String do |start_lat, start_lng, dest_lat, dest_lng|
+              routing.on 'coordinates', String,String,String,String do |start_lat,start_lng,dest_lat,dest_lng|
                 # GET ' /api/v0.1/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng'
                 find_result = FindDatabaseAllOfStops.call
                 routing.halt(404, 'There are no stops in db') if find_result.failure?
@@ -107,8 +107,8 @@ module TaiGo
                   dest = Entity::FindNearestStops.new(@allofstops)
                   dest.initialize_location(dest_lat, dest_lng)
                   nearest_stop = dest.find_nearest_stop
-                  pss = Entity::FindPossibleSubSubroutes.new(nearest_stop, start_lat, start_lng)
-                  TaiGo::PossibleSubRoutesRepresenter.new(pss.build_entity).to_json
+                  # pss = Entity::FindPossibleSubSubroutes.new(nearest_stop, start_lat, start_lng)
+                  # TaiGo::PossibleSubRoutesRepresenter.new(pss.build_entity).to_json
                 end
               end
             end
