@@ -2,7 +2,7 @@
 
 module TaiGo
   module Repository
-    # Repository for Subroutes tabe
+    # Repository for Subroutes table
     class SubRoutes
       def self.find_id(id)
         db_record = Database::SubRouteOrm.first(id: id)

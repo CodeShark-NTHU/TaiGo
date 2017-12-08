@@ -17,8 +17,18 @@ module TaiGo
       routing.on String do |route_id|
         # GET '#{API_ROOT}/route/:route_id'
         routing.get do
-          route = Repository::For[Entity::BusRoute].find_id(route_id)
-          BusRouteRepresenter.new(route).to_json
+          route = FindDatabaseRoute.call(
+            route_id: route_id
+          )
+          http_response = HttpResponseRepresenter
+                          .new(route.value)
+          response.status = http_response.http_code
+          if route.success?
+            route = route.value.message
+            BusRouteRepresenter.new(route).to_json
+          else
+            http_response.to_json
+          end
         end
       end
     end

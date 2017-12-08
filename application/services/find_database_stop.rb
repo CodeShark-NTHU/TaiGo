@@ -7,16 +7,16 @@ module TaiGo
   # Usage:
   #   result = FindDatabaseStopOfRoute.call(sub_route_id: 'HSZ000701')
   #   result.success?
-  module FindDatabaseStopOfRoute
+  module FindDatabaseStop
     extend Dry::Monads::Either::Mixin
 
     def self.call(input)
-      stops_of_a_route = Repository::For[Entity::StopOfRoute]
-                         .find_all_stop_of_a_sub_route(input[:sub_route_id])
-      if stops_of_a_route.empty?
-        Left(Result.new(:not_found, "Couldn't find the stops ID: #{input[:sub_route_id]}"))
+      stop = Repository::For[Entity::BusStop].find_id(input[:stop_id])
+      if stop.nil?
+        Left(Result.new(:not_found,
+                        "Couldn't find the stops ID: #{input[:stop_id]}"))
       else
-        Right(Result.new(:ok, stops_of_a_route))
+        Right(Result.new(:ok, stop))
       end
     end
   end

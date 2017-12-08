@@ -9,7 +9,7 @@ module TaiGo
       # #{API_ROOT}/search index request
       routing.is do
         routing.get do
-          message = 'API to get the possbile routes between start and destination'
+          message = 'API to get the best routes between start and dest'
           HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
         end
       end

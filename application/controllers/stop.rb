@@ -19,16 +19,33 @@ module TaiGo
         # GET '#{API_ROOT}/stop/:stop_id/sub_route'
         routing.on 'sub_route' do
           routing.get do
-            sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute]
-                                   .find_stop_id(stop_id)
-            StopOfRoutesRepresenter.new(Stopofroutes
-                                   .new(sub_routes_of_a_stop)).to_json
+            sub_routes_of_a_stop = FindDatabaseSubRouteOfAStop.call(
+              stop_id: stop_id
+            )
+            http_response = HttpResponseRepresenter
+                            .new(sub_routes_of_a_stop.value)
+            response.status = http_response.http_code
+            if sub_routes_of_a_stop.success?
+              sub_routes_of_a_stop = sub_routes_of_a_stop.value.message
+              StopOfRoutesRepresenter.new(Stopofroutes.new(sub_routes_of_a_stop)).to_json
+            else
+              http_response.to_json
+            end
           end
         end
         # GET '#{API_ROOT}/stop/:stop_id
         routing.get do
-          stop = Repository::For[Entity::BusStop].find_id(stop_id)
-          BusStopRepresenter.new(stop).to_json
+          stop = FindDatabaseStop.call(
+            stop_id: stop_id
+          )
+          http_response = HttpResponseRepresenter.new(stop.value)
+          response.status = http_response.http_code
+          if stop.success?
+            stop = stop.value.message
+            BusStopRepresenter.new(stop).to_json
+          else
+            http_response.to_json
+          end
         end
       end
     end

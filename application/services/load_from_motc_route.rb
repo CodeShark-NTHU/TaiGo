@@ -32,7 +32,7 @@ module TaiGo
       end
 
       if route_set.empty?
-        Left(Result.new(:ok, 'all of routes already loaded'))
+        Left(Result.new(:conflict, 'all of routes already loaded'))
       else
         Right(unstored_routes: route_set)
       end

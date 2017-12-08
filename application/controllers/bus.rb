@@ -40,8 +40,21 @@ module TaiGo
         routing.on 'routes' do
           # GET '#{API_ROOT}/bus/:city_name/routes'
           routing.get do
-            routes = Repository::For[Entity::BusRoute].find_city_name(city_name)
-            BusRoutesRepresenter.new(Routes.new(routes)).to_json
+            routes = FindDatabaseRoutesByCity.call(
+              city_name: city_name
+            )
+            http_response = HttpResponseRepresenter
+                            .new(routes.value)
+            response.status = http_response.http_code
+            if routes.success?
+              routes = routes.value.message
+              BusRoutesRepresenter.new(Routes.new(routes)).to_json
+            else
+              http_response.to_json
+            end
+
+            # routes = Repository::For[Entity::BusRoute].find_city_name(city_name)
+            # BusRoutesRepresenter.new(Routes.new(routes)).to_json
           end
 
           # POST '#{API_ROOT}/bus/city/:city_name/routes'
