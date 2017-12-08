@@ -15,6 +15,27 @@ module TaiGo
       end
 
       routing.on String do |city_name|
+        # #{API_ROOT}/bus/:city_name/updates
+        routing.on 'updates' do
+          # GET '#{API_ROOT}/bus/:city_name/updates'
+          routing.post do
+            LoadFromMotcRoute.new.call(
+              config: app.config,
+              city_name: city_name
+            )
+            LoadFromMotcStop.new.call(
+              config: app.config,
+              city_name: city_name
+            )
+            LoadFromMotcStopOfRoute.new.call(
+              config: app.config,
+              city_name: city_name
+            )
+            message = 'All Data has been updated'
+            HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
+          end
+        end
+
         # #{API_ROOT}/bus/:city_name/routes
         routing.on 'routes' do
           # GET '#{API_ROOT}/bus/:city_name/routes'
