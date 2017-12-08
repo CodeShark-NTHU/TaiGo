@@ -16,7 +16,7 @@ module TaiGo
 
       # #{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
       routing.on 'stop' do
-        routing.on 'coordinates', String do |start_lat, start_lng, dest_lat, dest_lng|
+        routing.on 'coordinates', String, String, String, String do |start_lat, start_lng, dest_lat, dest_lng|
           # GET '#{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng'
           find_result = FindDatabaseAllOfStops.call
           routing.halt(404, 'There are no stops in db') if find_result.failure?
