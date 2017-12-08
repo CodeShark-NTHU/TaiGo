@@ -1,0 +1,2 @@
+queues:
+- https://sqs.us-east-1.amazonaws.com/590906541344/TaiGo-update.fifo

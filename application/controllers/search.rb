@@ -9,14 +9,14 @@ module TaiGo
       # #{API_ROOT}/search index request
       routing.is do
         routing.get do
-          message = 'API to get the possbile routes between start and destination'
+          message = 'API to get the best routes between start and dest'
           HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
         end
       end
 
       # #{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
       routing.on 'stop' do
-        routing.on 'coordinates', String do |start_lat, start_lng, dest_lat, dest_lng|
+        routing.on 'coordinates', String, String, String, String do |start_lat, start_lng, dest_lat, dest_lng|
           # GET '#{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng'
           find_result = FindDatabaseAllOfStops.call
           routing.halt(404, 'There are no stops in db') if find_result.failure?

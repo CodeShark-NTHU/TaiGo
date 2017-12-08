@@ -6,6 +6,13 @@ ruby '2.4.2'
 # Networking gems
 gem 'http'
 
+# Asynchronicity gems
+gem 'concurrent-ruby'
+
+# Worker gems
+gem 'aws-sdk-sqs', '~> 1'
+gem 'shoryuken', '~> 3'
+
 # Web app related
 gem 'econfig'
 gem 'pry' # to run console in production
