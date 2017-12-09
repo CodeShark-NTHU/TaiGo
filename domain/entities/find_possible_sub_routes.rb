@@ -35,19 +35,24 @@ module TaiGo
 
       def sort
         @sort_result = {}
+        @final_hash = {}
         @tmpCal = Tool::CalDistance.new(@start_lat, @start_lng)
         @result.each do |key, value|
-          @sort_result[key] = @tmpCal.cal_distance(value.coordinates.latitude,value.coordinates.longitude)
+          @sort_result[[key,value]] = @tmpCal.cal_distance(value.coordinates.latitude,value.coordinates.longitude)
         end
         @sort_result.sort_by { |_key, value| value }.to_h
-        @sort_result.keys.first 3
+        final_third = @sort_result.keys.first 3
+        final_third.each do |anw|
+          @final_hash[anw[0]] = anw[1] 
+        end 
+        @final_hash
       end
 
       def build_entity
         find_the_closest_stop
         sort
         possible_sub_route_set = []
-        @result.each do |key, value|
+        @final_hash.each do |key, value|
           possible_sub_route_set << Entity::PossibleSubRoute.new(
             start_stop: value,
             stops_of_sub_route: key
