@@ -4,6 +4,10 @@ module TaiGo
   module Repository
     # Repository for Subroutes table
     class SubRoutes
+      def self.all
+        Database::SubRouteOrm.all.map { |db_record| rebuild_entity(db_record) }
+      end
+
       def self.find_id(id)
         db_record = Database::SubRouteOrm.first(id: id)
         rebuild_entity(db_record)

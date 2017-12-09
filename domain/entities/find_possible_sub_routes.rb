@@ -50,14 +50,22 @@ module TaiGo
 
       def build_entity
         find_the_closest_stop
-        sort
+        # sort
         possible_sub_route_set = []
+        @result.each do |key, value|
+          possible_sub_route_set << Entity::PossibleSubRoute.new(
+            start_stop: value,
+            stops_of_sub_route: key
+          )
+        end
+=begin
         @final_hash.each do |key, value|
           possible_sub_route_set << Entity::PossibleSubRoute.new(
             start_stop: value,
             stops_of_sub_route: key
           )
         end
+=end
         # rebuild entity
         Entity::PossibleSubRoutes.new(
           destination_stop: @dest_stop,

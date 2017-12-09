@@ -11,7 +11,16 @@ module TaiGo
 
       def self.find_stop_id(stop_id)
         db_records = Database::StopOfRouteOrm.distinct.where(stop_id: stop_id)
-        db_records.map { |db_record| rebuild_entity(db_record) }
+        db_records.map do |db_record|
+          rebuild_entity(db_record)
+        end
+      end
+
+      def self.find_sub_route_id_and_stop_id(sub_route_id,stop_id)
+        db_records = Database::StopOfRouteOrm.distinct.where(sub_route_id: sub_route_id, stop_id: stop_id)
+        db_records.map do |db_record|
+          rebuild_entity(db_record)
+        end        
       end
 
       def self.find_sub_route_set(stop_id)

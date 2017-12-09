@@ -9,7 +9,7 @@ module TaiGo
         @pin_lat = pin_lat.to_f
         @pin_lng = pin_lng.to_f
       end
-
+=begin
       def cal_distance(stop_lat, stop_lng)
         lat_diff = (@pin_lat - stop_lat) * PI / 180.0
         lng_diff = (@pin_lng - stop_lng) * PI / 180.0
@@ -19,14 +19,13 @@ module TaiGo
         result = Math.asin(first) * 2 * 6378137.0
         result
       end
-=begin
+=end
       def cal_distance(stop_lat, stop_lng)
         lat_diff = (@pin_lat - stop_lat)**2
         lng_diff = (@pin_lng - stop_lng)**2
         result = (lat_diff + lng_diff)**0.5
         result
       end
-=end
     end
   end
 end
