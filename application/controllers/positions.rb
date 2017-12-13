@@ -18,9 +18,11 @@ module TaiGo
       routing.on String, String do |city_name, route_name|
         # GET '{API_ROOT}/positions/:city_name/:route_name
         routing.get do
-          bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
-          positions = bpos_mapper.load(city_name, route_name)
-          BusPositionsRepresenter.new(Positions.new(positions)).to_json
+          positions = RealTimeFromMOTCPostionsOfSubRoute.call(
+            city_name: city_name,
+            route_name: route_name
+          )
+          BusPositionsRepresenter.new(Positions.new(positions.value.values[0])).to_json
         end
       end
     end

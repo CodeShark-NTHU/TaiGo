@@ -21,12 +21,13 @@ class UpdateCityInfoWorker
   shoryuken_options queue: config.CLONE_QUEUE_URL, auto_delete: true
 
   def perform(_sqs_msg, worker_request)
-    request = CodePraise::RepoRepresenter.new(OpenStruct.new).from_json worker_request
+    request = TaiGo::BusPositionsRepresenter.new(OpenStruct.new).from_json worker_request
     puts "REQUEST: #{request}"
-    gitrepo = CodePraise::GitRepo.new(request)
-    puts "EXISTS: #{gitrepo.exists_locally?}"
-    gitrepo.clone!
-    puts "REQUEST: #{request}"
-    puts "EXISTS: #{gitrepo.exists_locally?}"
+    # GitRepo mapper
+    # gitrepo = CodePraise::GitRepo.new(request)
+    # puts "EXISTS: #{gitrepo.exists_locally?}"
+    # gitrepo.clone!
+    # puts "REQUEST: #{request}"
+    # puts "EXISTS: #{gitrepo.exists_locally?}"
   end
 end

@@ -23,90 +23,115 @@ module TaiGo
           find_result = FindDatabaseAllOfStops.call
           routing.halt(404, 'There are no stops in db') if find_result.failure?
           @allofstops = find_result.value.message
+          puts @allofstops.size
           routing.get do
-
             # --------start----------
             start = Entity::FindNearestStops.new(@allofstops)
             start.initialize_location(start_lat, start_lng)
-            start_sub_route_id_set = []
-            # list of entity stop
-            start_near_top_stops = start.find_top_nearest_stops
-
-            start_rank =1
-            start_near_top_stops.map do |start_near_stop|
+            # element [sub_route_id, stop entity, distance]
+            start_set = []
+            # list of [entity stop,distance] 
+            start_near_top_stops_set = start.find_top_nearest_stops
+            # start_rank =1
+            # start_near_stop is a array, element[0] is stop , element[1] is distance
+            start_near_top_stops_set.map do |element|
+              start_near_stop = element[0]
+              distance = element[1]
               start_sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute].find_stop_id(start_near_stop.id)
               start_sub_routes_of_a_stop.map do |sub|
-                # puts "id: #{sub.sub_route.id} rank :#{start_rank}"
-                start_sub_route_id_set << [sub.sub_route.id,start_near_stop,start_rank]
+                start_set << [sub.sub_route.id, start_near_stop, distance]
               end
-              start_rank += 1
-              # puts "-----"
             end
-            start_sub_route_id_set.each_with_index do |s1, i1|
-              start_sub_route_id_set.each_with_index do |s2, i2|
-                if i2 != i1
-                  if s1[0] == s2[0]
-                    if s1[2] < s2[2]
-                      start_sub_route_id_set.delete(s2)
+            start_set.each_with_index do |start1, index1|
+              start_set.each_with_index do |start2, index2|
+                if index2 != index1
+                  if start1[0] == start2[0]
+                    if start1[2] < start2[2]
+                      start_set.delete(start2)
                     end
                   end
                 end
               end
             end
-=begin
-            start_sub_route_id_set.map do |subroute|
-              puts "#{subroute[0]} #{subroute[1].id} #{subroute[2]}"
-            end
-=end
             # --------start---------- 
-            puts "----"
             # --------dest----------
             dest = Entity::FindNearestStops.new(@allofstops)
             dest.initialize_location(dest_lat, dest_lng)
-            dest_sub_route_id_set = []
+            dest_set = []
             # list of entity stop
-            dest_near_top_stops = dest.find_top_nearest_stops
-            dest_rank =1
-            dest_near_top_stops.map do |dest_near_stop|
+            dest_near_top_stops_set = dest.find_top_nearest_stops
+            dest_near_top_stops_set.map do |element|
+              dest_near_stop = element[0]
+              distance = element[1]
               dest_sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute].find_stop_id(dest_near_stop.id) 
               dest_sub_routes_of_a_stop.map do |sub|
-                dest_sub_route_id_set << [sub.sub_route.id,dest_near_stop,dest_rank]
+                dest_set << [sub.sub_route.id,dest_near_stop,distance]
               end
-              dest_rank += 1
             end
-
-            dest_sub_route_id_set.each_with_index do |s1, i1|
-              dest_sub_route_id_set.each_with_index do |s2, i2|
-                if i2 != i1
-                  if s1[0] == s2[0]
-                    if s1[2] < s2[2]
-                      dest_sub_route_id_set.delete(s2)
+            dest_set.each_with_index do |dest1, index1|
+              dest_set.each_with_index do |dest2, index2|
+                if index2 != index1
+                  if dest1[0] == dest2[0]
+                    if dest1[2] < dest2[2]
+                      dest_set.delete(dest2)
                     end
                   end
                 end
               end
             end
-=begin
-            dest_sub_route_id_set.map do |subroute|
-              puts "#{subroute[0]} #{subroute[1].id} #{subroute[2]}"
-            end
-=end
             # --------dest----------
-            final_result = []
-            start_sub_route_id_set.each do |s_item|
-              dest_sub_route_id_set.each do |d_item|
+            match_set = []
+            start_set.each do |s_item|
+              dest_set.each do |d_item|
                 if d_item[0] == s_item[0]
-                  final_result << [s_item[0],s_item[1],d_item[1]]
+                  match_set << [s_item[0],s_item[1],d_item[1],s_item[2]+d_item[2]]
                 end
               end
             end
-            # --------start----------
+            match_sort = {}
+
+            match_set.each do |item| 
+              match_sort[item[3]] = [item[0],item[1],item[2]]
+            end
+
+            match_sort = match_sort.sort_by { |_key, value| _key }.to_h
+
+            match_sort.map do |_key, value|
+              puts _key
+            end
+
+            puts "size: #{match_sort.values.size}"
+            #---- squence --------
+            # start_stops_for_squence = []
+            # dest_stops_for_squence = []
+            right_squence = []
+            match_sort.values.each do |m|
+              start_stops_for_squence = Repository::For[Entity::StopOfRoute].find_sub_route_id_and_stop_id(m[0],m[1].id)
+              dest_stops_for_squence = Repository::For[Entity::StopOfRoute].find_sub_route_id_and_stop_id(m[0],m[2].id)
+              start_stops_for_squence.each do |s_stop|
+                dest_stops_for_squence.each do |d_stop|
+                  # puts "start #{s_stop.stop_sequence} dest #{d_stop.stop_sequence}"
+                  if s_stop.stop_sequence < d_stop.stop_sequence
+                    right_squence << m
+                    puts "start #{s_stop.stop_sequence} dest #{d_stop.stop_sequence}"
+                  end
+                  # puts "--------"
+                end
+              end
+            end
+
+            # right_squence.map do |r|
+            #   puts r[0]
+            # end
+            #-----squence --------
+
+
             possibleSubRoutes = []
-            final_result.map do |result|
-              all_stop_of_sub_route = Repository::For[Entity::StopOfRoute].find_all_stop_of_a_sub_route(result[0])
+            right_squence.map do |match|
+              all_stop_of_sub_route = Repository::For[Entity::StopOfRoute].find_all_stop_of_a_sub_route(match[0])
               possibleSubRoutes << Entity::PossibleSubRoute.new(
-                start_stop: result[1],
-                dest_stop: result[2],
+                start_stop: match[1],
+                dest_stop: match[2],
                 stops_of_sub_route: all_stop_of_sub_route
               )
             end
@@ -116,14 +141,6 @@ module TaiGo
               sub_route_set: final
             )
             TaiGo::PossibleSubRoutesRepresenter.new(psrs).to_json
-
-            # sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute].find_stop_id(nearest_stop.id) 
-            # sub_routes_of_a_stop.map do |sub|
-            #   puts sub.sub_route.name.english
-            #end
-            # StopOfRoutesRepresenter.new(Stopofroutes.new(sub_routes_of_a_stop)).to_json
-            # pss = Entity::FindPossibleSubSubroutes.new(nearest_stop, start_lat, start_lng)
-            # TaiGo::PossibleSubRoutesRepresenter.new(pss.build_entity).to_json
           end
         end
       end
