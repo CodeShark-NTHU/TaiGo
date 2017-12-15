@@ -7,7 +7,7 @@ module TaiGo
     # FindNearestStops
     class FindNearestStops
       # for return to user.
-      NEAREST_STOP_NUM = 100
+      NEAREST_STOP_NUM = 20
 
       def initialize(allofstops)
         @allofstops = allofstops
