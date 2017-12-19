@@ -28,6 +28,9 @@ gem 'sequel'
 gem 'dry-struct'
 gem 'dry-types'
 
+# Google map api
+gem 'google_maps_service'
+
 # Representers
 gem 'multi_json'
 gem 'roar'
