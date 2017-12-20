@@ -25,7 +25,7 @@ module TaiGo
           startlocation.to_s,
           endlocation.to_s,
           mode: 'transit',
-          language: 'zh-TW',
+          language: 'zh-TW', #en zh-TW
           alternatives: true)
         routes
       end

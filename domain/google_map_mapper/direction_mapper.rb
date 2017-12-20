@@ -11,16 +11,7 @@ module TaiGo
                                     @config['GOOGLE_MAP_RETRY_TIMEOUT'].to_i,
                                     @config['GOOGLE_MAP_QUERIES_PER_SECOND'].to_i)
       end
-=begin
-      def initialize(key, timeout, second)
-        gateway = TaiGo::GoogleMap::Api
-        # @config = config
-        @gateway_class = gateway
-        @gateway = @gateway_class.new(key.to_s,
-                                      timeout.to_i,
-                                      second.to_i)
-      end
-=end
+
       def load(start_location, end_location)
         @directions_data = @gateway.direction_data(start_location, end_location)
         load_several(@directions_data)
@@ -80,7 +71,7 @@ module TaiGo
             end
             if step[:travel_mode] == 'TRANSIT'
               bus = Entity::BusDirection.new(
-                step_no: (index+1), 
+                step_no: (index + 1),
                 bus_distance: bus_distance(step),
                 bus_duration: bus_duration(step),
                 bus_instruction: bus_instruction(step),
@@ -90,7 +81,8 @@ module TaiGo
                 bus_arrival_time: bus_arrival_time(step),
                 bus_arrival_stop_name: bus_arrival_stop_name(step),
                 bus_num_stops: bus_num_stops(step),
-                bus_sub_route_name: bus_sub_route_name(step)
+                bus_sub_route_name: bus_sub_route_name(step),
+                stops_of_sub_routes: []
               )
               @bus_array << bus
             end
@@ -116,7 +108,12 @@ module TaiGo
         end
 
         def total_path
-          @data[:overview_polyline][:points]
+          path = GoogleMapsService::Polyline.decode(@data[:overview_polyline][:points])
+          path.map! do |point|
+            Coordinates.new(point[:lat], point[:lng])
+          end
+          # puts path
+          # @data[:overview_polyline][:points]
         end
 
         def walking_distance(step)
@@ -132,7 +129,12 @@ module TaiGo
         end
 
         def walking_path(step)
-          step[:polyline][:points]
+          path = GoogleMapsService::Polyline.decode(step[:polyline][:points])
+          path.map! do |point|
+            Coordinates.new(point[:lat], point[:lng])
+          end
+          # puts path
+          # step[:polyline][:points]
         end
 
         def walking_start(step)
@@ -158,7 +160,12 @@ module TaiGo
         end
 
         def bus_path(step)
-          step[:polyline][:points]
+          path = GoogleMapsService::Polyline.decode(step[:polyline][:points])
+          path.map! do |point|
+            Coordinates.new(point[:lat], point[:lng])
+          end
+          # puts path
+          # step[:polyline][:points]
         end
 
         def bus_departure_time(step)
@@ -197,9 +204,3 @@ module TaiGo
     end
   end
 end
-=begin
-test = TaiGo::GoogleMap::DirectionMapper.new('AIzaSyBjcKDMFDmdZyzd-XjqQADKoaht2UNxNvM',20,10)
-# start, end
-test.load('新竹火車站(中正路) 300新竹市東區
-', '300新竹市東區光復路二段101號')
-=end

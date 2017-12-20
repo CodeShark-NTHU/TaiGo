@@ -4,9 +4,9 @@ require_relative 'stop_of_route_representer.rb'
 
 module TaiGo
   # Representer class for converting StopOfRoutes attributes to json
-  class StopOfRoutesRepresenter < Roar::Decorator
+  class StopsOfSubRouteRepresenter < Roar::Decorator
     include Roar::JSON
-
-    collection :stopofroutes, extend: StopOfRouteRepresenter
+    property :sub_route_name_ch
+    collection :stops_of_sub_route, extend: StopOfRouteRepresenter
   end
 end

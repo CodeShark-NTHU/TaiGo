@@ -10,7 +10,7 @@ module TaiGo
     property :walking_distance
     property :walking_duration
     property :walkng_instruction
-    property :walking_path
+    collection :walking_path, extend: CoordinateRepresenter, class: OpenStruct
     property :walking_start, extend: CoordinateRepresenter, class: OpenStruct
     property :walking_end, extend: CoordinateRepresenter, class: OpenStruct
   end

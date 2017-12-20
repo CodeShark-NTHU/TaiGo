@@ -2,6 +2,8 @@
 
 require_relative 'walking_direction_representer'
 require_relative 'bus_direction_representer'
+require_relative 'coordinate_representer'
+require_relative 'stops_of_route_representer'
 
 module TaiGo
   # Representer class for converting Bus Position attributes to json
@@ -10,8 +12,9 @@ module TaiGo
 
     property :total_distance
     property :total_duration
-    property :total_path
+    collection :total_path, extend: CoordinateRepresenter, class: OpenStruct
     collection :walking_steps, extend: WalkingDirectionRepresenter
     collection :bus_steps, extend: BusDirectionRepresenter
+    # collection :stops_of_sub_routes, extend: StopsOfRouteRepresenter
   end
 end

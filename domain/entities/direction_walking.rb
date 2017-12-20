@@ -11,7 +11,7 @@ module TaiGo
       attribute :walking_distance, Types::Strict::String
       attribute :walking_duration, Types::Strict::String
       attribute :walkng_instruction, Types::Strict::String
-      attribute :walking_path, Types::Strict::String
+      attribute :walking_path, Types::Strict::Array.member(Types.Instance(TaiGo::GoogleMap::DirectionMapper::DataMapper::Coordinates))
       attribute :walking_start, Types.Instance(TaiGo::GoogleMap::DirectionMapper::DataMapper::Coordinates)
       attribute :walking_end, Types.Instance(TaiGo::GoogleMap::DirectionMapper::DataMapper::Coordinates)
     end

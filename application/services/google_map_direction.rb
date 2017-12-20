@@ -3,18 +3,19 @@
 require 'dry-monads'
 
 module TaiGo
-  # Service to find a collection of all stops from our database
+  # Service to get the directions
   # Usage:
-  #   result = FindDatabaseAllOfStop.call()
+  #   result = GoogleMapDirection.call()
   #   result.success?
   module GoogleMapDirection
     extend Dry::Monads::Either::Mixin
 
     def self.call(input)
       direction_mapper = TaiGo::GoogleMap::DirectionMapper.new(Api.config)
-      # directions = direction_mapper.load(input[:start], input[:end])
-      directions = direction_mapper.load("新竹火車站(中正路) 300新竹市東區", "300新竹市東區光復路二段101號")
-      Right(directions: directions)
+      start = "#{input[:start_lat]},#{input[:start_lng]}"
+      dest = "#{input[:dest_lat]},#{input[:dest_lng]}"
+      directions = direction_mapper.load(start, dest)
+      Right(Result.new(:ok, directions))
     # rescue StandardError
     #   Left(Result.new(:not_found, 'directions not found'))
     end

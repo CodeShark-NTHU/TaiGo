@@ -7,6 +7,7 @@ module TaiGo
   module Entity
     # Domain entity object for StopsOfSubRoute
     class StopsOfSubRoute < Dry::Struct
+      attribute :sub_route_name_ch, Types::Strict::String
       attribute :stops_of_sub_route, Types::Strict::Array.member(StopOfRoute)
     end
   end
