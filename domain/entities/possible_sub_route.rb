@@ -10,7 +10,7 @@ module TaiGo
     class PossibleSubRoute < Dry::Struct
       attribute :start_stop, BusStop
       attribute :dest_stop, BusStop
-      # attribute :stops_of_sub_route, Types::Strict::Array.member(StopOfRoute)
+      attribute :stops_of_sub_route, Types::Strict::Array.member(StopOfRoute)
     end
   end
 end
