@@ -22,13 +22,11 @@ module TaiGo
             start_lng: start_lng,
             dest_lat: dest_lat,
             dest_lng: dest_lng)
-          # puts directions
-          # result = directions.value.values[0]
           http_response = HttpResponseRepresenter.new(directions.value)
           response.status = http_response.http_code
           if directions.success?
-            gm_directions = directions.value.message
-            combine = TaiGo::DumpStopsOfSubRoutes.new.call(gm_directions: gm_directions)
+            ds = directions.value.message
+            combine = TaiGo::DumpStopsOfSubRoutes.new.call(gm_directions: ds)
             h_r_c = HttpResponseRepresenter.new(combine.value)
             response.status = h_r_c.http_code
             if combine.success?
