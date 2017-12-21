@@ -16,8 +16,8 @@ module TaiGo
       dest = "#{input[:dest_lat]},#{input[:dest_lng]}"
       directions = direction_mapper.load(start, dest)
       Right(Result.new(:ok, directions))
-    # rescue StandardError
-    #   Left(Result.new(:not_found, 'directions not found'))
+    rescue StandardError
+      Left(Result.new(:not_found, 'directions not found'))
     end
   end
 end
