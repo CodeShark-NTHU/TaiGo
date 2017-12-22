@@ -19,6 +19,7 @@ gem 'pry' # to run console in production
 gem 'puma'
 gem 'rake' # to run migrations in production
 gem 'roda'
+gem 'rack-cors', :require => 'rack/cors'
 
 # Database related
 gem 'hirb'
@@ -38,6 +39,8 @@ gem 'roar'
 # Services
 gem 'dry-monads'
 gem 'dry-transaction'
+
+
 
 group :test do
   gem 'minitest'

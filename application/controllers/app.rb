@@ -22,6 +22,11 @@ module TaiGo
     route do |routing|
       response['Content-Type'] = 'application/json'
 
+      response["Access-Control-Allow-Origin"] = "http://localhost:4000"
+      response["Access-Control-Allow-Credentials"] = 'true'
+      response["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE"
+
+
       # GET / request
       routing.root do
         message = "TaiGo API v0.1 up in #{Api.environment} mode"
