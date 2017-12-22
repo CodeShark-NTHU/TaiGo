@@ -17,6 +17,6 @@ module TaiGo
       Right(positions: positions)
     rescue StandardError
       Left(Result.new(:not_found, 'positions not found'))
-    end  
+    end
   end
 end

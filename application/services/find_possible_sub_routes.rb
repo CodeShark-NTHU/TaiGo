@@ -5,6 +5,7 @@ require 'dry/transaction'
 module TaiGo
   # Transaction to load stops from Motc and save to database
   class FindPossibleSubRoutes
+    # old version for search.rb
     include Dry::Transaction
 
     step :get_all_stops_from_db
