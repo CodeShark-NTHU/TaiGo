@@ -17,7 +17,7 @@ module TaiGo
       directions = direction_mapper.load(start, dest)
       Right(Result.new(:ok, directions))
     rescue StandardError
-      Left(Result.new(:not_found, 'directions not found'))
+      Left(Result.new(:not_found, 'please open your internet'))
     end
   end
 end
