@@ -15,6 +15,7 @@ require 'webmock'
 require 'http'
 require 'base64'
 require 'openssl'
+require 'google_maps_service'
 
 require_relative 'test_load_all'
 
@@ -24,6 +25,8 @@ require_relative 'test_load_all'
 CITY_NAME = 'Hsinchu'.freeze
 SUB_ROUTE_ID = 'HSZ000701'.freeze
 ROUTE_NAME = '81'.freeze
+START_LOCATION = '24.7947302,120.9910429'.freeze
+END_LOCATION = '24.7947729,120.975722'.freeze
 CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 
 VCR.configure do |c|

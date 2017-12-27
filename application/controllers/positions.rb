@@ -18,8 +18,8 @@ module TaiGo
       routing.on String, String do |city_name, route_name|
         # GET '{API_ROOT}/positions/:city_name/:route_name
         routing.get do
-          route_name.insert 1, '線' if name_zh[0] == '藍' && name_zh[2] == '區'
-          route_name.concat('號') if name_zh[0..1] == '世博'
+          route_name.insert 1, '線' if route_name[0] == '藍' && route_name[2] == '區'
+          route_name.concat('號') if route_name[0..1] == '世博'
           positions = RealTimeFromMOTCPostionsOfSubRoute.call(
             city_name: city_name,
             route_name: route_name
