@@ -2,6 +2,7 @@
 
 require_relative 'name_representer.rb'
 require_relative 'coordinate_representer.rb'
+require_relative 'bus_stop_representer.rb'
 
 module TaiGo
   # Representer class for converting BusStops attributes to json
