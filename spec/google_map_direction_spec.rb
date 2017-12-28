@@ -8,7 +8,7 @@ describe 'Tests Google Map Direction library' do
   Econfig.env = 'development'.to_s
   Econfig.root = '.'
 
-  CORRECT_STOP = YAML.safe_load(File.read('spec/fixtures/gmd_results.yml'))
+  CORRECT_GMD = YAML.safe_load(File.read('spec/fixtures/gmd_results.yml'))
 
   CASSETTE_FILE = 'google_map_direction_api'.freeze
 
