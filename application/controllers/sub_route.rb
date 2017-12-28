@@ -43,7 +43,7 @@ module TaiGo
                           .new(sub_route.value)
           response.status = http_response.http_code
           if sub_route.success?
-            sub_route = stops_of_a_sub_route.value.message
+            sub_route = sub_route.value.message
             SubRouteRepresenter.new(sub_route).to_json
           else
             http_response.to_json

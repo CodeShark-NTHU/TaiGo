@@ -52,9 +52,6 @@ module TaiGo
             else
               http_response.to_json
             end
-
-            # routes = Repository::For[Entity::BusRoute].find_city_name(city_name)
-            # BusRoutesRepresenter.new(Routes.new(routes)).to_json
           end
 
           # POST '#{API_ROOT}/bus/city/:city_name/routes'

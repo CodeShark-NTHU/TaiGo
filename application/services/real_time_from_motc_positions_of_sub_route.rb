@@ -13,9 +13,13 @@ module TaiGo
     def self.call(input)
       bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(Api.config)
       positions = bpos_mapper.load(input[:city_name], input[:route_name])
-      Right(positions: positions)
-    rescue StandardError
-      Left(Result.new(:not_found, 'positions not found'))
+
+      if positions.empty?
+        Left(Result.new(:not_found, 'positions not found'))
+      else
+        Right(Result.new(:ok, positions))
+        # Right(positions: positions)
+      end
     end
   end
 end
