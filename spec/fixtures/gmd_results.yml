@@ -1,0 +1,319 @@
+--- |
+ - --
+  travel_mode: TRANSIT
+  transit_direction_size: 1
+  route_name: 藍1區
+  arrival_stop: 新竹高中
+  departure_stop: 水源地
+  transit_direction:
+   bounds:
+     northeast:
+       lat: 24.7980851
+       lng: 120.9912265
+     southwest:
+       lat: 24.7941237
+       lng: 120.9757327
+   copyrights: 地圖資料©2017 Google
+   fare:
+     currency: TWD
+     text: "$15.00"
+     value: 15
+   legs:
+   - arrival_time:
+       text: 下午10:46
+       time_zone: Asia/Taipei
+       value: 1514385991
+     departure_time:
+       text: 下午10:09
+       time_zone: Asia/Taipei
+       value: 1514383749
+     distance:
+       text: 2.1 公里
+       value: 2146
+     duration:
+       text: 37 分
+       value: 2242
+     end_address: 300台灣新竹市東區東南街210巷8號
+     end_location:
+       lat: 24.7947508
+       lng: 120.9757327
+     start_address: 台灣新竹市東區新竹市
+     start_location:
+       lat: 24.7947321
+       lng: 120.9912265
+     steps:
+     - distance:
+         text: 1.0 公里
+         value: 958
+       duration:
+         text: 11 分
+         value: 687
+       end_location:
+         lat: 24.797824
+         lng: 120.985618
+       html_instructions: 步行到水源地
+       polyline:
+         points: avivCebnaVw@@m@@M?E?CAA?CBE@EBQ@g@BiAHc@@e@@a@@e@FAPa@?iA@U@aACEb@QnAADAJADGZCHA@GPDBFHBB@B@DAD?BAHCJAH?D?D@D@JDNd@xB^|An@hBR^JPHLKzASfB_@bDw@UGV
+       start_location:
+         lat: 24.7947321
+         lng: 120.9912265
+       steps:
+       - distance:
+           text: 0.2 公里
+           value: 237
+         duration:
+           text: 3 分
+           value: 174
+         end_location:
+           lat: 24.7968439
+           lng: 120.9910225
+         html_instructions: 往<b>北</b><div style="font-size:0.9em">走樓梯</div>
+         polyline:
+           points: avivCebnaVw@@m@@M?E?CAA?CBE@EBQ@g@BiAHc@@e@@a@@e@F
+         start_location:
+           lat: 24.7947321
+           lng: 120.9912265
+         travel_mode: WALKING
+       - distance:
+           text: 9 公尺
+           value: 9
+         duration:
+           text: 1 分
+           value: 7
+         end_location:
+           lat: 24.7968478
+           lng: 120.99093
+         html_instructions: 向<b>左</b>轉，朝<b>水源街</b>前進
+         maneuver: turn-left
+         polyline:
+           points: gcjvC{`naVAP
+         start_location:
+           lat: 24.7968439
+           lng: 120.9910225
+         travel_mode: WALKING
+       - distance:
+           text: 0.1 公里
+           value: 109
+         duration:
+           text: 1 分
+           value: 76
+         end_location:
+           lat: 24.7978251
+           lng: 120.9909255
+         html_instructions: 向<b>右</b>轉，朝<b>水源街</b>前進
+         maneuver: turn-right
+         polyline:
+           points: icjvCi`naVa@?iA@U@aAC
+         start_location:
+           lat: 24.7968478
+           lng: 120.99093
+         travel_mode: WALKING
+       - distance:
+           text: 0.1 公里
+           value: 104
+         duration:
+           text: 1 分
+           value: 72
+         end_location:
+           lat: 24.7980851
+           lng: 120.9899389
+         html_instructions: 向<b>左</b>轉，朝<b>水源街</b>前進
+         maneuver: turn-left
+         polyline:
+           points: mijvCi`naVEb@QnAADAJADGZCHA@GP
+         start_location:
+           lat: 24.7978251
+           lng: 120.9909255
+         travel_mode: WALKING
+       - distance:
+           text: 3 公尺
+           value: 3
+         duration:
+           text: 1 分
+           value: 3
+         end_location:
+           lat: 24.7980639
+           lng: 120.9899208
+         html_instructions: 於<b>水源街</b>向<b>左</b>轉
+         maneuver: turn-left
+         polyline:
+           points: akjvCczmaVDB
+         start_location:
+           lat: 24.7980851
+           lng: 120.9899389
+         travel_mode: WALKING
+       - distance:
+           text: 0.3 公里
+           value: 277
+         duration:
+           text: 3 分
+           value: 198
+         end_location:
+           lat: 24.7971796
+           lng: 120.9874312
+         html_instructions: 於<b>博愛街</b>靠<b>右</b>行駛
+         maneuver: turn-slight-right
+         polyline:
+           points: "{jjvC_zmaVFHBB@B@DAD?BAHCJAH?D?D@D@JDNd@xB^|An@hBR^JPHL"
+         start_location:
+           lat: 24.7980639
+           lng: 120.9899208
+         travel_mode: WALKING
+       - distance:
+           text: 0.2 公里
+           value: 185
+         duration:
+           text: 2 分
+           value: 132
+         end_location:
+           lat: 24.797495
+           lng: 120.9856272
+         html_instructions: 向<b>右</b>轉，繼續沿<b>博愛街</b>前進
+         maneuver: turn-right
+         polyline:
+           points: kejvCmjmaVKzASfB_@bD
+         start_location:
+           lat: 24.7971796
+           lng: 120.9874312
+         travel_mode: WALKING
+       - distance:
+           text: 34 公尺
+           value: 34
+         duration:
+           text: 1 分
+           value: 25
+         end_location:
+           lat: 24.797824
+           lng: 120.985618
+         html_instructions: 於<b>學府路</b>向<b>右</b>轉<div style="font-size:0.9em">目的地在左邊</div>
+         maneuver: turn-right
+         polyline:
+           points: kgjvCe_maVw@UGV
+         start_location:
+           lat: 24.797495
+           lng: 120.9856272
+         travel_mode: WALKING
+       travel_mode: WALKING
+     - distance:
+         text: 0.6 公里
+         value: 574
+       duration:
+         text: 3 分
+         value: 188
+       end_location:
+         lat: 24.795688
+         lng: 120.980957
+       html_instructions: 巴士 開往新竹火車站(中正路)
+       polyline:
+         points: kijvCc_maV\D`@Bj@THLLPt@~CPn@v@dD|DvNWI
+       start_location:
+         lat: 24.797824
+         lng: 120.985618
+       transit_details:
+         arrival_stop:
+           location:
+             lat: 24.795688
+             lng: 120.980957
+           name: 新竹高中
+         arrival_time:
+           text: 下午10:38
+           time_zone: Asia/Taipei
+           value: 1514385529
+         departure_stop:
+           location:
+             lat: 24.797824
+             lng: 120.985618
+           name: 水源地
+         departure_time:
+           text: 下午10:35
+           time_zone: Asia/Taipei
+           value: 1514385341
+         headsign: 新竹火車站(中正路)
+         headway: 900
+         line:
+           agencies:
+           - name: 新竹客運
+             url: http://www.hcbus.com.tw/
+           name: 火車站-竹中
+           short_name: 藍1區
+           vehicle:
+             icon: "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png"
+             name: 巴士
+             type: BUS
+         num_stops: 2
+       travel_mode: TRANSIT
+     - distance:
+         text: 0.6 公里
+         value: 614
+       duration:
+         text: 8 分
+         value: 460
+       end_location:
+         lat: 24.7947508
+         lng: 120.9757327
+       html_instructions: 步行到300台灣新竹市東區東南街210巷8號
+       polyline:
+         points: a|ivC_blaVPG`@zAz@jDv@vCx@~Cj@~BTz@Tv@?P?Lu@d@GDaBhATr@J^
+       start_location:
+         lat: 24.795688
+         lng: 120.980957
+       steps:
+       - distance:
+           text: 0.5 公里
+           value: 461
+         duration:
+           text: 6 分
+           value: 337
+         end_location:
+           lat: 24.7941237
+           lng: 120.9767422
+         html_instructions: 往<b>西</b>走<b>學府路</b>朝<b>東山街</b>前進
+         polyline:
+           points: a|ivC_blaVPG`@zAz@jDv@vCx@~Cj@~BTz@Tv@?P?L
+         start_location:
+           lat: 24.795688
+           lng: 120.980957
+         travel_mode: WALKING
+       - distance:
+           text: 0.1 公里
+           value: 107
+         duration:
+           text: 1 分
+           value: 81
+         end_location:
+           lat: 24.7949236
+           lng: 120.9761483
+         html_instructions: 於<b>東南街</b>向<b>右</b>轉
+         maneuver: turn-right
+         polyline:
+           points: grivCsgkaVu@d@GDaBhA
+         start_location:
+           lat: 24.7941237
+           lng: 120.9767422
+         travel_mode: WALKING
+       - distance:
+           text: 46 公尺
+           value: 46
+         duration:
+           text: 1 分
+           value: 42
+         end_location:
+           lat: 24.7947508
+           lng: 120.9757327
+         html_instructions: 於<b>東南街210巷</b>向<b>左</b>轉<div style="font-size:0.9em">目的地在右邊</div>
+         maneuver: turn-left
+         polyline:
+           points: gwivC}ckaVTr@J^
+         start_location:
+           lat: 24.7949236
+           lng: 120.9761483
+         travel_mode: WALKING
+       travel_mode: WALKING
+     traffic_speed_entry: []
+     via_waypoint: []
+   overview_polyline:
+     points: avivCebnaVyBBEAIDWDqBLiABgAHAPa@?_BBaACEb@StAOv@IRLLDF?JGb@B\j@hC^|An@hB^p@HLKzAs@jGw@UGV~@Hj@THLLPt@~ChAtE|DvNWIPG`@zArBbIdB~Gj@rB?^}@j@aBhATr@J^
+   summary: ''
+   warnings:
+   -  步行路線指示目前為測試版。 使用注意事項–此路線可能沒有行人道或步行徑。
+   waypoint_order: []

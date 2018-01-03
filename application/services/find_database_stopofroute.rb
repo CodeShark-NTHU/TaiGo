@@ -14,7 +14,7 @@ module TaiGo
       stops_of_a_route = Repository::For[Entity::StopOfRoute]
                          .find_all_stop_of_a_sub_route(input[:sub_route_id])
       if stops_of_a_route.empty?
-        Left(Result.new(:not_found, "Could not find the stored stops (#{input[:sub_route_id]})"))
+        Left(Result.new(:not_found, "Couldn't find the stops ID: #{input[:sub_route_id]}"))
       else
         Right(Result.new(:ok, stops_of_a_route))
       end

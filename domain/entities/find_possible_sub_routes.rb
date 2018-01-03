@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require_relative '../database_repositories/stop_of_routes.rb'
 require_relative 'nearest_stops_to_location.rb'
+require_relative '../tool/cal_distance.rb'
 
 module TaiGo
   module Entity
@@ -12,7 +13,7 @@ module TaiGo
         @start_lng = start_lng
       end
 
-       def find_sub_route_set
+      def find_sub_route_set
         @sub_route_set = Repository::For[Entity::StopOfRoute].find_sub_route_set(@dest_stop.id)
       end
 
@@ -32,8 +33,24 @@ module TaiGo
         end
       end
 
+      def sort
+        @sort_result = {}
+        @final_hash = {}
+        @tmpCal = Tool::CalDistance.new(@start_lat, @start_lng)
+        @result.each do |key, value|
+          @sort_result[[key,value]] = @tmpCal.cal_distance(value.coordinates.latitude,value.coordinates.longitude)
+        end
+        @sort_result.sort_by { |_key, value| value }.to_h
+        final_third = @sort_result.keys.first 3
+        final_third.each do |anw|
+          @final_hash[anw[0]] = anw[1] 
+        end 
+        @final_hash
+      end
+
       def build_entity
         find_the_closest_stop
+        # sort
         possible_sub_route_set = []
         @result.each do |key, value|
           possible_sub_route_set << Entity::PossibleSubRoute.new(
@@ -41,6 +58,14 @@ module TaiGo
             stops_of_sub_route: key
           )
         end
+=begin
+        @final_hash.each do |key, value|
+          possible_sub_route_set << Entity::PossibleSubRoute.new(
+            start_stop: value,
+            stops_of_sub_route: key
+          )
+        end
+=end
         # rebuild entity
         Entity::PossibleSubRoutes.new(
           destination_stop: @dest_stop,

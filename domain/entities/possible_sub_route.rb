@@ -9,7 +9,7 @@ module TaiGo
     # Domain entity object for PossibleSubRoute
     class PossibleSubRoute < Dry::Struct
       attribute :start_stop, BusStop
-      # attribute :sub_route, StopsOfSubRoute
+      attribute :dest_stop, BusStop
       attribute :stops_of_sub_route, Types::Strict::Array.member(StopOfRoute)
     end
   end

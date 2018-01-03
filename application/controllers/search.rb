@@ -9,27 +9,52 @@ module TaiGo
       # #{API_ROOT}/search index request
       routing.is do
         routing.get do
-          message = 'API to get the possbile routes between start and destination'
+          message = 'API to get the best routes between start and dest'
           HttpResponseRepresenter.new(Result.new(:ok, message)).to_json
         end
       end
 
       # #{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
       routing.on 'stop' do
-        routing.on 'coordinates', String do |start_lat, start_lng, dest_lat, dest_lng|
-          # GET '#{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng'
-          find_result = FindDatabaseAllOfStops.call
-          routing.halt(404, 'There are no stops in db') if find_result.failure?
-          @allofstops = find_result.value.message
-          routing.get do
-            dest = Entity::FindNearestStops.new(@allofstops)
-            dest.initialize_location(dest_lat, dest_lng)
-            nearest_stop = dest.find_nearest_stop
-            pss = Entity::FindPossibleSubSubroutes.new(nearest_stop, start_lat, start_lng)
-            TaiGo::PossibleSubRoutesRepresenter.new(pss.build_entity).to_json
+        routing.on 'coordinates', String, String, String, String do |start_lat, start_lng, dest_lat, dest_lng|
+          directions = TaiGo::GoogleMapDirection.call(
+            start_lat: start_lat,
+            start_lng: start_lng,
+            dest_lat: dest_lat,
+            dest_lng: dest_lng)
+          http_response = HttpResponseRepresenter.new(directions.value)
+          response.status = http_response.http_code
+          if directions.success?
+            ds = directions.value.message
+            combine = TaiGo::DumpStopsOfSubRoutes.new.call(gm_directions: ds)
+            h_r_c = HttpResponseRepresenter.new(combine.value)
+            response.status = h_r_c.http_code
+            if combine.success?
+              result = combine.value.message
+              PossibleWaysRepresenter.new(PossibleWays.new(result)).to_json
+            else
+              h_r_c.to_json
+            end
+          else
+            http_response.to_json
           end
         end
       end
     end
   end
 end
+
+=begin
+          possible_sub_routes = FindPossibleSubRoutesV2.new.call(
+            s_lat: start_lat,
+            s_lng: start_lng,
+            d_lat: dest_lat,
+            d_lng: dest_lng
+          )
+          final = possible_sub_routes.value.values
+          puts final[0]
+          psrs = Entity::PossibleSubRoutes.new(
+            sub_route_set: final[0]
+          )
+          TaiGo::PossibleSubRoutesRepresenter.new(psrs).to_json
+=end

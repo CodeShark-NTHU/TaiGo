@@ -18,9 +18,21 @@ module TaiGo
       routing.on String, String do |city_name, route_name|
         # GET '{API_ROOT}/positions/:city_name/:route_name
         routing.get do
-          bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
-          positions = bpos_mapper.load(city_name, route_name)
-          BusPositionsRepresenter.new(Positions.new(positions)).to_json
+          # route_name.insert 1, '線' if route_name[0] == '藍' && route_name[2] == '區'
+          # route_name.concat('號') if route_name[0..1] == '世博'
+          positions = RealTimeFromMOTCPostionsOfSubRoute.call(
+            city_name: city_name,
+            route_name: route_name
+          )
+          http_response = HttpResponseRepresenter
+                          .new(positions.value)
+          response.status = http_response.http_code
+          if positions.success?
+            positions = positions.value.message
+            BusPositionsRepresenter.new(Positions.new(positions)).to_json
+          else
+            http_response.to_json
+          end
         end
       end
     end

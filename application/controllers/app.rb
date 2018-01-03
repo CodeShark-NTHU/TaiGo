@@ -22,6 +22,10 @@ module TaiGo
     route do |routing|
       response['Content-Type'] = 'application/json'
 
+      response['Access-Control-Allow-Origin'] = 'http://localhost:4000'
+      response['Access-Control-Allow-Credentials'] = 'true'
+      response['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
+
       # GET / request
       routing.root do
         message = "TaiGo API v0.1 up in #{Api.environment} mode"
@@ -33,42 +37,6 @@ module TaiGo
         routing.on 'v0.1' do
           @api_root = '/api/v0.1'
           routing.multi_route
-
-          routing.on 'concurrency' do
-            routing.is do
-              cities = %w[Taichung Kaohsiung Tainan Hsinchu]
-              # cities = %w[Hsinchu Taichung]
-
-              def insert_all(cities)
-                cities.map do |city_name|
-                  Repository::For[Entity::BusStop].delete_all(city_name)
-                end
-                cities.map do |city_name|
-                  LoadFromMotcStop.new.call(config: app.config,
-                                            city_name: city_name)
-                end
-              end
-
-              def insert_all_concurrency(cities)
-                cities.map do |city_name|
-                  Repository::For[Entity::BusStop].delete_all(city_name)
-                end
-                cities.map do |city_name|
-                  Concurrent::Promise
-                    .new { LoadFromMotcStop.new.call(config: app.config, city_name: city_name) }
-                    .then { |res| { city_name: city_name, code: res.status, body: res.body.to_s } }
-                    .rescue { { error: "#{city_name} could not be loaded" } }
-                end.map(&:execute).map(&:value)
-              end
-
-              # puts Benchmark.measure { insert_all(cities) }
-              # puts Benchmark.measure { insert_all_concurency(cities) }
-              Benchmark.bm(10) do |bench|
-                bench.report('sync') { insert_all(cities) }
-                bench.report('concurent:') { insert_all_concurrency(cities) }
-              end
-            end
-          end
         end
       end
     end

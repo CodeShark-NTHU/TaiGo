@@ -20,7 +20,7 @@ module TaiGo
 
       def self.find_name_ch(name_zh)
         db_record = Database::RouteOrm.first(name_zh: name_zh)
-        puts db_record
+        # puts db_record
         rebuild_entity(db_record)
       end
 

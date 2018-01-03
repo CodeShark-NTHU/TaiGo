@@ -2,11 +2,27 @@
 
 module TaiGo
   module Repository
-    # Repository for Subroutes tabe
+    # Repository for Subroutes table
     class SubRoutes
+      def self.all
+        Database::SubRouteOrm.all.map { |db_record| rebuild_entity(db_record) }
+      end
+
       def self.find_id(id)
         db_record = Database::SubRouteOrm.first(id: id)
         rebuild_entity(db_record)
+      end
+
+      def self.find_name(name_zh)
+        # name_zh.insert 0, '線' if name_zh[0] == '藍' && name_zh[2] == '區'
+        # name_zh = name_zh.concat('號') if name_zh[0..1] = ''世博''
+        db_record = Database::SubRouteOrm.first(name_zh: name_zh)
+        rebuild_entity(db_record)
+      end
+
+      def self.find_sub_route_by_id(route_id)
+        db_record = Database::SubRouteOrm.where(route_id: route_id)
+        db_record.map { |rec| rebuild_entity(rec) }
       end
 
       def self.find_or_create(entity)

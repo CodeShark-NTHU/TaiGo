@@ -4,4 +4,3 @@ development:
 
 test:
   DB_FILENAME: infrastructure/database/test.db
-

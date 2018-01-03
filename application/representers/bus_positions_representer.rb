@@ -7,6 +7,6 @@ module TaiGo
   class BusPositionsRepresenter < Roar::Decorator
     include Roar::JSON
 
-    collection :positions, extend: BusPositionRepresenter
+    collection :positions, extend: BusPositionRepresenter, class: OpenStruct 
   end
 end

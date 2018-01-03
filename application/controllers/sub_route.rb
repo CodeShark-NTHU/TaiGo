@@ -36,8 +36,18 @@ module TaiGo
         end
         # GET '#{API_ROOT}/sub_route/:sub_route_id'
         routing.get do
-          sub_route = Repository::For[Entity::BusSubRoute].find_id(sub_route_id)
-          SubRouteRepresenter.new(sub_route).to_json
+          sub_route = FindDatabaseSubRoute.call(
+            sub_route_id: sub_route_id
+          )
+          http_response = HttpResponseRepresenter
+                          .new(sub_route.value)
+          response.status = http_response.http_code
+          if sub_route.success?
+            sub_route = sub_route.value.message
+            SubRouteRepresenter.new(sub_route).to_json
+          else
+            http_response.to_json
+          end
         end
       end
     end

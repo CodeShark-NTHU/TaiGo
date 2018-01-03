@@ -7,7 +7,7 @@ module TaiGo
     # FindNearestStops
     class FindNearestStops
       # for return to user.
-      NEAREST_STOP_NUM = 3 
+      NEAREST_STOP_NUM = 4
 
       def initialize(allofstops)
         @allofstops = allofstops
@@ -29,7 +29,8 @@ module TaiGo
           distance_set[stop] = result
         end
         distance_set = sort_by_distance(distance_set)
-        distance_set.keys.first NEAREST_STOP_NUM
+        # distance_set.keys.first NEAREST_STOP_NUM
+        distance_set.first NEAREST_STOP_NUM
       end
 
       def find_nearest_stop

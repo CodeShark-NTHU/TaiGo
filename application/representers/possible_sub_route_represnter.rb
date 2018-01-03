@@ -8,6 +8,7 @@ module TaiGo
   class PossibleSubRouteRepresenter < Roar::Decorator
     include Roar::JSON
     property :start_stop, extend: BusStopRepresenter
+    property :dest_stop, extend: BusStopRepresenter
     collection :stops_of_sub_route, extend: StopOfRouteRepresenter
   end
 end
