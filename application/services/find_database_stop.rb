@@ -3,9 +3,9 @@
 require 'dry-monads'
 
 module TaiGo
-  # Service to find a collection of stops for a sub route from our database
+  # Service to find a stop information from our database
   # Usage:
-  #   result = FindDatabaseStopOfRoute.call(sub_route_id: 'HSZ000701')
+  #   result = FindDatabaseStop.call(stop_id: 'HSZ222237')
   #   result.success?
   module FindDatabaseStop
     extend Dry::Monads::Either::Mixin
