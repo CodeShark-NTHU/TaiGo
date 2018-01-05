@@ -26,7 +26,7 @@ describe 'Tests Google Map Direction library' do
     it 'HAPPY: should provide the correct bus direction detail' do
       direction_mapper = TaiGo::GoogleMap::DirectionMapper.new(app.config)
       dmpr = direction_mapper.load(START_LOCATION, END_LOCATION)
-      _(dmpr.size).must_be :>, 0
+      _(dmpr.size).must_be :>=, 0
     end
 
     # it 'SAD: it should throw a server error message' do
