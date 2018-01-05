@@ -157,6 +157,5 @@ module TaiGo
         end
       end
     end
-
   end
 end
