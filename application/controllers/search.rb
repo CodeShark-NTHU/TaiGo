@@ -21,7 +21,8 @@ module TaiGo
             start_lat: start_lat,
             start_lng: start_lng,
             dest_lat: dest_lat,
-            dest_lng: dest_lng)
+            dest_lng: dest_lng
+          )
           http_response = HttpResponseRepresenter.new(directions.value)
           response.status = http_response.http_code
           if directions.success?
