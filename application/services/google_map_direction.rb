@@ -15,7 +15,7 @@ module TaiGo
       start = "#{input[:start_lat]},#{input[:start_lng]}"
       dest = "#{input[:dest_lat]},#{input[:dest_lng]}"
       directions = direction_mapper.load(start, dest)
-      Right(Result.new(:ok, directions))
+      Right(Result.new(:ok, [directions[0]]))
     rescue StandardError
       Left(Result.new(:not_found, 'please open your internet'))
     end
