@@ -129,7 +129,8 @@ module TaiGo
           break
         end
       end
-      right_sub_route
+      # right_sub_route
+      true
     end
 
     def ch_name_of_sub_route(sor)
