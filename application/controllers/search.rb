@@ -44,18 +44,3 @@ module TaiGo
     end
   end
 end
-
-=begin
-          possible_sub_routes = FindPossibleSubRoutesV2.new.call(
-            s_lat: start_lat,
-            s_lng: start_lng,
-            d_lat: dest_lat,
-            d_lng: dest_lng
-          )
-          final = possible_sub_routes.value.values
-          puts final[0]
-          psrs = Entity::PossibleSubRoutes.new(
-            sub_route_set: final[0]
-          )
-          TaiGo::PossibleSubRoutesRepresenter.new(psrs).to_json
-=end

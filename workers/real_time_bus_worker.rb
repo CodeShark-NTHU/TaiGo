@@ -6,7 +6,7 @@ require 'econfig'
 require 'shoryuken'
 
 # Shoryuken worker class to clone repos in parallel
-class MOTCWorker
+class RealTimeBusWorker
   extend Econfig::Shortcut
   Econfig.env = ENV['RACK_ENV'] || 'development'
   Econfig.root = File.expand_path('..', File.dirname(__FILE__))
@@ -22,15 +22,6 @@ class MOTCWorker
   shoryuken_options queue: config.CLONE_QUEUE_URL, auto_delete: true
 
   def perform(_sqs_msg, worker_request)
-    if worker_request == 'stops'
-      stops = TaiGo::MOTC::BusStopMapper.new(@config).load(@city_name)
-      not_in_db = []
-      stops.map do |stop|
-        not_in_db << stop if Repository::For[stop.class].find_id(stop.id).nil?
-      end
-      not_in_db.map do |stop|
-        Repository::For[stop.class].create_from(stop)
-      end
-    end
+    puts "worker_request: "+ worker_request
   end
 end

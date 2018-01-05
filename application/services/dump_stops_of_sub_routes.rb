@@ -24,13 +24,7 @@ module TaiGo
       result << input[:gm_directions]
       result << index_bus_sub_route_name
       Right(result: result)
-    end
-
-    def motc_name(name_zh)
-      name_zh.insert 1, '線' if name_zh[0] == '藍' && name_zh[2] == '區'
-      name_zh.concat('號') if name_zh[0..1] == '世博'
-      name_zh
-    end
+    end 
 
     def transform_route_name_for_motc(input)
       result = []
@@ -44,18 +38,6 @@ module TaiGo
       Right(result: result)
     end
 
-    def get_sub_routes(route)
-      result = []
-      unless route.nil?
-        id = route.id
-        subs = Repository::For[Entity::BusSubRoute].find_sub_route_by_id(id)
-        subs.each do |s|
-          result << s
-        end
-      end
-      result
-    end
-
     def get_sub_routes_for_each_route(input)
       result = []
       index_bus_sub_route_name = input[:result][1]
@@ -67,6 +49,59 @@ module TaiGo
       result << input[:result][0]
       result << index_bus_sub_route_name
       Right(result: result)
+    end
+
+    def remove_the_wrong_sub_routes(input)
+      index_bus_sub_routes = input[:result][1]
+      result = []
+      index_bus_sub_routes.map do |pair|
+        subroutes = pair[2]
+        departure_stop_name = motc_stop_name(pair[3])
+        arrival_stop_name = motc_stop_name(pair[4])
+        bus_num_stops = pair[5]
+        subroutes.each do |sub|
+          array_of_sor = get_array_of_sor(sub.id)
+          departure = sor_motc_arr(array_of_sor, departure_stop_name)
+          arrival = sor_motc_arr(array_of_sor, arrival_stop_name)
+          right_sub_route = check_stop_num(departure, arrival, bus_num_stops)
+          pair[2] = [] # clear
+          next unless right_sub_route
+          ch_name = ch_name_of_sub_route(array_of_sor[0])
+          pair[2] << Entity::StopsOfSubRoute.new(
+                       sub_route_name_ch: ch_name,
+                       stops_of_sub_route: array_of_sor)
+        end
+      end
+      result << input[:result][0]
+      result << index_bus_sub_routes
+      Right(result: result)
+    end
+
+    def dump_stops_of_sub_routes_into_bus_direction(input)
+      gm_directions = input[:result][0]
+      index_bus_sub_routes = input[:result][1]
+      result = combine(gm_directions, index_bus_sub_routes)
+      Right(Result.new(:ok, result))
+    end
+
+    private
+
+    def motc_name(name_zh)
+      name_zh.insert 1, '線' if name_zh[0] == '藍' && name_zh[2] == '區'
+      name_zh.concat('號') if name_zh[0..1] == '世博'
+      name_zh
+    end
+
+    def get_sub_routes(route)
+      result = []
+      unless route.nil?
+        id = route.id
+        subs = Repository::For[Entity::BusSubRoute].find_sub_route_by_id(id)
+        subs.each do |s|
+          result << s
+        end
+      end
+      result
     end
 
     def get_array_of_sor(sr_id)
@@ -103,32 +138,6 @@ module TaiGo
       "#{sr_name} #{sr_headsign}"
     end
 
-    def remove_the_wrong_sub_routes(input)
-      index_bus_sub_routes = input[:result][1]
-      result = []
-      index_bus_sub_routes.map do |pair|
-        subroutes = pair[2]
-        departure_stop_name = motc_stop_name(pair[3])
-        arrival_stop_name = motc_stop_name(pair[4])
-        bus_num_stops = pair[5]
-        subroutes.each do |sub|
-          array_of_sor = get_array_of_sor(sub.id)
-          departure = sor_motc_arr(array_of_sor, departure_stop_name)
-          arrival = sor_motc_arr(array_of_sor, arrival_stop_name)
-          right_sub_route = check_stop_num(departure, arrival, bus_num_stops)
-          pair[2] = [] # clear
-          next unless right_sub_route
-          ch_name = ch_name_of_sub_route(array_of_sor[0])
-          pair[2] << Entity::StopsOfSubRoute.new(
-                       sub_route_name_ch: ch_name,
-                       stops_of_sub_route: array_of_sor)
-        end
-      end
-      result << input[:result][0]
-      result << index_bus_sub_routes
-      Right(result: result)
-    end
-
     def combine(gm_directions, index_bus_sub_routes)
       gm_directions.each_with_index do |direction, index1|
         index_bus_sub_routes.each do |item|
@@ -141,11 +150,5 @@ module TaiGo
       end
     end
 
-    def dump_stops_of_sub_routes_into_bus_direction(input)
-      gm_directions = input[:result][0]
-      index_bus_sub_routes = input[:result][1]
-      result = combine(gm_directions, index_bus_sub_routes)
-      Right(Result.new(:ok, result))
-    end
   end
 end
