@@ -23,7 +23,6 @@ task :console do
   sh 'pry -r ./spec/test_load_all'
 end
 
-
 namespace :worker do
   namespace :run do
     desc 'Run the background cloning worker in development mode'
@@ -51,7 +50,6 @@ namespace :vcr do
     end
   end
 end
-
 
 namespace :quality do
   CODE = 'lib/'
