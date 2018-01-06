@@ -158,7 +158,7 @@ module TaiGo
     def combine(gm_directions, index_bus_sub_routes)
       puts index_bus_sub_routes
       result = []
-      index_bus_sub_routes.each do |item|
+      [index_bus_sub_routes[0]].each do |item|
         item[2].map do |ssor|
           gm_directions[item[0]].bus_steps[item[1]].sub_routes << ssor
         end
