@@ -27,7 +27,7 @@ module TaiGo
       dest = input[:direction][1]
       direction_mapper = TaiGo::GoogleMap::DirectionMapper.new(Api.config)
       directions = direction_mapper.load(start, dest)
-      Right(Result.new(:ok, [directions[0]]))
+      Right(Result.new(:ok, directions))
       # Right(Result.new(:ok, directions))
     rescue StandardError
       Left(Result.new(:not_found, 'please open your internet'))

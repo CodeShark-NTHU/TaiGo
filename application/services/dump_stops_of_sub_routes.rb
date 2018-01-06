@@ -24,7 +24,7 @@ module TaiGo
       result << input[:gm_directions]
       result << index_bus_sub_route_name
       Right(result: result)
-    end 
+    end
 
     def transform_route_name_for_motc(input)
       result = []
