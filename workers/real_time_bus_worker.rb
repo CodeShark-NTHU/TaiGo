@@ -34,14 +34,14 @@ class RealTimeBusWorker
       positions = bpos_mapper.load(request.city_name, request.route_name)
       p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
       publish(request.id, p, request.city_name, request.route_name)
-      sleep(5)
+      sleep(10)
     end
   end
 
   private
 
   def publish(channel, positions, city_name, route_name)
-    puts "#{positions.to_json}"
+    puts positions.to_json
     HTTP.headers(content_type: 'application/json')
         .post(
           "#{RealTimeBusWorker.config.API_URL}#{city_name}/#{route_name}/faye",
