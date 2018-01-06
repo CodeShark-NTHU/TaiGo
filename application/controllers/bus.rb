@@ -20,15 +20,15 @@ module TaiGo
           # GET '#{API_ROOT}/bus/:city_name/updates'
           routing.post do
             LoadFromMotcRoute.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             LoadFromMotcStop.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             LoadFromMotcStopOfRoute.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             message = 'All Data has been updated'
@@ -57,7 +57,7 @@ module TaiGo
           # POST '#{API_ROOT}/bus/city/:city_name/routes'
           routing.post do
             routes_service_result = LoadFromMotcRoute.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             http_response = HttpResponseRepresenter
@@ -83,7 +83,7 @@ module TaiGo
           # POST '#{API_ROOT}/stops/:city_name'
           routing.post do
             stops_service_result = LoadFromMotcStop.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             http_response = HttpResponseRepresenter
@@ -104,7 +104,7 @@ module TaiGo
           # POST '#{API_ROOT}/bus/city/:city_name/stop_of_routes
           routing.post do
             stop_of_routes_service_result = LoadFromMotcStopOfRoute.new.call(
-              config: app.config,
+              config: Api.config,
               city_name: city_name
             )
             http_response = HttpResponseRepresenter
