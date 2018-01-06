@@ -17,7 +17,7 @@ module TaiGo
       # #{API_ROOT}/search/stop/coordinates/:start_lat/:start_lng/:dest_lat/:dest_lng
       routing.on 'stop' do
         routing.on 'coordinates', String, String, String, String do |start_lat, start_lng, dest_lat, dest_lng|
-          directions = TaiGo::GoogleMapDirection.call(
+          directions = TaiGo::GoogleMapDirection.new.call(
             start_lat: start_lat,
             start_lng: start_lng,
             dest_lat: dest_lat,

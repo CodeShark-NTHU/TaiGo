@@ -89,6 +89,13 @@ module TaiGo
     def motc_name(name_zh)
       name_zh.insert 1, '線' if name_zh[0] == '藍' && name_zh[2] == '區'
       name_zh.concat('號') if name_zh[0..1] == '世博'
+      name_zh = '藍線1區' if name_zh == 'BL1 Qu'
+      name_zh = '藍15區' if name_zh == 'BL Area 15'
+      name_zh = '世博1號' if name_zh == 'Shi Bo 1'
+      name_zh = '世博3號' if name_zh == 'Shi Bo 3'
+      name_zh = '世博5號' if name_zh == 'Shi Bo 5'
+      name_zh = '藍線' if name_zh == 'Blue Line'
+      name_zh = '綠線' if name_zh == 'Green Line'
       name_zh
     end
 
@@ -129,7 +136,8 @@ module TaiGo
           break
         end
       end
-      right_sub_route
+      # right_sub_route
+      true
     end
 
     def ch_name_of_sub_route(sor)
@@ -149,6 +157,5 @@ module TaiGo
         end
       end
     end
-
   end
 end

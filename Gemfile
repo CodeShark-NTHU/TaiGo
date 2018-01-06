@@ -32,6 +32,7 @@ gem 'dry-types'
 
 # Google map api
 gem 'google_maps_service'
+gem 'geocoder'
 
 # Representers
 gem 'multi_json'
