@@ -12,7 +12,7 @@ module TaiGo
     def get_bus_position(input)
       real_time_bus_request = real_time_bus_request_json(input)
       RealTimeBusWorker.perform_async(real_time_bus_request.to_json)
-      Right(Result.new(:processing, 'real time processing'))
+      Right(Result.new(:processing, { id:input[:id] }))
     end
 
     private

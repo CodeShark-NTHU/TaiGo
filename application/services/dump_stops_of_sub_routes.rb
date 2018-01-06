@@ -143,7 +143,8 @@ module TaiGo
     def ch_name_of_sub_route(sor)
       sr_name = sor.sub_route.name.chinese
       sr_headsign = sor.sub_route.headsign
-      "#{sr_name} #{sr_headsign}"
+      # "#{sr_name} #{sr_headsign}"
+      sr_name
     end
 
     def combine(gm_directions, index_bus_sub_routes)
