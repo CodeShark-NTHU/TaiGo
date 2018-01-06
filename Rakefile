@@ -9,7 +9,7 @@ end
 # Configuration only -- not for direct calls
 task :config do
   require_relative 'config/environment.rb' # load config info
-  @app = CodePraise::Api
+  @app = TaiGo::Api
   @config = @app.config
 end
 
