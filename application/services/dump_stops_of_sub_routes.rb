@@ -18,7 +18,7 @@ module TaiGo
       result = []
       input[:gm_directions].each_with_index do |direction, index1|
         direction.bus_steps.each_with_index do |bus_step, index2|
-          index_bus_sub_route_name << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name,bus_step.bus_num_stops]
+          index_bus_sub_route_name << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name, bus_step.bus_num_stops]
         end
       end
       result << input[:gm_directions]
@@ -143,7 +143,8 @@ module TaiGo
     def ch_name_of_sub_route(sor)
       sr_name = sor.sub_route.name.chinese
       sr_headsign = sor.sub_route.headsign
-      "#{sr_name} #{sr_headsign}"
+      # "#{sr_name} #{sr_headsign}"
+      sr_name
     end
 
     def combine(gm_directions, index_bus_sub_routes)
@@ -152,7 +153,7 @@ module TaiGo
           next unless item[0] == index1 # if item[0] == index1
           direction.bus_steps.each_with_index do |bus_step, index2|
             next unless item[1] == index2 # if item[1] == index2
-            item[2].each { |ssor| bus_step.stops_of_sub_routes << ssor }
+            item[2].each { |ssor| bus_step.sub_routes << ssor }
           end
         end
       end

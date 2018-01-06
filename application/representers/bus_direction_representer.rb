@@ -17,6 +17,6 @@ module TaiGo
     property :bus_arrival_stop_name
     property :bus_num_stops
     property :bus_sub_route_name
-    collection :stops_of_sub_routes, extend: StopsOfSubRouteRepresenter, class: OpenStruct
+    collection :sub_routes, extend: StopsOfSubRouteRepresenter, class: OpenStruct
   end
 end
