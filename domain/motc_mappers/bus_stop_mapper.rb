@@ -69,7 +69,7 @@ module TaiGo
                           @data['StopPosition']['PositionLon'])
         end
 
-        attr_reader :city_name        
+        attr_reader :city_name
         # this is a helper class for name
         class Name
           attr_reader :english, :chinese

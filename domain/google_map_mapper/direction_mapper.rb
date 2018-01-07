@@ -82,7 +82,7 @@ module TaiGo
                 bus_arrival_stop_name: bus_arrival_stop_name(step),
                 bus_num_stops: bus_num_stops(step),
                 bus_sub_route_name: bus_sub_route_name(step),
-                stops_of_sub_routes: []
+                sub_routes: []
               )
               @bus_array << bus
             end

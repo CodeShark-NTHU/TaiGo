@@ -14,8 +14,8 @@ module TaiGo
       sub_routes_of_a_stop = Repository::For[Entity::StopOfRoute]
                              .find_stop_id(input[:stop_id])
       if sub_routes_of_a_stop.empty?
-        Left(Result.new(:not_found,
-                        "Couldn't find the sub routes for stops ID: #{input[:stop_id]}"))
+        message = "Couldn't find the sub routes for stopsID: #{input[:stop_id]}"
+        Left(Result.new(:not_found, message))
       else
         Right(Result.new(:ok, sub_routes_of_a_stop))
       end

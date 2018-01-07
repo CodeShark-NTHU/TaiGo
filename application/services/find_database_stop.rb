@@ -13,8 +13,8 @@ module TaiGo
     def self.call(input)
       stop = Repository::For[Entity::BusStop].find_id(input[:stop_id])
       if stop.nil?
-        Left(Result.new(:not_found,
-                        "Couldn't find the stops ID: #{input[:stop_id]}"))
+        message = "Couldn't find the stops ID: #{input[:stop_id]}"
+        Left(Result.new(:not_found,))
       else
         Right(Result.new(:ok, stop))
       end

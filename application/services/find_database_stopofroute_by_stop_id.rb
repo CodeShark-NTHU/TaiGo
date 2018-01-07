@@ -3,18 +3,18 @@
 require 'dry-monads'
 
 module TaiGo
-  # Service to find a collection of all stops from our database
+  # Service to find a collection of stop of route that have stop_id from our database
   # Usage:
-  #   result = FindDatabaseAllOfStop.call()
+  #   result = FindDatabaseAllOfStop.call(stop_id: 'HSZ222237')
   #   result.success?
   module FindDatabaseStopOfRouteByStopID
     extend Dry::Monads::Either::Mixin
 
     def self.call(stop)
-      # stop_of_route = Repository::For[Entity::StopOfRoute].find_all_stop_of_a_sub_route_which_include_this_stop(stop.id)
       stop_of_route = Repository::For[Entity::StopOfRoute].find_stop_id(stop.id)
       if stop_of_route.empty?
-        Left(Result.new(:not_found, "no stop_of_route for this stop."))
+        message = 'stop_of_route were not found for this stop'
+        Left(Result.new(:not_found, message))
       else
         Right(Result.new(:ok, stop_of_route))
       end

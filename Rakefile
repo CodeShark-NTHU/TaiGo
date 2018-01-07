@@ -9,7 +9,7 @@ end
 # Configuration only -- not for direct calls
 task :config do
   require_relative 'config/environment.rb' # load config info
-  @app = CodePraise::Api
+  @app = TaiGo::Api
   @config = @app.config
 end
 
@@ -22,7 +22,6 @@ end
 task :console do
   sh 'pry -r ./spec/test_load_all'
 end
-
 
 namespace :worker do
   namespace :run do
@@ -51,7 +50,6 @@ namespace :vcr do
     end
   end
 end
-
 
 namespace :quality do
   CODE = 'lib/'

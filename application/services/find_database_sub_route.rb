@@ -11,11 +11,11 @@ module TaiGo
     extend Dry::Monads::Either::Mixin
 
     def self.call(input)
-      sub_route = Repository::For[Entity::BusSubRoute].find_id(input[:sub_route_id])
-      # stops_of_a_route = Repository::For[Entity::StopOfRoute]
-      #                    .find_all_stop_of_a_sub_route(input[:sub_route_id])
+      sub_route = Repository::For[Entity::BusSubRoute]
+                  .find_id(input[:sub_route_id])
       if sub_route.nil?
-        Left(Result.new(:not_found, "Couldn't find the sub_route #{input[:sub_route_id]}"))
+        message = "Couldn't find the sub_route #{input[:sub_route_id]}"
+        Left(Result.new(:not_found, message))
       else
         Right(Result.new(:ok, sub_route))
       end

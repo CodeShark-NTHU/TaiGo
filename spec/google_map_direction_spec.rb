@@ -28,11 +28,5 @@ describe 'Tests Google Map Direction library' do
       dmpr = direction_mapper.load(START_LOCATION, END_LOCATION)
       _(dmpr.size).must_be :>=, 0
     end
-
-    # it 'SAD: it should throw a server error message' do
-    #   bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(app.config)
-    #   bpos = bpos_mapper.load('Hsinchu', 'some_route')
-    #   _(bpos.size).must_be :<, 1
-    # end
   end
 end

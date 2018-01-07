@@ -5,7 +5,6 @@ require_relative 'load_all'
 require 'econfig'
 require 'shoryuken'
 
-
 # Shoryuken worker class to clone repos in parallel
 class RealTimeBusWorker
   extend Econfig::Shortcut
@@ -25,28 +24,46 @@ class RealTimeBusWorker
   shoryuken_options queue: config.CLONE_QUEUE_URL, auto_delete: true
 
   def perform(_sqs_msg, worker_request)
-    config = YAML.safe_load(File.read('config/secrets.yml'))
-    config['MOTC_ID'] = config['development']['MOTC_ID']
-    config['MOTC_KEY'] = config['development']['MOTC_KEY']
     request = TaiGo::RealTimeBusRequestRepresenter.new(OpenStruct.new).from_json worker_request
-    while(true)
-      bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(config)
-      positions = bpos_mapper.load(request.city_name, request.route_name)
-      p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
-      publish(request.id, p, request.city_name, request.route_name)
-      sleep(5)
+    # while (true)
+    #   bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(TaiGo::Api.config)
+    #   positions = bpos_mapper.load(request.city_name, request.route_name)
+    #   p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
+    #   publish(request.id, p)
+    #   sleep(60)
+    # end
+    @lat = 24.800575
+    @lng = 120.9485
+    @en = '81'
+    @zh = '81'
+    5.times do
+      position = TaiGo::Entity::BusPosition.new(
+        plate_numb: '098-FN',
+        sub_route_id: 'HSZ001001',
+        sub_route_name: TaiGo::MOTC::BusPositionMapper::DataMapper::Name.new(@en, @zh),
+        coordinates: TaiGo::MOTC::BusPositionMapper::DataMapper::Coordinates.new(@lat, @lng),
+        speed: 0.0,
+        azimuth: 184.0,
+        duty_status: 0,
+        bus_status: 0
+      )
+      @lat += 0.1
+      @lng += 0.1
+      p = TaiGo::BusPositionsRepresenter.new(Positions.new([position]))
+      publish(request.id, p)
+      sleep(16)
     end
   end
 
   private
 
-  def publish(channel, positions, city_name, route_name)
-    puts "#{positions.to_json}"
+  def publish(channel_id, positions)
+    puts "Posting update for: #{channel_id}"
     HTTP.headers(content_type: 'application/json')
         .post(
-          "#{RealTimeBusWorker.config.API_URL}#{city_name}/#{route_name}/faye",
+          "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
-            channel: "/#{channel}",
+            channel: "/#{channel_id}",
             data: positions.to_json
           }.to_json
         )

@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-ENV['RACK_ENV'] = 'development'
+ENV['RACK_ENV'] = 'test'
 
 require 'simplecov'
 SimpleCov.start
@@ -18,9 +18,6 @@ require 'openssl'
 require 'google_maps_service'
 
 require_relative 'test_load_all'
-
-# load 'Rakefile'
-# Rake::Task['db:reset'].invoke
 
 CITY_NAME = 'Hsinchu'.freeze
 ROUTE_ID = 'HSZ0007'.freeze

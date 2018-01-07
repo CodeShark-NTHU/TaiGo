@@ -18,13 +18,13 @@ module TaiGo
       result = []
       input[:gm_directions].each_with_index do |direction, index1|
         direction.bus_steps.each_with_index do |bus_step, index2|
-          index_bus_sub_route_name << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name,bus_step.bus_num_stops]
+          index_bus_sub_route_name << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name, bus_step.bus_num_stops]
         end
       end
       result << input[:gm_directions]
       result << index_bus_sub_route_name
       Right(result: result)
-    end 
+    end
 
     def transform_route_name_for_motc(input)
       result = []
@@ -40,14 +40,19 @@ module TaiGo
 
     def get_sub_routes_for_each_route(input)
       result = []
+      tmp = []
+      direction_set = input[:result][0]
       index_bus_sub_route_name = input[:result][1]
-      index_bus_sub_route_name.map do |pair|
+      index_bus_sub_route_name.each_with_index do |pair, index|
         name_zh = pair[2]
         route = Repository::For[Entity::BusRoute].find_name_ch(name_zh)
         pair[2] = get_sub_routes(route)
+        unless route.nil?
+          tmp << index_bus_sub_route_name[index]
+        end
       end
-      result << input[:result][0]
-      result << index_bus_sub_route_name
+      result << direction_set
+      result << tmp
       Right(result: result)
     end
 
@@ -56,6 +61,7 @@ module TaiGo
       result = []
       index_bus_sub_routes.map do |pair|
         subroutes = pair[2]
+        #puts subroutes.size
         departure_stop_name = motc_stop_name(pair[3])
         arrival_stop_name = motc_stop_name(pair[4])
         bus_num_stops = pair[5]
@@ -65,11 +71,12 @@ module TaiGo
           arrival = sor_motc_arr(array_of_sor, arrival_stop_name)
           right_sub_route = check_stop_num(departure, arrival, bus_num_stops)
           pair[2] = [] # clear
+          # puts right_sub_route
           next unless right_sub_route
           ch_name = ch_name_of_sub_route(array_of_sor[0])
-          pair[2] << Entity::StopsOfSubRoute.new(
-                       sub_route_name_ch: ch_name,
-                       stops_of_sub_route: array_of_sor)
+          # puts ch_name
+          pair[2] << Entity::StopsOfSubRoute.new(sub_route_name_ch: ch_name,
+                                                 stops_of_sub_route: array_of_sor)
         end
       end
       result << input[:result][0]
@@ -81,7 +88,11 @@ module TaiGo
       gm_directions = input[:result][0]
       index_bus_sub_routes = input[:result][1]
       result = combine(gm_directions, index_bus_sub_routes)
-      Right(Result.new(:ok, result))
+      if result.size > 0
+        Right(Result.new(:ok, [result[0]]))
+      else
+        Right(Result.new(:ok, []))
+      end
     end
 
     private
@@ -142,21 +153,21 @@ module TaiGo
 
     def ch_name_of_sub_route(sor)
       sr_name = sor.sub_route.name.chinese
-      sr_headsign = sor.sub_route.headsign
-      "#{sr_name} #{sr_headsign}"
+      # sr_headsign = sor.sub_route.headsign
+      sr_name
     end
 
     def combine(gm_directions, index_bus_sub_routes)
-      gm_directions.each_with_index do |direction, index1|
-        index_bus_sub_routes.each do |item|
-          next unless item[0] == index1 # if item[0] == index1
-          direction.bus_steps.each_with_index do |bus_step, index2|
-            next unless item[1] == index2 # if item[1] == index2
-            item[2].each { |ssor| bus_step.stops_of_sub_routes << ssor }
+      result = []
+      unless index_bus_sub_routes == []
+        [index_bus_sub_routes[0]].each do |item|
+          item[2].map do |ssor|
+            gm_directions[item[0]].bus_steps[item[1]].sub_routes << ssor
           end
+          result << gm_directions[item[0]]
         end
       end
+      result
     end
-
   end
 end

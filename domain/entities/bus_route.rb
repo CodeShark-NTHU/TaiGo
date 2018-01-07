@@ -15,7 +15,6 @@ module TaiGo
       attribute :authority_id, Types::String.optional
       attribute :city_name, Types::String.optional
       attribute :sub_routes, Types::Strict::Array.member(BusSubRoute).optional
-      # attribute :owned_sub_routes, Types::Strict::Array.member(BusSubRoute).optional
     end
   end
 end

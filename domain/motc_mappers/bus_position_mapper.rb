@@ -39,6 +39,7 @@ module TaiGo
             plate_numb: plate_numb,
             sub_route_id: sub_route_id,
             coordinates: coordinates,
+            sub_route_name: sub_route_name,
             speed: speed,
             azimuth: azimuth,
             duty_status: duty_status,
@@ -59,6 +60,11 @@ module TaiGo
         def coordinates
           Coordinates.new(@data['BusPosition']['PositionLat'],
                           @data['BusPosition']['PositionLon'])
+        end
+
+        def sub_route_name
+          Name.new(@data['SubRouteName']['En'],
+                   @data['SubRouteName']['Zh_tw'])
         end
 
         def speed
@@ -84,6 +90,16 @@ module TaiGo
           def initialize(lat, long)
             @latitude = lat
             @longitude = long
+          end
+        end
+
+        # this is a helper class for Name
+        class Name
+          attr_reader :english, :chinese
+
+          def initialize(en, ch)
+            @english = en
+            @chinese = ch
           end
         end
       end

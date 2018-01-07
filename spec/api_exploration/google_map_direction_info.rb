@@ -9,15 +9,12 @@ GOOGLE_MAP_KEY = config['development']['GOOGLE_MAP_KEY']
 GOOGLE_MAP_RETRY_TIMEOUT = config['development']['GOOGLE_MAP_RETRY_TIMEOUT']
 GOOGLE_MAP_QUERIES_PER_SECOND = config['development']['GOOGLE_MAP_QUERIES_PER_SECOND']
 
-# GOOGLE_MAP_KEY = 'AIzaSyBjcKDMFDmdZyzd-XjqQADKoaht2UNxNvM'
-# GOOGLE_MAP_RETRY_TIMEOUT = 20
-# GOOGLE_MAP_QUERIES_PER_SECOND = 10
-
 GoogleMapsService.configure do |cg|
   cg.key = GOOGLE_MAP_KEY
   cg.retry_timeout = GOOGLE_MAP_RETRY_TIMEOUT
   cg.queries_per_second = GOOGLE_MAP_QUERIES_PER_SECOND
 end
+
 # Initialize client using global parameters
 @gmaps = GoogleMapsService::Client.new
 
