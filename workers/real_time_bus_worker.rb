@@ -62,12 +62,12 @@ class RealTimeBusWorker
   private
 
   def publish(channel_id, positions)
-    # puts "Posting update for: #{channel_id}"
+    puts "Posting update for: #{channel_id}"
     HTTP.headers(content_type: 'application/json')
         .post(
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
-            channel: "/#{channel_id}",
+            channel: "/5000",
             data: positions.to_json
           }.to_json
         )
