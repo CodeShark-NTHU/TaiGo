@@ -7,88 +7,82 @@ module TaiGo
   class DumpStopsOfSubRoutes
     include Dry::Transaction
 
-    step :extract_bus_route_name_from_bus_direcrtion
+    step :extract_bus_route_name_from_google_direcrtion
     step :transform_route_name_for_motc
     step :get_sub_routes_for_each_route
     step :remove_the_wrong_sub_routes
     step :dump_stops_of_sub_routes_into_bus_direction
 
-    def extract_bus_route_name_from_bus_direcrtion(input)
-      index_bus_sub_route_name = []
+    def extract_bus_route_name_from_google_direcrtion(input)
+      storage_cells = [] # assist for combine MOTC with google direction 
       result = []
       input[:gm_directions].each_with_index do |direction, index1|
         direction.bus_steps.each_with_index do |bus_step, index2|
-          index_bus_sub_route_name << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name, bus_step.bus_num_stops]
+          storage_cells << [index1, index2, bus_step.bus_sub_route_name, bus_step.bus_departure_stop_name, bus_step.bus_arrival_stop_name, bus_step.bus_num_stops]
         end
       end
       result << input[:gm_directions]
-      result << index_bus_sub_route_name
+      result << storage_cells
       Right(result: result)
     end
 
     def transform_route_name_for_motc(input)
       result = []
-      index_bus_sub_route_name = input[:result][1]
-      index_bus_sub_route_name.map do |pair|
-        name_zh = pair[2]
-        pair[2] = motc_name(name_zh)
+      storage_cells = input[:result][1]
+      storage_cells.map do |cell|
+        google_route_name = cell[2]
+        cell[2] = motc_name(google_route_name)
       end
       result << input[:result][0]
-      result << index_bus_sub_route_name
+      result << storage_cells
       Right(result: result)
     end
 
     def get_sub_routes_for_each_route(input)
       result = []
-      tmp = []
-      direction_set = input[:result][0]
-      index_bus_sub_route_name = input[:result][1]
-      index_bus_sub_route_name.each_with_index do |pair, index|
-        name_zh = pair[2]
-        route = Repository::For[Entity::BusRoute].find_name_ch(name_zh)
-        pair[2] = get_sub_routes(route)
-        unless route.nil?
-          tmp << index_bus_sub_route_name[index]
-        end
+      aviliable_cells = []
+      storage_cells = input[:result][1]
+      storage_cells.each_with_index do |cell, index|
+        motc_route_name = cell[2]
+        route_entity = Repository::For[Entity::BusRoute].find_by_name_zh(motc_route_name)
+        cell[2] = get_sub_routes(route_entity)
+        aviliable_cells << storage_cells[index] unless route_entity.nil?
       end
-      result << direction_set
-      result << tmp
+      result << input[:result][0]
+      result << aviliable_cells
       Right(result: result)
     end
 
     def remove_the_wrong_sub_routes(input)
-      index_bus_sub_routes = input[:result][1]
+      storage_cells = input[:result][1]
       result = []
-      index_bus_sub_routes.map do |pair|
-        subroutes = pair[2]
-        #puts subroutes.size
-        departure_stop_name = motc_stop_name(pair[3])
-        arrival_stop_name = motc_stop_name(pair[4])
-        bus_num_stops = pair[5]
+      storage_cells.map do |cell|
+        subroutes = cell[2]
+        departure_stop_name = motc_stop_name(cell[3])
+        arrival_stop_name = motc_stop_name(cell[4])
+        bus_num_stops = cell[5]
         subroutes.each do |sub|
           array_of_sor = get_array_of_sor(sub.id)
           departure = sor_motc_arr(array_of_sor, departure_stop_name)
           arrival = sor_motc_arr(array_of_sor, arrival_stop_name)
           right_sub_route = check_stop_num(departure, arrival, bus_num_stops)
-          pair[2] = [] # clear
-          # puts right_sub_route
+          cell[2] = [] # reset the space for stops of sub route
           next unless right_sub_route
           ch_name = ch_name_of_sub_route(array_of_sor[0])
-          # puts ch_name
-          pair[2] << Entity::StopsOfSubRoute.new(sub_route_name_ch: ch_name,
+          cell[2] << Entity::StopsOfSubRoute.new(sub_route_name_ch: ch_name,
                                                  stops_of_sub_route: array_of_sor)
         end
       end
       result << input[:result][0]
-      result << index_bus_sub_routes
+      result << storage_cells
       Right(result: result)
     end
 
     def dump_stops_of_sub_routes_into_bus_direction(input)
-      gm_directions = input[:result][0]
-      index_bus_sub_routes = input[:result][1]
-      result = combine(gm_directions, index_bus_sub_routes)
-      if result.size > 0
+      google_directions = input[:result][0]
+      motc_info = input[:result][1]
+      result = combine(google_directions, motc_info)
+      if !result.empty?
         Right(Result.new(:ok, [result[0]]))
       else
         Right(Result.new(:ok, []))
