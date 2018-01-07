@@ -35,7 +35,7 @@ class RealTimeBusWorker
     @lat = 24.800575
     @lng = 120.9485
     #藍線1區
-    while (true)
+    5.times do
       position = TaiGo::Entity::BusPosition.new(
         plate_numb: '098-FN',
         sub_route_id: 'HSZ001001',
@@ -49,13 +49,14 @@ class RealTimeBusWorker
       @lng = @lng + 0.1
       p = TaiGo::BusPositionsRepresenter.new(Positions.new([position]))
       publish(request.id, p)
-      sleep(3)
+      sleep(1)
     end
   end
 
   private
 
   def publish(channel_id, positions)
+    channel_id = 5000
     puts "Posting update for: #{channel_id}"
     # puts positions.to_json
     HTTP.headers(content_type: 'application/json')
@@ -63,7 +64,7 @@ class RealTimeBusWorker
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
             channel: "/#{channel_id}",
-            data: positions.to_json
+            data: {message: "Hello world"}
           }.to_json
         )
   end

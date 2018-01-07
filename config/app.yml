@@ -1,10 +1,10 @@
 ---
 development:
-  API_URL: 'http://localhost:3000'
+  API_URL: 'http://localhost:9292'
   DB_FILENAME: infrastructure/database/dev.db
 
 test:
-  API_URL: 'http://localhost:3000'
+  API_URL: 'http://localhost:9292'
   DB_FILENAME: infrastructure/database/test.db
 
 production:
