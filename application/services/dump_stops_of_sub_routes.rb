@@ -71,13 +71,12 @@ module TaiGo
           arrival = sor_motc_arr(array_of_sor, arrival_stop_name)
           right_sub_route = check_stop_num(departure, arrival, bus_num_stops)
           pair[2] = [] # clear
-          #puts right_sub_route
+          # puts right_sub_route
           next unless right_sub_route
           ch_name = ch_name_of_sub_route(array_of_sor[0])
-          #puts ch_name
-          pair[2] << Entity::StopsOfSubRoute.new(
-                       sub_route_name_ch: ch_name,
-                       stops_of_sub_route: array_of_sor)
+          # puts ch_name
+          pair[2] << Entity::StopsOfSubRoute.new(sub_route_name_ch: ch_name,
+                                                 stops_of_sub_route: array_of_sor)
         end
       end
       result << input[:result][0]
@@ -150,8 +149,7 @@ module TaiGo
 
     def ch_name_of_sub_route(sor)
       sr_name = sor.sub_route.name.chinese
-      sr_headsign = sor.sub_route.headsign
-      # "#{sr_name} #{sr_headsign}"
+      # sr_headsign = sor.sub_route.headsign
       sr_name
     end
 

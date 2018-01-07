@@ -20,10 +20,8 @@ module TaiGo
     end
 
     def filter_the_subroutes_not_in_db(input)
-      # only store the subroutes which not in db to subroutes_set
       subroutes_set = []
       input[:subroutes].map do |subroute|
-        # if we change subroutes uid to id ,here have to change to subroute.id
         subroutes_set << subroute if Repository::For[subroute.class]
                                      .find_id(subroute.id).nil?
       end

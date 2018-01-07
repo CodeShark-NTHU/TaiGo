@@ -10,8 +10,13 @@ module TaiGo
     step :get_bus_position
 
     def get_bus_position(input)
+<<<<<<< HEAD
       # bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(input[:config])
       # positions = bpos_mapper.load(input[:city_name], input[:route_name])
+=======
+      bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(input[:config])
+      bpos_mapper.load(input[:city_name], input[:route_name])
+>>>>>>> 9f17c61445450dcc7562e307b719b4fa502a2ec3
       real_time_bus_request = real_time_bus_request_json(input)
       RealTimeBusWorker.perform_async(real_time_bus_request.to_json)
       Right(Result.new(:processing, id: input[:id]))
