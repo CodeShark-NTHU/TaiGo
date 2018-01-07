@@ -88,7 +88,11 @@ module TaiGo
       gm_directions = input[:result][0]
       index_bus_sub_routes = input[:result][1]
       result = combine(gm_directions, index_bus_sub_routes)
-      Right(Result.new(:ok, result))
+      if result.size > 0
+        Right(Result.new(:ok, [result[0]]))
+      else
+        Right(Result.new(:ok, []))
+      end
     end
 
     private
