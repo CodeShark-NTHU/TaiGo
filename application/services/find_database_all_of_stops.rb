@@ -13,7 +13,8 @@ module TaiGo
     def self.call
       stops = Repository::For[Entity::BusStop].all
       if stops.empty?
-        Left(Result.new(:not_found, "there are no stops in db."))
+        message = 'there are no stops in db'
+        Left(Result.new(:not_found, message))
       else
         Right(Result.new(:ok, stops))
       end

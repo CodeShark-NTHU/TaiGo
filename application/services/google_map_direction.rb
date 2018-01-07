@@ -4,7 +4,13 @@ require 'dry/transaction'
 require 'geocoder'
 
 module TaiGo
-  # Transaction to combine Google map direction with MOTC
+  # Service to find a best walking and transit route from Google API
+  # Usage:
+  #   directions = GoogleMapDirection.call(start_lat: start_lat,
+  #                                        start_lng: start_lng,
+  #                                        dest_lat: dest_lat,
+  #                                        dest_lng: dest_lng)
+  #   result.success?
   class GoogleMapDirection
     include Dry::Transaction
     step :check_range
@@ -28,7 +34,6 @@ module TaiGo
       direction_mapper = TaiGo::GoogleMap::DirectionMapper.new(Api.config)
       directions = direction_mapper.load(start, dest)
       Right(Result.new(:ok, directions))
-      # Right(Result.new(:ok, directions))
     rescue StandardError
       Left(Result.new(:not_found, 'please open your internet'))
     end
@@ -37,8 +42,8 @@ module TaiGo
       center = [24.778921686099686, 120.93383417011717]
       loc = [lat, lng]
       range_mile = 6.21
-      dis = Geocoder::Calculations.distance_between(center,loc)
-      dis <= range_mile ? true : false
+      dis = Geocoder::Calculations.distance_between(center, loc)
+      dis <= range_mile
     end
   end
 end

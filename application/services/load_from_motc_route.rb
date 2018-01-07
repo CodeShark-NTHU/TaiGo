@@ -20,7 +20,6 @@ module TaiGo
     end
 
     def filter_the_routes_not_in_db(input)
-      # only store the routes which not in db to route_set
       route_set = []
 
       input[:routes].map do |route|
@@ -39,7 +38,6 @@ module TaiGo
       input[:unstored_routes].map do |route|
         stored_routes << Repository::For[route.class].create_from(route)
       end
-      # created -> 201
       return Right(Result.new(:created, stored_routes))
     rescue StandardError => e
       puts e.to_s

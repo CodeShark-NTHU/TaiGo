@@ -8,9 +8,6 @@ module TaiGo
   class Api < Roda
     plugin :all_verbs
     plugin :multi_route
-    # plugin :environments
-    # plugin :json
-    # plugin :halt
 
     require_relative 'bus'
     require_relative 'stop'

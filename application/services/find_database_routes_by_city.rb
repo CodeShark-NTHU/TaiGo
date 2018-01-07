@@ -11,10 +11,11 @@ module TaiGo
     extend Dry::Monads::Either::Mixin
 
     def self.call(input)
-      routes = Repository::For[Entity::BusRoute].find_city_name(input[:city_name])
+      routes = Repository::For[Entity::BusRoute]
+               .find_city_name(input[:city_name])
       if routes.empty?
-        Left(Result.new(:not_found, 
-                        "Couldn't find the routes from city #{input[:city_name]}"))
+        message = "Couldn't find the routes from city #{input[:city_name]}"
+        Left(Result.new(:not_found, message))
       else
         Right(Result.new(:ok, routes))
       end
