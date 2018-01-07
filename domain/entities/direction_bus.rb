@@ -19,7 +19,6 @@ module TaiGo
       attribute :bus_num_stops, Types::Strict::Int
       attribute :bus_sub_route_name, Types::Strict::String
       attribute :sub_routes, Types::Strict::Array.member(StopsOfSubRoute).optional
-      # attribute :stops_of_sub_routes, Types::Array
     end
   end
 end

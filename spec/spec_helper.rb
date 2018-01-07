@@ -19,9 +19,6 @@ require 'google_maps_service'
 
 require_relative 'test_load_all'
 
-# load 'Rakefile'
-# Rake::Task['db:reset'].invoke
-
 CITY_NAME = 'Hsinchu'.freeze
 ROUTE_ID = 'HSZ0007'.freeze
 SUB_ROUTE_ID = 'HSZ000701'.freeze

@@ -36,8 +36,12 @@ class RealTimeBusWorker
     @lng = 120.9485
     @en = '81'
     @zh = '81'
+<<<<<<< HEAD
     #藍線1區
     while(true)
+=======
+    5.times do
+>>>>>>> 161ada953f5a2d9f8b3af3a30e920b1388e8cfe9
       position = TaiGo::Entity::BusPosition.new(
         plate_numb: '098-FN',
         sub_route_id: 'HSZ001001',
