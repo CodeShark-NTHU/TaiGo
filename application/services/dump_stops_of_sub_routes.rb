@@ -89,7 +89,7 @@ module TaiGo
       index_bus_sub_routes = input[:result][1]
       result = combine(gm_directions, index_bus_sub_routes)
       if result==[]
-        Left(Result.new(:ok, "there are no bus now."))
+        Left(Result.new(:ok, 'there are no buses now.'))
       else
         Right(Result.new(:ok, result))
       end
