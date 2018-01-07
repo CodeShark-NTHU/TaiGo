@@ -21,6 +21,7 @@ module TaiGo
           request_id = [route_name, Time.now.to_f].hash
           # puts "id :#{request_id}"
           m = RealTimeBusPositions.new.call(
+            config: Api.config,
             city_name: city_name,
             route_name: route_name,
             id: request_id
@@ -28,11 +29,7 @@ module TaiGo
           http_response = HttpResponseRepresenter
                           .new(m.value)
           response.status = http_response.http_code
-          if m.success? #202
-            http_response.to_json
-          else
-            http_response.to_json
-          end
+          http_response.to_json
         end
       end
     end

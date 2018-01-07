@@ -5,7 +5,6 @@ require_relative 'load_all'
 require 'econfig'
 require 'shoryuken'
 
-
 # Shoryuken worker class to clone repos in parallel
 class RealTimeBusWorker
   extend Econfig::Shortcut
@@ -22,32 +21,30 @@ class RealTimeBusWorker
 
   include Shoryuken::Worker
   # tell workers which SQS queue to listen to
-  shoryuken_options queue: config.CLONE_QUEUE_URL, auto_delete: true
+  shoryuken_options queue: config.CLONE_QUEUE_URL, visibility_timeout: 30, auto_delete: true
 
   def perform(_sqs_msg, worker_request)
-    config = YAML.safe_load(File.read('config/secrets.yml'))
-    config['MOTC_ID'] = config['development']['MOTC_ID']
-    config['MOTC_KEY'] = config['development']['MOTC_KEY']
     request = TaiGo::RealTimeBusRequestRepresenter.new(OpenStruct.new).from_json worker_request
-    while(true)
-      bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(config)
+    while (true)
+      bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(TaiGo::Api.config)
       positions = bpos_mapper.load(request.city_name, request.route_name)
       p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
-      publish(request.id, p, request.city_name, request.route_name)
+      publish(request.id, p)
       sleep(10)
     end
   end
 
   private
 
-  def publish(channel, positions, city_name, route_name)
-    puts positions.to_json
+  def publish(channel_id, positions)
+    puts "Posting update for: #{channel_id}"
+    # puts positions.to_json
     HTTP.headers(content_type: 'application/json')
         .post(
-          "#{RealTimeBusWorker.config.API_URL}#{city_name}/#{route_name}/faye",
+          "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
-            channel: "/#{channel}",
-            data: positions.to_json
+            channel: "/#{channel_id}",
+            data: positions.to_json,
           }.to_json
         )
   end
