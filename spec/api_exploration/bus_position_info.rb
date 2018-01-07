@@ -47,5 +47,5 @@ bad_request = motc_api_path('Hsinchu/some_route')
 bp_response[bad_request] = call_motc_url(auth_code, xdate, bad_request)
 bp_response[bad_request].parse
 
-File.write('spec/fixtures/bp_response.yml', bp_response.to_yaml)
-File.write('spec/fixtures/bp_results.yml', bp_results.to_yaml)
+# File.write('spec/fixtures/bp_response.yml', bp_response.to_yaml)
+# File.write('spec/fixtures/bp_results.yml', bp_results.to_yaml)
