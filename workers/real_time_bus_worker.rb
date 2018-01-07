@@ -49,13 +49,14 @@ class RealTimeBusWorker
       @lng = @lng + 0.1
       p = TaiGo::BusPositionsRepresenter.new(Positions.new([position]))
       publish(request.id, p)
-      sleep(3)
+      sleep(10)
     end
   end
 
   private
 
   def publish(channel_id, positions)
+    channel_id = 5000
     puts "Posting update for: #{channel_id}"
     HTTP.headers(content_type: 'application/json')
         .post(
