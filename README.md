@@ -39,7 +39,7 @@ Our API is built on top of MOTC API (ptx.transportdata.tw/MOTC/) and Google Map 
 ```
 ## Automatic Test for the all API
 
-Testing this API is easy, simply do the following steps:
+To test this API, simply do the following steps:
 ```
 $ RACK_ENV=test rake db:migrate
 $ bundle exec rake spec
