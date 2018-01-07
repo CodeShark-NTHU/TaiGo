@@ -40,7 +40,7 @@ class RealTimeBusWorker
     fake_all_stops.map do |sor|
       @lat = sor.stop.coordinates.latitude
       @lng = sor.stop.coordinates.longitude
-      puts "lat,lng: #{@lat},#{@lng}"
+      #puts "lat,lng: #{@lat},#{@lng}"
       position = TaiGo::Entity::BusPosition.new(
         plate_numb: '098-FN',
         sub_route_id: 'HSZ001001',
@@ -67,7 +67,11 @@ class RealTimeBusWorker
         .post(
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
+<<<<<<< HEAD
             channel: "/5000",
+=======
+            channel: "/6000",
+>>>>>>> 8ec53837f9be1bd18d491b758ff7e3f67c59005e
             data: positions.to_json
           }.to_json
         )
