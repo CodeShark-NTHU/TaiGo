@@ -88,7 +88,11 @@ module TaiGo
       gm_directions = input[:result][0]
       index_bus_sub_routes = input[:result][1]
       result = combine(gm_directions, index_bus_sub_routes)
-      Right(Result.new(:ok, result))
+      if result==[]
+        Left(Result.new(:ok, "there are no bus now."))
+      else
+        Right(Result.new(:ok, result))
+      end
     end
 
     private
@@ -154,13 +158,14 @@ module TaiGo
     end
 
     def combine(gm_directions, index_bus_sub_routes)
-      # puts index_bus_sub_routes
       result = []
-      [index_bus_sub_routes[0]].each do |item|
-        item[2].map do |ssor|
-          gm_directions[item[0]].bus_steps[item[1]].sub_routes << ssor
+      unless index_bus_sub_routes == []
+        [index_bus_sub_routes[0]].each do |item|
+          item[2].map do |ssor|
+            gm_directions[item[0]].bus_steps[item[1]].sub_routes << ssor
+          end
+          result << gm_directions[item[0]]
         end
-        result << gm_directions[item[0]]
       end
       result
     end
