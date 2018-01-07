@@ -10,6 +10,7 @@ module TaiGo
     property :plate_numb
     property :sub_route_id
     property :coordinates, extend: CoordinateRepresenter, class: OpenStruct
+    property :sub_route_name, extend: NameRepresenter, class: OpenStruct
     property :speed
     property :azimuth
     property :duty_status
