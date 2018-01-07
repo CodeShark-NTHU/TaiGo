@@ -93,6 +93,7 @@ module TaiGo
           end
         end
 
+        # this is a helper class for Name
         class Name
           attr_reader :english, :chinese
 
@@ -101,7 +102,6 @@ module TaiGo
             @chinese = ch
           end
         end
-        
       end
     end
   end

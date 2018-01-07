@@ -36,7 +36,6 @@ class RealTimeBusWorker
     @lng = 120.9485
     @en = '81'
     @zh = '81'
-    #藍線1區
     5.times do
       position = TaiGo::Entity::BusPosition.new(
         plate_numb: '098-FN',
@@ -66,7 +65,7 @@ class RealTimeBusWorker
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
             channel: "/#{channel_id}",
-            data: {message: "Hello world"}
+            data: positions.to_json
           }.to_json
         )
   end

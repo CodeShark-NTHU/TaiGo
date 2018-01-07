@@ -1,4 +1,1093 @@
 ---
-size: 1
+size: 28
 routes:
-  message: API rate limit exceeded
+- RouteUID: HSZ0007
+  RouteID: '0007'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '18'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ000701
+    SubRouteID: '000701'
+    OperatorIDs:
+    - '18'
+    SubRouteName:
+      Zh_tw: '81'
+      En: '81'
+    Headsign: 古奇峰→新莊車站[先行駛關東路]
+    Direction: 0
+  - SubRouteUID: HSZ0007A1
+    SubRouteID: 0007A1
+    OperatorIDs:
+    - '18'
+    SubRouteName:
+      Zh_tw: '81'
+      En: '81'
+    Headsign: 古奇峰→新莊車站[先行駛建功路]
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '81'
+    En: '81'
+  DepartureStopNameZh: 古奇峰
+  DepartureStopNameEn: Ku Chi Peak
+  DestinationStopNameZh: 古奇峰
+  DestinationStopNameEn: Ku Chi Peak
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0010
+  RouteID: '0010'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ001001
+    SubRouteID: '001001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍線1區
+      En: 藍線1區
+    Headsign: 火車站→竹中[循環線]
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 藍線1區
+    En: 藍線1區
+  DepartureStopNameZh: 火車站
+  DepartureStopNameEn: Train Station
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0020
+  RouteID: '0020'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ002001
+    SubRouteID: '002001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '2'
+      En: '2'
+    Headsign: 火車站→交大
+    Direction: 0
+  - SubRouteUID: HSZ002002
+    SubRouteID: '002002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '2'
+      En: '2'
+    Headsign: 交大→火車站
+    Direction: 1
+  - SubRouteUID: HSZ0020A1
+    SubRouteID: 0020A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 2支
+      En: 2支
+    Headsign: 火車站→交大[繞建功路]
+    Direction: 0
+  - SubRouteUID: HSZ0020A2
+    SubRouteID: 0020A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 2支
+      En: 2支
+    Headsign: 交大→火車站[繞建功路]
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '2'
+    En: '2'
+  DepartureStopNameZh: 火車站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 交大光復校區
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0100
+  RouteID: '0100'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ010001
+    SubRouteID: '010001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '10'
+      En: '10'
+    Headsign: 總站→成德高中
+    Direction: 0
+  - SubRouteUID: HSZ010002
+    SubRouteID: '010002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '10'
+      En: '10'
+    Headsign: 成德高中→總站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '10'
+    En: '10'
+  DepartureStopNameZh: 成德高中
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0110
+  RouteID: '0110'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ011001
+    SubRouteID: '011001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '11'
+      En: '11'
+    Headsign: 火車站→金元寶
+    Direction: 0
+  - SubRouteUID: HSZ011002
+    SubRouteID: '011002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '11'
+      En: '11'
+    Headsign: 金元寶→火車站
+    Direction: 1
+  - SubRouteUID: HSZ0110A1
+    SubRouteID: 0110A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 11支
+      En: 11支
+    Headsign: 火車站→金元寶[延駛海埔地]
+    Direction: 0
+  - SubRouteUID: HSZ0110A2
+    SubRouteID: 0110A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 11支
+      En: 11支
+    Headsign: 金元寶→火車站[延駛海埔地]
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '11'
+    En: '11'
+  DepartureStopNameZh: 火車站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 瓦厝
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0113
+  RouteID: '0113'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ011301
+    SubRouteID: '011301'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 11甲
+      En: 11甲
+    Headsign: 火車站→上寮
+    Direction: 0
+  - SubRouteUID: HSZ011302
+    SubRouteID: '011302'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 11甲
+      En: 11甲
+    Headsign: 上寮→火車站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 11甲
+    En: 11甲
+  DepartureStopNameZh: 上寮
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0120
+  RouteID: '0120'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ012001
+    SubRouteID: '012001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '12'
+      En: '12'
+    Headsign: 總站→莊厝
+    Direction: 0
+  - SubRouteUID: HSZ012002
+    SubRouteID: '012002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '12'
+      En: '12'
+    Headsign: 莊厝→總站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '12'
+    En: '12'
+  DepartureStopNameZh: 莊厝
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0150
+  RouteID: '0150'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ015001
+    SubRouteID: '015001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 火車站→南寮
+    Direction: 0
+  - SubRouteUID: HSZ015002
+    SubRouteID: '015002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 南寮→火車站
+    Direction: 1
+  - SubRouteUID: HSZ0150A1
+    SubRouteID: 0150A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 火車站→新竹漁港直銷中心[平日]
+    Direction: 0
+  - SubRouteUID: HSZ0150A2
+    SubRouteID: 0150A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 新竹漁港直銷中心→火車站[平日]
+    Direction: 1
+  - SubRouteUID: HSZ0150B1
+    SubRouteID: 0150B1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 火車站→新竹漁港直銷中心[例假日]
+    Direction: 0
+  - SubRouteUID: HSZ0150B2
+    SubRouteID: 0150B2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍15區
+      En: 藍15區
+    Headsign: 新竹漁港直銷中心→火車站[例假日]
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 藍15區
+    En: 藍15區
+  DepartureStopNameZh: 新竹漁港直銷中心
+  DepartureStopNameEn: Hsinchu Harbor Outlet Center
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0160
+  RouteID: '0160'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ016001
+    SubRouteID: '016001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '16'
+      En: '16'
+    Headsign: 火車站→台大分院
+    Direction: 0
+  - SubRouteUID: HSZ016002
+    SubRouteID: '016002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '16'
+      En: '16'
+    Headsign: 台大分院→火車站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '16'
+    En: '16'
+  DepartureStopNameZh: 火車站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 台大醫院新竹分院
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0182
+  RouteID: '0182'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '45'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ018201
+    SubRouteID: '018201'
+    OperatorIDs:
+    - '45'
+    SubRouteName:
+      Zh_tw: '182'
+      En: '182'
+    Headsign: 北大橋→高鐵新竹站
+    Direction: 0
+  - SubRouteUID: HSZ018202
+    SubRouteID: '018202'
+    OperatorIDs:
+    - '45'
+    SubRouteName:
+      Zh_tw: '182'
+      En: '182'
+    Headsign: 高鐵新竹站→北大橋
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '182'
+    En: '182'
+  DepartureStopNameZh: 北大橋
+  DepartureStopNameEn: Bei-Da Bridge
+  DestinationStopNameZh: 高鐵新竹站
+  DestinationStopNameEn: THSR Hsinchu Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0200
+  RouteID: '0200'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ020001
+    SubRouteID: '020001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '20'
+      En: '20'
+    Headsign: 總站→普天宮
+    Direction: 0
+  - SubRouteUID: HSZ020002
+    SubRouteID: '020002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '20'
+      En: '20'
+    Headsign: 普天宮→總站
+    Direction: 1
+  - SubRouteUID: HSZ0200A1
+    SubRouteID: 0200A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 20支
+      En: 20支
+    Headsign: 總站→普天宮[繞建華國中]
+    Direction: 0
+  - SubRouteUID: HSZ0200A2
+    SubRouteID: 0200A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 20支
+      En: 20支
+    Headsign: 普天宮→總站[繞建華國中]
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '20'
+    En: '20'
+  DepartureStopNameZh: 普天宮
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0230
+  RouteID: '0230'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ023001
+    SubRouteID: '023001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '23'
+      En: '23'
+    Headsign: 總站→玄奘大學[經中華路]
+    Direction: 0
+  - SubRouteUID: HSZ023002
+    SubRouteID: '023002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '23'
+      En: '23'
+    Headsign: 玄奘大學→總站[經中華路]
+    Direction: 1
+  - SubRouteUID: HSZ0230A1
+    SubRouteID: 0230A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 23支
+      En: 23支
+    Headsign: 總站→玄奘大學[經牛埔路]
+    Direction: 0
+  - SubRouteUID: HSZ0230A2
+    SubRouteID: 0230A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 23支
+      En: 23支
+    Headsign: 玄奘大學→總站[經牛埔路]
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '23'
+    En: '23'
+  DepartureStopNameZh: 總站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 玄奘大學
+  DestinationStopNameEn: Hsuan Chuang University
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0270
+  RouteID: '0270'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ027001
+    SubRouteID: '027001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '27'
+      En: '27'
+    Headsign: 火車站→荷蘭村
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '27'
+    En: '27'
+  DepartureStopNameZh: 火車站
+  DepartureStopNameEn: Train Station
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0310
+  RouteID: '0310'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ031001
+    SubRouteID: '031001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '31'
+      En: '31'
+    Headsign: 火車站→科園社區
+    Direction: 0
+  - SubRouteUID: HSZ031002
+    SubRouteID: '031002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '31'
+      En: '31'
+    Headsign: 科園社區→火車站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '31'
+    En: '31'
+  DepartureStopNameZh: 龍山社區口
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 火車站
+  DestinationStopNameEn: Train Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0500
+  RouteID: '0500'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '67'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ0500A1
+    SubRouteID: 0500A1
+    OperatorIDs:
+    - '67'
+    SubRouteName:
+      Zh_tw: '50'
+      En: '50'
+    Headsign: 香山區公所→火車站→香山區公所[先經中華路][繞大鵬新城]
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '50'
+    En: '50'
+  DepartureStopNameZh: 香山區公所
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 香山區公所
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0510
+  RouteID: '0510'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '67'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ0510A1
+    SubRouteID: 0510A1
+    OperatorIDs:
+    - '67'
+    SubRouteName:
+      Zh_tw: '51'
+      En: '51'
+    Headsign: 香山區公所→火車站→香山區公所[先經中山路][繞大鵬新村]
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '51'
+    En: '51'
+  DepartureStopNameZh: 香山區公所
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 香山區公所
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0520
+  RouteID: '0520'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '67'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ052001
+    SubRouteID: '052001'
+    OperatorIDs:
+    - '67'
+    SubRouteName:
+      Zh_tw: '52'
+      En: '52'
+    Headsign: 新莊車站→市政府[經建功路]
+    Direction: 0
+  - SubRouteUID: HSZ0520A1
+    SubRouteID: 0520A1
+    OperatorIDs:
+    - '67'
+    SubRouteName:
+      Zh_tw: 52支
+      En: 52支
+    Headsign: 新莊車站-市政府[經建功路]繞國軍新竹醫院
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '52'
+    En: '52'
+  DepartureStopNameZh: 新莊車站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 新莊車站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0530
+  RouteID: '0530'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '67'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ053001
+    SubRouteID: '053001'
+    OperatorIDs:
+    - '67'
+    SubRouteName:
+      Zh_tw: '53'
+      En: '53'
+    Headsign: 新莊車站→市政府(經九甲埔)
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '53'
+    En: '53'
+  DepartureStopNameZh: 新莊車站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 新莊車站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0550
+  RouteID: '0550'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ055001
+    SubRouteID: '055001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '55'
+      En: '55'
+    Headsign: 南寮→竹科[經荷蘭村]
+    Direction: 0
+  - SubRouteUID: HSZ055002
+    SubRouteID: '055002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '55'
+      En: '55'
+    Headsign: 竹科→南寮[經荷蘭村]
+    Direction: 1
+  - SubRouteUID: HSZ0550A1
+    SubRouteID: 0550A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 55支
+      En: 55支
+    Headsign: 南寮→竹科
+    Direction: 0
+  - SubRouteUID: HSZ0550A2
+    SubRouteID: 0550A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 55支
+      En: 55支
+    Headsign: 竹科→南寮
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '55'
+    En: '55'
+  DepartureStopNameZh: 南寮游泳池
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 新安站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0570
+  RouteID: '0570'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ057001
+    SubRouteID: '057001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '57'
+      En: '57'
+    Headsign: 新安站→城隍廟→新安站
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '57'
+    En: '57'
+  DepartureStopNameZh: 新安站
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 新安站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0571
+  RouteID: '0571'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ0571B1
+    SubRouteID: 0571B1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 世博1號
+      En: 世博1號
+    Headsign: 世博台灣館→城隍廟[先經北大路]
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 世博1號
+    En: 世博1號
+  DepartureStopNameZh: 世博台灣館
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 世博台灣館
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0573
+  RouteID: '0573'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ057301
+    SubRouteID: '057301'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 世博3號
+      En: 世博3號
+    Headsign: 後站→世博台灣館→金山公園
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 世博3號
+    En: 世博3號
+  DepartureStopNameZh: 後站(公園路口)
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 後站(公園路口)
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0575
+  RouteID: '0575'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ057501
+    SubRouteID: '057501'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 世博5號
+      En: 世博5號
+    Headsign: 聖公宮→市區→世博台灣館
+    Direction: 0
+  - SubRouteUID: HSZ057502
+    SubRouteID: '057502'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 世博5號
+      En: 世博5號
+    Headsign: 世博台灣館→市區→聖公宮
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 世博5號
+    En: 世博5號
+  DepartureStopNameZh: 世博台灣館
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 聖公宮
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0710
+  RouteID: '0710'
+  HasSubRoutes: false
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ0710A1
+    SubRouteID: 0710A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '71'
+      En: '71'
+    Headsign: 大潤發2站→財神廟→大潤發2站
+    Direction: 0
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '71'
+    En: '71'
+  DepartureStopNameZh: 大潤發2站
+  DepartureStopNameEn: RT-Mart 2 Station
+  DestinationStopNameZh: 大潤發2站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0720
+  RouteID: '0720'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ072001
+    SubRouteID: '072001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '72'
+      En: '72'
+    Headsign: 後站→陽明清境
+    Direction: 0
+  - SubRouteUID: HSZ072002
+    SubRouteID: '072002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '72'
+      En: '72'
+    Headsign: 陽明清境→後站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '72'
+    En: '72'
+  DepartureStopNameZh: 後站(公園路口)
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 陽明清境
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0730
+  RouteID: '0730'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ073001
+    SubRouteID: '073001'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '73'
+      En: '73'
+    Headsign: 大潤發2站→花園新城
+    Direction: 0
+  - SubRouteUID: HSZ073002
+    SubRouteID: '073002'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '73'
+      En: '73'
+    Headsign: 花園新城→大潤發2站
+    Direction: 1
+  - SubRouteUID: HSZ0730A1
+    SubRouteID: 0730A1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '73'
+      En: '73'
+    Headsign: 大潤發2站→花園新城(經成德路)
+    Direction: 0
+  - SubRouteUID: HSZ0730A2
+    SubRouteID: 0730A2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: '73'
+      En: '73'
+    Headsign: 花園新城→大潤發2站(經成德路)
+    Direction: 1
+  - SubRouteUID: HSZ0730B1
+    SubRouteID: 0730B1
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 73區
+      En: 73區
+    Headsign: 新竹轉運站→成德路
+    Direction: 0
+  - SubRouteUID: HSZ0730B2
+    SubRouteID: 0730B2
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 73區
+      En: 73區
+    Headsign: 成德路→新竹轉運站
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: '73'
+    En: '73'
+  DepartureStopNameZh: 花園新城
+  DepartureStopNameEn: ''
+  DestinationStopNameZh: 大潤發2站
+  DestinationStopNameEn: ''
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0739
+  RouteID: '0739'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '14'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ073901
+    SubRouteID: '073901'
+    OperatorIDs:
+    - '14'
+    SubRouteName:
+      Zh_tw: 綠線
+      En: 綠線
+    Headsign: 經國路口→香山轉運站
+    Direction: 0
+  - SubRouteUID: HSZ073902
+    SubRouteID: '073902'
+    OperatorIDs:
+    - '14'
+    SubRouteName:
+      Zh_tw: 綠線
+      En: 綠線
+    Headsign: 香山轉運站→經國路口
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 綠線
+    En: 綠線
+  DepartureStopNameZh: 經國路口
+  DepartureStopNameEn: Jingguo Road Entrance
+  DestinationStopNameZh: 香山轉運站
+  DestinationStopNameEn: Xiang Shan Bus Station
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+- RouteUID: HSZ0743
+  RouteID: '0743'
+  HasSubRoutes: true
+  OperatorIDs:
+  - '13'
+  AuthorityID: '012'
+  ProviderID: '010'
+  SubRoutes:
+  - SubRouteUID: HSZ074301
+    SubRouteID: '074301'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍線
+      En: 藍線
+    Headsign: 新竹漁港直銷中心→竹中
+    Direction: 0
+  - SubRouteUID: HSZ074302
+    SubRouteID: '074302'
+    OperatorIDs:
+    - '13'
+    SubRouteName:
+      Zh_tw: 藍線
+      En: 藍線
+    Headsign: 竹中→新竹漁港直銷中心
+    Direction: 1
+  BusRouteType: 11
+  RouteName:
+    Zh_tw: 藍線
+    En: 藍線
+  DepartureStopNameZh: 新竹漁港直銷中心
+  DepartureStopNameEn: Hsinchu Harbor Outlet Center
+  DestinationStopNameZh: 竹中
+  DestinationStopNameEn: Zhu Zhong
+  UpdateTime: '2017-11-25T00:13:21+08:00'
+  VersionID: 110
+  
