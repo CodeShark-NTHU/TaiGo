@@ -10,5 +10,5 @@ test:
   DB_FILENAME: infrastructure/database/test.db
 
 production:
-  APP_URL: https://taigo-app.herokuapp.com
   API_URL: 'https://taigo-apis.herokuapp.com'
+  APP_URL: https://taigo-app.herokuapp.com

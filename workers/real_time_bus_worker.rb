@@ -25,16 +25,33 @@ class RealTimeBusWorker
 
   def perform(_sqs_msg, worker_request)
     request = TaiGo::RealTimeBusRequestRepresenter.new(OpenStruct.new).from_json worker_request
-    # while (true)
+    @lat = 24.800575
+    @lng = 120.9485
+    @en = 'BL 1 Xu'
+    @zh = '藍線1區'
+    # 20.times do
     #   bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(TaiGo::Api.config)
     #   positions = bpos_mapper.load(request.city_name, request.route_name)
     #   p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
     #   publish(request.id, p)
-    #   sleep(60)
+    #   position = TaiGo::Entity::BusPosition.new(
+    #     plate_numb: '098-FN',
+    #     sub_route_id: 'HSZ001001',
+    #     sub_route_name: TaiGo::MOTC::BusPositionMapper::DataMapper::Name.new(@en, @zh),
+    #     coordinates: TaiGo::MOTC::BusPositionMapper::DataMapper::Coordinates.new(@lat, @lng),
+    #     speed: 30.0,
+    #     azimuth: 184.0,
+    #     duty_status: 0,
+    #     bus_status: 0
+    #   )
+    #   p = TaiGo::BusPositionsRepresenter.new(Positions.new([position]))
+    #   publish(request.id, p)
+    #   # using delay is a problemmm!!!!!!
+    #   sleep 15
     # end
     fake_all_stops = TaiGo::Repository::For[TaiGo::Entity::StopOfRoute].find_all_stop_of_a_sub_route('HSZ001001')
-    # @lat = 24.800575
-    # @lng = 120.9485
+    @lat = 24.800575
+    @lng = 120.9485
     @en = 'BL 1 Xu'
     @zh = '藍線1區'
     fake_all_stops.map do |sor|
@@ -51,11 +68,12 @@ class RealTimeBusWorker
         duty_status: 0,
         bus_status: 0
       )
-      # @lat += 0.1
-      # @lng += 0.1
+      @lat += 0.1
+      @lng += 0.1
       p = TaiGo::BusPositionsRepresenter.new(Positions.new([position]))
       publish(request.id, p)
-      sleep(16)
+      # Using sleep is troublesome!!!!!!!!
+      # sleep 5
     end
   end
 
@@ -67,7 +85,7 @@ class RealTimeBusWorker
         .post(
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
-            channel: "/6000",
+            channel: "/#{channel_id}",
             data: positions.to_json
           }.to_json
         )
