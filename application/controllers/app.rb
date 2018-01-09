@@ -18,7 +18,7 @@ module TaiGo
 
     route do |routing|
       response['Content-Type'] = 'application/json'
-      
+
       response['Access-Control-Allow-Origin'] = Api.config.APP_URL
       response['Access-Control-Allow-Credentials'] = 'true'
       response['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
