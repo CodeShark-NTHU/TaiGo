@@ -51,5 +51,4 @@ describe 'Tests Bus Stop library' do
       _(id).must_equal correct_uid
     end
   end
-
 end

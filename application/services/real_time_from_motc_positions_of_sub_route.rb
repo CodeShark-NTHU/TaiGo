@@ -18,7 +18,9 @@ module TaiGo
     private
 
     def real_time_bus_request_json(input)
-      real_time_bus_request = RealTimeBusRequest.new(input[:city_name], input[:route_name], input[:id])
+      real_time_bus_request = RealTimeBusRequest.new(input[:city_name],
+                                                     input[:route_name],
+                                                     input[:id])
       RealTimeBusRequestRepresenter.new(real_time_bus_request)
     end
   end

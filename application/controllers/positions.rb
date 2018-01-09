@@ -16,12 +16,9 @@ module TaiGo
 
       # {API_ROOT}/positions/:city_name/:route_name
       routing.on String, String do |city_name, route_name|
-        # GET '{API_ROOT}/positions/:city_name/:route_name
+        # GET '{API_ROOT}/positions/:city_name/:route_name'
+        request_id = [route_name.to_s, Time.now.to_f].hash.to_s
         routing.get do
-          #o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-          #request_id = (0...10).map { o[rand(o.length)] }.join
-          #request_id = (Time.now.to_f).to_s
-          request_id = "6000"
           m = RealTimeBusPositions.new.call(
             config: Api.config,
             city_name: city_name,
