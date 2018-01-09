@@ -67,11 +67,7 @@ class RealTimeBusWorker
         .post(
           "#{RealTimeBusWorker.config.API_URL}/faye",
           body: {
-<<<<<<< HEAD
-            channel: "/5000",
-=======
             channel: "/6000",
->>>>>>> 8ec53837f9be1bd18d491b758ff7e3f67c59005e
             data: positions.to_json
           }.to_json
         )

@@ -5,12 +5,7 @@ require 'geocoder'
 
 module TaiGo
   # Service to find a best walking and transit route from Google API
-  # Usage:
-  #   directions = GoogleMapDirection.call(start_lat: start_lat,
-  #                                        start_lng: start_lng,
-  #                                        dest_lat: dest_lat,
-  #                                        dest_lng: dest_lng)
-  #   result.success?
+ 
   class GoogleMapDirection
     include Dry::Transaction
     step :check_range
