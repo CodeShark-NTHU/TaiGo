@@ -29,12 +29,12 @@ class RealTimeBusWorker
     @lng = 120.9485
     @en = 'BL 1 Xu'
     @zh = '藍線1區'
-    5.times do
+    60.times do
       bpos_mapper = TaiGo::MOTC::BusPositionMapper.new(TaiGo::Api.config)
       positions = bpos_mapper.load(request.city_name, request.route_name)
       p = TaiGo::BusPositionsRepresenter.new(Positions.new(positions))
       publish(request.id, p)
-      sleep 60 # while sleeping can we make a countdown (e.g: the new location will be refreshed in 60 59 58 ... second)
+      sleep 5 # while sleeping can we make a countdown (e.g: the new location will be refreshed in 60 59 58 ... second)
     end
     # fake_all_stops = TaiGo::Repository::For[TaiGo::Entity::StopOfRoute].find_all_stop_of_a_sub_route('HSZ001001')
     # @lat = 24.800575
@@ -68,7 +68,7 @@ class RealTimeBusWorker
 
   def publish(channel_id, positions)
     puts "Posting update for: #{channel_id}"
-    puts positions.to_json
+    # puts positions.to_json
     HTTP.headers(content_type: 'application/json')
         .post(
           "#{RealTimeBusWorker.config.API_URL}/faye",
